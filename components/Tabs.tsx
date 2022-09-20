@@ -1,8 +1,10 @@
 import { Tab } from '@headlessui/react'
 import React from 'react'
+
+import Nftlayout from './Nftlayout'
+
 import { TokenType } from '../types/types'
 
-/* Components */
 import Search from './Search'
 
 /* Assets */
@@ -70,7 +72,9 @@ const Tabs: React.FC<TabsProps> = ({ tabList, panels }) => {
 				<Tab.Panel>
 					<TokenList tokens={tokenList} />
 				</Tab.Panel>
-				<Tab.Panel>NFT</Tab.Panel>
+				<Tab.Panel>
+					<Nftlayout />
+				</Tab.Panel>
 			</Tab.Panels>
 		</Tab.Group>
 	)
