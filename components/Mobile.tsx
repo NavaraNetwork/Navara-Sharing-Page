@@ -9,10 +9,12 @@ import Tabs from './Tabs'
 
 /* Assets */
 import navaraLogo from '../assets/logos/navara_logo.svg'
+import logo from '../assets/logos/navara_logo_custom.svg'
 import token from '../assets/icons/send_square.svg'
 import nft from '../assets/icons/receive_square.svg'
 import follow from '../assets/icons/follow.svg'
 import share from '../assets/icons/share.svg'
+import avatar from '../assets/images/lemon.jpg'
 
 const items: { icon: any; text: string }[] = [
 	{
@@ -40,6 +42,9 @@ const user: UserInfo = {
 	domain: 'trungdo.nns.one',
 	address: '0x123.789',
 	expirationDate: '09/27',
+	isValid: true,
+	avatar: avatar,
+	logo: logo
 }
 
 const Mobile: React.FC = () => {
@@ -79,7 +84,7 @@ const Mobile: React.FC = () => {
 				</div>
 			</div>
 
-			<Tabs />
+			<Tabs tabList={categories} />
 		</div>
 	)
 }
