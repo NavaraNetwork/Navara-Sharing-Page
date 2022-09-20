@@ -1,5 +1,7 @@
+
 import Image from "next/image";
 import React, { useState } from "react";
+
 
 import { Transition } from "@headlessui/react";
 import { UserInfo } from "../types/types";
@@ -18,6 +20,7 @@ import logo from "../assets/logos/navara_logo_custom.svg";
 import SearchDropdown from "./SearchDropdown";
 import { Spinner } from "./Spinner";
 const items: { icon: any; text: string }[] = [
+
   {
     icon: token,
     text: "Token",
@@ -132,7 +135,9 @@ const Mobile: React.FC = () => {
         <></>
       )}
 
+
       <Card {...user} />
+
 
       <div className="relative -top-11 mx-auto pt-3 px-5 w-4/5 h-16 bg-white rounded-t-2xl">
         <div className="flex justify-between">
@@ -149,6 +154,7 @@ const Mobile: React.FC = () => {
           })}
         </div>
       </div>
+
 
       <Tabs tabList={categories} />
     </div>
