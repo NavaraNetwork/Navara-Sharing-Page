@@ -1,26 +1,53 @@
 import { Tab } from '@headlessui/react'
-import { type } from 'os'
 import React from 'react'
+import { TokenType } from '../types/types'
+
+/* Components */
 import Search from './Search'
 
-type TabsProps<T> = {
-	tabList: string[]
-	panels: T[]
-}
+/* Assets */
+import logoBitcoin from '../assets/logos/logo_bitcoin.svg'
+import logoEthereum from '../assets/logos/logo_ethereum.svg'
+import TokenList from './TokenList'
 
-const categories = ['Token', 'NFT']
+type TabsProps = {
+	tabList: string[]
+	panels?: any[]
+}
 
 function classNames(...classes: string[]) {
 	return classes.filter(Boolean).join(' ')
 }
 
-const Tabs: React.FC = () => {
+const tokenBitcoin: TokenType = {
+	tokenLogo: logoBitcoin,
+	tokenNetworkLogo: logoBitcoin,
+	token: 'Bitcoin',
+	symbol: 'BTC',
+	address: '0x123...789',
+	isVerified: true,
+	isDefault: false,
+}
+
+const tokenEthereum: TokenType = {
+	tokenLogo: logoEthereum,
+	tokenNetworkLogo: logoEthereum,
+	token: 'Ethereum',
+	symbol: 'ETH',
+	address: '0x123...789',
+	isVerified: true,
+	isDefault: true,
+}
+
+const tokenList: TokenType[] = [tokenEthereum, tokenBitcoin, tokenBitcoin]
+
+const Tabs: React.FC<TabsProps> = ({ tabList, panels }) => {
 	return (
 		<Tab.Group>
 			<Tab.List className='flex space-x-1 rounded-2xl bg-[#F8FAFC] p-1'>
-				{categories.map((category) => (
+				{tabList.map((tab, index) => (
 					<Tab
-						key={category}
+						key={index}
 						className={({ selected }) =>
 							classNames(
 								'w-full py-2.5 text-sm font-bold leading-5 text-blue-700',
@@ -31,7 +58,7 @@ const Tabs: React.FC = () => {
 							)
 						}
 					>
-						{category}
+						{tab}
 					</Tab>
 				))}
 			</Tab.List>
@@ -40,7 +67,9 @@ const Tabs: React.FC = () => {
 				className='mb-7'
 			/>
 			<Tab.Panels>
-				<Tab.Panel>Tokens</Tab.Panel>
+				<Tab.Panel>
+					<TokenList tokens={tokenList} />
+				</Tab.Panel>
 				<Tab.Panel>NFT</Tab.Panel>
 			</Tab.Panels>
 		</Tab.Group>
