@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 
-import search from "../assets/search.svg";
+import search from "../assets/icons/search.svg";
 
 type SearchProps = {
   placeholder?: string;
