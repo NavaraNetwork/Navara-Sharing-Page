@@ -3,24 +3,22 @@ import { type } from 'os'
 import React from 'react'
 import Search from './Search'
 
-type TabsProps<T> = {
+type TabsProps = {
 	tabList: string[]
-	panels: T[]
+	panels?: any[]
 }
-
-const categories = ['Token', 'NFT']
 
 function classNames(...classes: string[]) {
 	return classes.filter(Boolean).join(' ')
 }
 
-const Tabs: React.FC = () => {
+const Tabs: React.FC<TabsProps> = ({ tabList, panels }) => {
 	return (
 		<Tab.Group>
 			<Tab.List className='flex space-x-1 rounded-2xl bg-[#F8FAFC] p-1'>
-				{categories.map((category) => (
+				{tabList.map((tab, index) => (
 					<Tab
-						key={category}
+						key={index}
 						className={({ selected }) =>
 							classNames(
 								'w-full py-2.5 text-sm font-bold leading-5 text-blue-700',
@@ -31,7 +29,7 @@ const Tabs: React.FC = () => {
 							)
 						}
 					>
-						{category}
+						{tab}
 					</Tab>
 				))}
 			</Tab.List>
