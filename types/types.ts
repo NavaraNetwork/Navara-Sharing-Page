@@ -8,3 +8,15 @@ export type UserInfo = {
 	avatar?: any
 	logo?: any
 }
+
+export type TokenType = {
+	tokenLogo?: any
+	tokenNetworkLogo?: any
+	token?: string
+	symbol?: string
+	address?: string
+	isVerified?: boolean
+	isDefault?: boolean
+}
+
+export type tokenListType = { tokens: TokenType[] }
