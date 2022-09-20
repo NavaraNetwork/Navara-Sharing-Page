@@ -4,9 +4,8 @@ import React, { useEffect, useState } from 'react'
 /* Components */
 import Card from './Card'
 import Tabs from './Tabs'
-import SearchDropdown from './SearchDropdown'
-import { Spinner } from './Spinner'
-import { Transition } from '@headlessui/react'
+import SearchDropdown from './UI/SearchDropdown'
+import { Spinner } from './UI/Spinner'
 import Widget from './Widget'
 
 /* Assets */
@@ -16,7 +15,7 @@ import API from '../services/api'
 
 /* Constants */
 import { categories } from '../constants/constants'
-import { tempWidgetItems, tempUser } from '../constants/temporaryData'
+import { tempUser, tempWidgetItems } from '../constants/temporaryData'
 
 const Mobile: React.FC = () => {
   const [resultSearch, setResultSearch] = useState(false)
