@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import React from 'react'
-import { Tab } from '@headlessui/react'
 
 /* Components */
 import Card from './Card'
@@ -12,6 +11,8 @@ import nft from '../assets/receive_square.svg'
 import follow from '../assets/follow.svg'
 import share from '../assets/share.svg'
 import Search from './Search'
+import TokensAndNfts from './Tabs'
+import Tabs from './Tabs'
 
 const items: { icon: any; text: string }[] = [
 	{
@@ -33,9 +34,10 @@ const items: { icon: any; text: string }[] = [
 ]
 
 const categories = ['Token', 'NFT']
-
-function classNames(...classes: string[]) {
-	return classes.filter(Boolean).join(' ')
+const user = {
+	name: 'Do Nam Trung',
+	alias: '@trungdo',
+	domain: 'trungdo.nns.one',
 }
 
 const Mobile: React.FC = () => {
@@ -75,26 +77,7 @@ const Mobile: React.FC = () => {
 				</div>
 			</div>
 
-			<Tab.Group>
-				<Tab.List className='flex space-x-1 rounded-2xl bg-[#F8FAFC] p-1'>
-					{categories.map((category) => (
-						<Tab
-							key={category}
-							className={({ selected }) =>
-								classNames(
-									'w-full py-2.5 text-sm font-bold leading-5 text-blue-700',
-									'ring-white ring-opacity-25 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-1',
-									selected
-										? 'bg-white shadow'
-										: 'text-[#8E9BAE] hover:bg-blue-100/20'
-								)
-							}
-						>
-							{category}
-						</Tab>
-					))}
-				</Tab.List>
-			</Tab.Group>
+			<Tabs />
 		</div>
 	)
 }
