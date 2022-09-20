@@ -87,7 +87,7 @@ const Mobile: React.FC = () => {
     },
   ];
   return (
-    <div className="max-w-xs mx-auto">
+    <div className="max-w-xs mx-auto px-2 sm:px-0">
       <div className="flex justify-center mb-5">
         <Image src={navaraLogo} className="mx-auto" />
       </div>
