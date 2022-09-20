@@ -16,7 +16,7 @@ const Card = () => {
 			<p className='mb-2 capitalize text-xs font-normal opacity-70'>
 				Navara Name Service 3
 			</p>
-			<p className='mb-7 text-sm'>Navara One</p>
+			<p className='mb-7 text-sm'></p>
 			<div className='flex gap-3'>
 				<p className='text-base font-medium'>nacara.nns.one</p>
 				<Image src={checkMark} />
