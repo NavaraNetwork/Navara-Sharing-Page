@@ -1,18 +1,18 @@
 import Image from 'next/image'
 import React from 'react'
+import { UserInfo } from '../types/types'
 
 /* Components */
 import Card from './Card'
+import Search from './Search'
+import Tabs from './Tabs'
 
 /* Assets */
-import navaraLogo from '../assets/navara_logo.svg'
-import token from '../assets/send_square.svg'
-import nft from '../assets/receive_square.svg'
-import follow from '../assets/follow.svg'
-import share from '../assets/share.svg'
-import Search from './Search'
-import TokensAndNfts from './Tabs'
-import Tabs from './Tabs'
+import navaraLogo from '../assets/logos/navara_logo.svg'
+import token from '../assets/icons/send_square.svg'
+import nft from '../assets/icons/receive_square.svg'
+import follow from '../assets/icons/follow.svg'
+import share from '../assets/icons/share.svg'
 
 const items: { icon: any; text: string }[] = [
 	{
@@ -34,10 +34,12 @@ const items: { icon: any; text: string }[] = [
 ]
 
 const categories = ['Token', 'NFT']
-const user = {
+const user: UserInfo = {
 	name: 'Do Nam Trung',
 	alias: '@trungdo',
 	domain: 'trungdo.nns.one',
+	address: '0x123.789',
+	expirationDate: '09/27',
 }
 
 const Mobile: React.FC = () => {
@@ -55,7 +57,7 @@ const Mobile: React.FC = () => {
 				className='mb-7'
 			/>
 
-			<Card />
+			<Card {...user} />
 
 			<div className='relative -top-11 mx-auto pt-3 px-5 w-4/5 h-16 bg-white rounded-t-2xl'>
 				<div className='flex justify-between'>
