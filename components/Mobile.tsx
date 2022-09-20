@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import Image from 'next/image'
 import React from 'react'
 
@@ -17,43 +18,37 @@ import Tabs from './Tabs'
 const items: { icon: any; text: string }[] = [
 	{
 		icon: token,
-		text: 'Token',
+		text: 'Token'
 	},
 	{
 		icon: nft,
-		text: 'NFT',
+		text: 'NFT'
 	},
 	{
 		icon: follow,
-		text: 'Follow',
+		text: 'Follow'
 	},
 	{
 		icon: share,
-		text: 'Share',
-	},
+		text: 'Share'
+	}
 ]
 
 const categories = ['Token', 'NFT']
 const user = {
 	name: 'Do Nam Trung',
 	alias: '@trungdo',
-	domain: 'trungdo.nns.one',
+	domain: 'trungdo.nns.one'
 }
 
 const Mobile: React.FC = () => {
 	return (
 		<div className='max-w-xs mx-auto'>
 			<div className='flex justify-center mb-5'>
-				<Image
-					src={navaraLogo}
-					className='mx-auto'
-				/>
+				<Image src={navaraLogo} className='mx-auto' />
 			</div>
 
-			<Search
-				placeholder='Seach other address'
-				className='mb-7'
-			/>
+			<Search placeholder='Seach other address' className='mb-7' />
 
 			<Card />
 
@@ -61,15 +56,8 @@ const Mobile: React.FC = () => {
 				<div className='flex justify-between'>
 					{items.map((item, index) => {
 						return (
-							<div
-								key={index}
-								className='divider relative flex flex-col items-center w-[50px]'
-							>
-								<Image
-									src={item.icon}
-									width='16px'
-									height='16px'
-								/>
+							<div key={index} className='divider relative flex flex-col items-center w-[50px]'>
+								<Image src={item.icon} width='16px' height='16px' />
 								<p className='mt-2 text-xs'>{item.text}</p>
 							</div>
 						)
