@@ -1,101 +1,70 @@
-import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import Image from 'next/image'
+import React, { useEffect, useState } from 'react'
 
 /* Components */
-import { UserInfo } from "../types/types";
-import Card from "./Card";
-import Tabs from "./Tabs";
+import Card from './Card'
+import Tabs from './Tabs'
+import SearchDropdown from './SearchDropdown'
+import { Spinner } from './Spinner'
+import { Transition } from '@headlessui/react'
+import Widget from './Widget'
 
 /* Assets */
-import follow from "../assets/icons/follow.svg";
-import nft from "../assets/icons/receive_square.svg";
-import token from "../assets/icons/send_square.svg";
-import share from "../assets/icons/share.svg";
-import avatar from "../assets/images/lemon.jpg";
-import navaraLogo from "../assets/logos/navara_logo.svg";
-import logo from "../assets/logos/navara_logo_custom.svg";
-import { useDebounce } from "../hooks/useDebounce";
-import API from "../services/api";
-import SearchDropdown from "./SearchDropdown";
-import { Spinner } from "./Spinner";
-const items: { icon: any; text: string }[] = [
-  {
-    icon: token,
-    text: "Token",
-  },
-  {
-    icon: nft,
-    text: "NFT",
-  },
-  {
-    icon: follow,
-    text: "Follow",
-  },
-  {
-    icon: share,
-    text: "Share",
-  },
-];
+import navaraLogo from '../assets/logos/navara_logo.svg'
+import { useDebounce } from '../hooks/useDebounce'
+import API from '../services/api'
 
-const categories = ["Token", "NFT"];
-const user: UserInfo = {
-  name: "Do Nam Trung",
-  alias: "@trungdo",
-  domain: "trungdo.nns.one",
-  address: "0x123.789",
-  expirationDate: "09/27",
-  isValid: true,
-  avatar: avatar,
-  logo: logo,
-};
+/* Constants */
+import { categories } from '../constants/constants'
+import { tempWidgetItems, tempUser } from '../constants/temporaryData'
 
 const Mobile: React.FC = () => {
-  const [resultSearch, setResultSearch] = useState(false);
+  const [resultSearch, setResultSearch] = useState(false)
 
   const handleSearch = (event: any) => {
-    setSearchTerm(event.target.value);
-  };
+    setSearchTerm(event.target.value)
+  }
 
   // State and setters for ...
   // Search term
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('')
   // API search results
-  const [results, setResults] = useState([]);
+  const [results, setResults] = useState([])
   // Searching status (whether there is pending API request)
-  const [isSearching, setIsSearching] = useState(false);
+  const [isSearching, setIsSearching] = useState(false)
 
-  const [data, setData] = useState([]);
+  const [data, setData] = useState([])
   // Debounce search term so that it only gives us latest value ...
   // ... if searchTerm has not been updated within last 500ms.
   // The goal is to only have the API call fire when user stops typing ...
   // ... so that we aren't hitting our API rapidly.
-  const debouncedSearchTerm = useDebounce(searchTerm, 500);
+  const debouncedSearchTerm = useDebounce(searchTerm, 500)
   // API search function
   const searchCharacters = async (search: any) => {
-    return await API.get("domain/find", {
+    return await API.get('domain/find', {
       params: {
         domain: search,
       },
     }).then((result) => {
-      console.log(result.data);
-      setResults(result.data);
-    });
-  };
+      console.log(result.data)
+      setResults(result.data)
+    })
+  }
   useEffect(
     () => {
       if (debouncedSearchTerm) {
-        setIsSearching(true);
+        setIsSearching(true)
         searchCharacters(debouncedSearchTerm).then((results: any) => {
-          setIsSearching(false);
-        });
+          setIsSearching(false)
+        })
       } else {
-        setResults([]);
-        setIsSearching(false);
+        setResults([])
+        setIsSearching(false)
       }
     },
     [debouncedSearchTerm] // Only call effect if debounced search term changes
-  );
-  console.log(results, "results");
+  )
+  console.log(results, 'results')
   return (
     <div className="max-w-xs mx-auto">
       <div className="flex justify-center mb-5">
@@ -137,25 +106,13 @@ const Mobile: React.FC = () => {
       {/* </Transition> */}
       {/* )} */}
 
-      <Card {...user} />
-      <div className="relative -top-11 mx-auto pt-3 px-5 w-4/5 h-16 bg-white rounded-t-2xl">
-        <div className="flex justify-between">
-          {items.map((item, index) => {
-            return (
-              <div
-                key={index}
-                className="divider relative flex flex-col items-center w-[50px]"
-              >
-                <Image src={item.icon} width="16px" height="16px" />
-                <p className="mt-2 text-xs">{item.text}</p>
-              </div>
-            );
-          })}
-        </div>
-      </div>
+      <Card {...tempUser} />
+
+      <Widget items={tempWidgetItems} />
+
       <Tabs tabList={categories} />
     </div>
-  );
-};
+  )
+}
 
-export default Mobile;
+export default Mobile
