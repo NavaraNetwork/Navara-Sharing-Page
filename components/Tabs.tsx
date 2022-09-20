@@ -1,7 +1,14 @@
 import { Tab } from '@headlessui/react'
-import { type } from 'os'
 import React from 'react'
+import { TokenType } from '../types/types'
+
+/* Components */
 import Search from './Search'
+
+/* Assets */
+import logoBitcoin from '../assets/logos/logo_bitcoin.svg'
+import logoEthereum from '../assets/logos/logo_ethereum.svg'
+import TokenList from './TokenList'
 
 type TabsProps = {
 	tabList: string[]
@@ -11,6 +18,28 @@ type TabsProps = {
 function classNames(...classes: string[]) {
 	return classes.filter(Boolean).join(' ')
 }
+
+const tokenBitcoin: TokenType = {
+	tokenLogo: logoBitcoin,
+	tokenNetworkLogo: logoBitcoin,
+	token: 'Bitcoin',
+	symbol: 'BTC',
+	address: '0x123...789',
+	isVerified: true,
+	isDefault: false,
+}
+
+const tokenEthereum: TokenType = {
+	tokenLogo: logoEthereum,
+	tokenNetworkLogo: logoEthereum,
+	token: 'Ethereum',
+	symbol: 'ETH',
+	address: '0x123...789',
+	isVerified: true,
+	isDefault: true,
+}
+
+const tokenList: TokenType[] = [tokenEthereum, tokenBitcoin, tokenBitcoin]
 
 const Tabs: React.FC<TabsProps> = ({ tabList, panels }) => {
 	return (
@@ -38,7 +67,9 @@ const Tabs: React.FC<TabsProps> = ({ tabList, panels }) => {
 				className='mb-7'
 			/>
 			<Tab.Panels>
-				<Tab.Panel>Tokens</Tab.Panel>
+				<Tab.Panel>
+					<TokenList tokens={tokenList} />
+				</Tab.Panel>
 				<Tab.Panel>NFT</Tab.Panel>
 			</Tab.Panels>
 		</Tab.Group>
