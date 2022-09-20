@@ -22,7 +22,7 @@ const SearchDropdown: React.FC<SearchProps> = ({
   return (
     <>
       <div
-        className={`flex rounded-lg border items-center gap-4  px-2 ${className}`}
+        className={`flex rounded-lg border items-center gap-4 mb-3 px-2 ${className}`}
       >
         <Image src={search} />
         <div>
