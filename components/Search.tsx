@@ -11,13 +11,9 @@ type SearchProps = {
 const Search: React.FC<SearchProps> = ({ placeholder, className }) => {
 	return (
 		<div className={`flex items-center gap-4 p-4 ${className}`}>
-			<Image
-				src={search}
-				className=''
-			/>
+			<Image src={search} />
 			<input
 				type='search'
-				id='address-search'
 				placeholder={placeholder}
 			/>
 		</div>
