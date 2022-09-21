@@ -56,6 +56,7 @@ const Profile = ({ data }: IProflleProps) => {
       setResults(result)
     })
   }
+  console.log(data, '123')
   useEffect(
     () => {
       if (debouncedSearchTerm) {
@@ -74,7 +75,7 @@ const Profile = ({ data }: IProflleProps) => {
   const [isShow, setIsShow] = useState(false)
   const handlOpen = () => {
     console.log('123')
-    setIsShow(true)
+    setIsShow(!isShow)
   }
   return (
     <div className="max-w-xs mx-auto">
@@ -109,7 +110,8 @@ const Profile = ({ data }: IProflleProps) => {
       <Widget items={tempWidgetItems} />
 
       <Tabs tabList={categories} />
-      <Modal isShow={isShow} handlOpen={handlOpen} />
+
+      <Modal isShow={isShow} handlOpen={handlOpen} valueModal="ABC" titleModal="TITLE MODAL" />
     </div>
   )
 }
