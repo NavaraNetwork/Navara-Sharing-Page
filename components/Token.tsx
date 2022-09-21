@@ -1,14 +1,33 @@
 import Image from 'next/image'
-import React from 'react'
+import React, { useRef, useState } from 'react'
 
 import { TokenType } from '../types/types'
 
 /* assets */
 import icon_copy from '../assets/icons/copy.svg'
 import icon_send from '../assets/icons/send.svg'
+import checkMarkRound from '../assets/icons/checkmark_round.svg'
 import checkMark from '../assets/icons/checkmark.svg'
+import useCopyToClipBoard from '../hooks/useCopyToClipBoard'
 
 const Token: React.FC<TokenType> = ({ tokenLogo, tokenNetworkLogo, token, symbol, address, isVerified, isDefault }) => {
+  const addressRef = useRef<HTMLSpanElement>(null)
+  const [toolTipText, setToolTipText] = useState<string>('Copy token address')
+  const [copyIcon, setCopyIcon] = useState(icon_copy)
+
+  const [, copy] = useCopyToClipBoard()
+
+  const handleToolTipClick = () => {
+    null !== addressRef.current && copy(addressRef.current?.innerText)
+    setToolTipText('Copied')
+    setCopyIcon(checkMark)
+
+    setTimeout(() => {
+      setToolTipText('Copy token address')
+      setCopyIcon(icon_copy)
+    }, 3000)
+  }
+
   return (
     <div className="grid grid-flow-col-dense py-3">
       <div>
@@ -22,12 +41,18 @@ const Token: React.FC<TokenType> = ({ tokenLogo, tokenNetworkLogo, token, symbol
       <div>
         <div>
           <span className="inline-block font-bold mr-2">{token}</span>
-          <span className="text-[10px]">({address})</span>
+          <span>
+            (
+            <span className="text-[10px]" ref={addressRef}>
+              {address}
+            </span>
+            )
+          </span>
         </div>
         <div className="flex items-center gap-2">
           <span className="text-[#8E9BAE]">{symbol}</span>
           <span className={`${isVerified ? 'inline' : 'hidden'}`}>
-            <Image src={checkMark} />
+            <Image src={checkMarkRound} />
           </span>
           {isDefault ? (
             <div className="flex items-center max-h-4 bg-[#F0F9FF] px-1 py-2 rounded-sm ">
@@ -37,9 +62,9 @@ const Token: React.FC<TokenType> = ({ tokenLogo, tokenNetworkLogo, token, symbol
         </div>
       </div>
       <div className="flex flex-col items-center justify-between h-full">
-        <div className="tooltip">
-          <span className="tooltiptext">Copy token address</span>
-          <Image src={icon_copy} width="24px" height="24px" />
+        <div className="tooltip" onClick={handleToolTipClick}>
+          <span className="tooltiptext">{toolTipText}</span>
+          <Image src={copyIcon} width="24px" height="24px" />
         </div>
         <p>Copy</p>
       </div>
