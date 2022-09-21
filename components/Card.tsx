@@ -14,6 +14,8 @@ import LogoNavara from '../assets/logos/logo-white-navara.svg'
 type CardProp = {
   data: UserInfo
 }
+
+
 const Card: React.FC<CardProp> = ({ data }) => {
   const { name, alias, domain, address, expired, isValid, avatar, logo } = data
 
@@ -25,7 +27,11 @@ const Card: React.FC<CardProp> = ({ data }) => {
   // const check = imageCard.filter(t => t.name.includes('.nns.one'));
 
   // const ImageCard = imageCard.filter(t => t.name.includes('.nns.one')===domain)
-  var imageCards = [{ name: '.nns.one' }, { name: '.uns' }, { name: '.eth' }]
+  var imageCards = [
+    { name: '.nns.one', icon: LogoNavara },
+    { name: '.uns', icon: LogoUNS },
+    { name: '.eth', icon: LogoETH },
+  ]
 
   const findItem = imageCards.find((item) => domain.includes(item.name))
 
@@ -48,13 +54,14 @@ const Card: React.FC<CardProp> = ({ data }) => {
           </div>
         </div>
         {/* <div className="w-50 h-50"> */}
-        {
+        <Image src={findItem.icon} />
+        {/* {
           {
             '.nns.one': <Image src={LogoNavara} />,
             '.eth': <Image src={LogoETH} />,
             '.uns': <Image src={LogoUNS} />,
           }[findItem.name]
-        }
+        } */}
 
         {/* </div> */}
       </div>
