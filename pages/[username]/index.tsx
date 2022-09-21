@@ -26,7 +26,7 @@ interface IProflleProps {
 const Profile = ({ data }: IProflleProps) => {
   const router = useRouter()
   const domain = router.asPath
-  console.log(data, '123')
+  console.log(data, '12322')
   const [resultSearch, setResultSearch] = useState(false)
 
   const handleSearch = (event: any) => {
@@ -112,36 +112,12 @@ const Profile = ({ data }: IProflleProps) => {
 export async function getServerSideProps(context: any) {
   // Fetch data from external API
   const domainName = context.params.username
-  const res = await fetch(`https://api.navara.network/domain/find?domain=${domainName}`)
+  const res = await API.get(`domain/find?domain=${domainName}`)
   console.log(res, '123')
-  const data = await res.json()
+  const data = await res
 
   // Pass data to the page via props
   return { props: { data: data } }
 }
-// }
-// export const getStaticProps = async (context: any) => {
-//   try {
-//     const domain = context.params.username
-//     console.log(domain)
-//     const domainData = await API.get('domain/find', {
-//       params: {
-//         domain: domain,
-//       },
-//     })
-
-//     return {
-//       props: {
-//         data: domainData,
-//         // suggestArticlesData: responseSuggestArticles.data.filter((item: any) => item.id != articlesId),
-//       },
-//     }
-//   } catch (error) {
-//     console.log(error)
-//     return {
-//       props: { data: [] },
-//     }
-//   }
-// }
 
 export default Profile
