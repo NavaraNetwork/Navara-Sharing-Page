@@ -13,6 +13,7 @@ import API from '../../services/api'
 
 /* Constants */
 import Link from 'next/link'
+import { setTimeout } from 'timers'
 import Card from '../../components/Card'
 import Tabs from '../../components/Tabs'
 import { Spinner } from '../../components/UI/Spinner'
@@ -20,7 +21,6 @@ import Widget from '../../components/Widget'
 import { categories } from '../../constants/constants'
 import { tempWidgetItems } from '../../constants/temporaryData'
 import { useDebounce } from '../../hooks/useDebounce'
-import Modal from '../../components/UI/Modal'
 interface IProflleProps {
   data: any
 }
@@ -53,26 +53,26 @@ const Profile = ({ data }: IProflleProps) => {
       params: {
         domain: search,
       },
-    }).then((result) => {
-      setResults(result)
     })
-      .then((result) => {
-        setIsSearching(false)
+      .then((result: any) => {
         setResults(result)
+        setErrorMessage('')
       })
       .catch((error) => {
-        setIsSearching(false)
         setResults([])
-        console.log(error.response.data.message)
-        setErrorMessage(error.response.data.message)
+        setTimeout(() => {
+          setErrorMessage(error.response.data.message)
+        }, 1000)
       })
   }
   useEffect(
     () => {
       if (debouncedSearchTerm) {
-        // setIsSearching(true)
         setIsSearching(true)
+
         searchCharacters(debouncedSearchTerm).then((results: any) => {
+          // setResults(results)
+          // console.log(results, 'UEF')
           setIsSearching(false)
         })
       } else {
@@ -86,45 +86,56 @@ const Profile = ({ data }: IProflleProps) => {
   const handlOpen = () => {
     setIsShow(!isShow)
   }
-
   return (
     <div className="max-w-xs mx-auto my-5">
       <div className="flex justify-center mb-5">
         <Image src={navaraLogo} className="mx-auto" />
       </div>
-      <SearchDropdown
-        placeholder="Seach other address"
-        className=" p-2"
-        onChange={handleSearch}
-        value={searchTerm}
-        searching={resultSearch}
-      />
-      {isSearching ? (
-        results && results.length > 0 ? (
-          <Spinner />
-        ) : (
-          <></>
-        )
-      ) : (
-        results && (
-          <div className={`flex cursor-pointer hover:font-bold hover:bg-gray-200 p-3 my-3 rounded-2xl `}>
-            <Link href={`${results?.domain}`}>
-              <a onClick={() => setIsSearching(true)}>
-                <p>{results?.domain}</p>
-              </a>
-              {/* <div className="flex px-2 my-3 flex-col ">
-                <p>{results?.domain}</p>
-              </div> */}
-            </Link>
-          </div>
-        )
-      )}
+      <div className="rounded-lg border m-2">
+        <SearchDropdown
+          placeholder="Seach other address"
+          className="p-2"
+          onChange={handleSearch}
+          value={searchTerm}
+          searching={resultSearch}
+        />
+        <div className="  mb-1 ">
+          {searchTerm === '' ? (
+            <p className="my-2 text-center text-[13px] text-red-500 px-3">Start typing to search for assets</p>
+          ) : results ? (
+            errorMessage ? (
+              <div className="my-3">
+                <Spinner />
+              </div>
+            ) : (
+              (
+                <p className="my-3 text-center text-[13px] text-red-500 px-3">
+                  We were unable to find any results for your search
+                </p>
+              ) &&
+              // <p className="my-3 text-[13px] text-red-500 px-3">We were unable to find any results for your search</p>
+              !isSearching && (
+                <div className={`flex cursor-pointer hover:font-bold hover:bg-gray-50 px-10 my-1 rounded-2xl `}>
+                  <Link href={`${results?.domain}`}>
+                    <a onClick={() => setIsSearching(true)}>
+                      <p>{results?.domain}</p>
+                    </a>
+                  </Link>
+                </div>
+              )
+            )
+          ) : (
+            <></>
+          )}
+        </div>
+      </div>
+
       <Card data={data} />
 
       <Widget items={tempWidgetItems} />
 
       <Tabs tabList={categories} chains={data.chains} />
-      <Modal isShow={isShow} handlOpen={handlOpen} />
+      {/* <Modal isShow={isShow} handlOpen={handlOpen} /> */}
     </div>
   )
 }
