@@ -15,7 +15,6 @@ import navaraLogo from '../../assets/logos/navara_logo.svg'
 import API from '../../services/api'
 
 /* Constants */
-import Link from 'next/link'
 import Card from '../../components/Card'
 import { categories } from '../../constants/constants'
 import { tempUser, tempWidgetItems } from '../../constants/temporaryData'
@@ -53,8 +52,8 @@ const Profile = ({ data }: IProflleProps) => {
         domain: search,
       },
     }).then((result) => {
-      console.log(result.data)
-      setResults(result.data)
+      console.log(result)
+      setResults(result)
     })
   }
   useEffect(
@@ -91,11 +90,11 @@ const Profile = ({ data }: IProflleProps) => {
       ) : (
         results && (
           <div className={`flex cursor-pointer hover:font-bold rounded-2xl mb-2`}>
-            <Link href={`/${results.domain}`}>
+            <a href={`/${results?.domain}`}>
               <div className="flex px-2 my-3 flex-col ">
-                <p>{results.domain}</p>
+                <p>{results?.domain}</p>
               </div>
-            </Link>
+            </a>
           </div>
         )
       )}
