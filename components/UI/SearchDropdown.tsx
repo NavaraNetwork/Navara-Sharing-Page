@@ -15,12 +15,12 @@ type SearchProps = {
 const SearchDropdown: React.FC<SearchProps> = ({ placeholder, className, onChange, onSubmit, value }) => {
   return (
     <>
-      <div className={`flex rounded-lg border items-center gap-4 mb-3 px-2 ${className}`}>
+      <div className={`flex   items-center gap-4 px-2 ${className}`}>
         <Image src={search} />
         <div>
           <input
             id="first_name"
-            className=" w-64 text-gray-900 text-sm rounded-lg block w-full p-2.5"
+            className=" w-64 border text-gray-900 text-sm rounded-lg block w-full p-2.5"
             type="search"
             placeholder={placeholder}
             onChange={onChange}
