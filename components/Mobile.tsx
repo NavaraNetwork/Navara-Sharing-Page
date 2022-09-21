@@ -46,7 +46,6 @@ const Mobile: React.FC = () => {
         domain: search,
       },
     }).then((result) => {
-      console.log(result)
       setResults(result)
     })
   }

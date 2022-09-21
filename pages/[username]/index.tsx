@@ -18,8 +18,9 @@ import Tabs from '../../components/Tabs'
 import { Spinner } from '../../components/UI/Spinner'
 import Widget from '../../components/Widget'
 import { categories } from '../../constants/constants'
-import { tempUser, tempWidgetItems } from '../../constants/temporaryData'
+import { tempWidgetItems } from '../../constants/temporaryData'
 import { useDebounce } from '../../hooks/useDebounce'
+import Modal from '../../components/UI/Modal'
 interface IProflleProps {
   data: any
 }
@@ -52,6 +53,8 @@ const Profile = ({ data }: IProflleProps) => {
       params: {
         domain: search,
       },
+    }).then((result) => {
+      setResults(result)
     })
       .then((result) => {
         setIsSearching(false)
@@ -79,7 +82,6 @@ const Profile = ({ data }: IProflleProps) => {
     },
     [debouncedSearchTerm] // Only call effect if debounced search term changes
   )
-  console.log(results, 'results')
   const [isShow, setIsShow] = useState(false)
   const handlOpen = () => {
     setIsShow(!isShow)
@@ -117,12 +119,12 @@ const Profile = ({ data }: IProflleProps) => {
           </div>
         )
       )}
-      {/* {results && results.length > 0 ? <>CÓ DÂT</> : <>{errorMessage}</>} */}
-      <Card {...tempUser} />
+      <Card data={data} />
 
       <Widget items={tempWidgetItems} />
 
-      <Tabs tabList={categories} />
+      <Tabs tabList={categories} chains={data.chains} />
+      <Modal isShow={isShow} handlOpen={handlOpen} />
     </div>
   )
 }
@@ -131,7 +133,6 @@ export async function getServerSideProps(context: any) {
   // Fetch data from external API
   const domainName = context.params.username
   const res = await API.get(`domain/find?domain=${domainName}`)
-  console.log(res, '12sss3')
   const data = await res
 
   // Pass data to the page via props
