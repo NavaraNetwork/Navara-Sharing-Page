@@ -1,23 +1,24 @@
 import { Dialog, Transition } from '@headlessui/react'
+import { XIcon } from '@heroicons/react/solid'
 import React, { Fragment } from 'react'
 type ModalProps = {
   titleModal?: string
   className?: string
-  onChange?: (event: any) => void
-  handlOpen?: (event: any) => void
+  handleClose?: (event: any) => void
+  handleOpen?: (event: any) => void
   valueModal?: string
   isShow?: boolean
 }
-const Modal: React.FC<ModalProps> = ({ isShow, handlOpen, titleModal, valueModal }) => {
+const Modal: React.FC<ModalProps> = ({ isShow, handleOpen, handleClose, titleModal, valueModal }) => {
   //   let [isOpen, setIsOpen] = useState(isShow)
   //   console.log(isOpen)
   return (
     <>
-      <button onClick={handlOpen} type="button" className="bg-red-500 py-2.5 px-5 mr-2 mb-2 text-sm font-medium">
+      {/* <button onClick={handlOpen} type="button" className="bg-red-500 py-2.5 px-5 mr-2 mb-2 text-sm font-medium">
         Alternative
-      </button>
+      </button> */}
       <Transition appear show={isShow} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={handlOpen}>
+        <Dialog as="div" className="relative z-10" onClose={() => {}}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -42,9 +43,15 @@ const Modal: React.FC<ModalProps> = ({ isShow, handlOpen, titleModal, valueModal
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel className="w-full max-w-xs transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                  <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
+                  <div className="flex">
+                    <button className="ml-auto" onClick={handleClose}>
+                      <XIcon className="h-5 w-5 text-gray-500" />
+                    </button>
+                  </div>
+                  <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900 ">
                     {titleModal}
                   </Dialog.Title>
+
                   <div className="mt-2">
                     <p className="text-sm text-gray-500">{valueModal}</p>
                   </div>
