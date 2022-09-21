@@ -5,7 +5,7 @@ import { UserInfo } from '../types/types'
 
 // Assets
 import creditCard from '../assets/images/credit_card.svg'
-import checkMark from '../assets/icons/checkmark.svg'
+import checkMark from '../assets/icons/checkmark_round.svg'
 
 const Card: React.FC<UserInfo> = ({
 	name,

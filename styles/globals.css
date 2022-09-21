@@ -44,8 +44,19 @@ a {
 
     /* Position the tooltip text*/
     position: absolute;
-		top: -25px;
+		top: -30px;
     z-index: 1;
+
+    &:after {
+      content: '';
+      position: absolute;
+      left: 10px;
+      bottom: -4px;
+      width: 8px;
+      height: 8px;
+      background: black;
+      transform: rotate(40deg);
+    }
 
   }
 
