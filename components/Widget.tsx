@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { Dialog, Transition } from '@headlessui/react'
 import Image from 'next/image'
 import React, { Fragment, useRef, useState } from 'react'
