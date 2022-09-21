@@ -14,6 +14,7 @@ import { useDebounce } from '../hooks/useDebounce'
 import API from '../services/api'
 
 /* Constants */
+import Link from 'next/link'
 import { categories } from '../constants/constants'
 import { tempUser, tempWidgetItems } from '../constants/temporaryData'
 
@@ -97,10 +98,11 @@ const Mobile: React.FC = () => {
         {/* <div className="p-2">
           <Image src={token} width="15" height="15" />
         </div> */}
-
-        {/* <div className="flex p-1 flex-col">
-          <p>{results.domain}</p>
-        </div> */}
+        <Link href={`/${results.domain}`}>
+          <div className="flex p-1 flex-col">
+            <p>{results.domain}</p>
+          </div>
+        </Link>
       </div>
       {/* </Transition> */}
       {/* )} */}
