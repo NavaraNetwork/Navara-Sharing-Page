@@ -1,25 +1,34 @@
 import Image from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
 
 import { UserInfo } from '../types/types'
 
 // Assets
 import creditCard from '../assets/images/credit_card.svg'
 import checkMark from '../assets/icons/checkmark_round.svg'
+import Logo01 from '../assets/logos/logo-01.svg'
+import LogoETH from '../assets/logos/logo-02.svg'
+import LogoUNS from '../assets/logos/logo-03.svg'
+import LogoNavara from '../assets/logos/logo-white-navara.svg'
 
 type CardProp = {
   data: UserInfo
 }
 const Card: React.FC<CardProp> = ({ data }) => {
   const { name, alias, domain, address, expired, isValid, avatar, logo } = data
-	
-	const expiredDate = new Date(expired)
-	
-	const expiredMonth = expiredDate.getMonth()
-	const expiredYear = expiredDate.getFullYear().toString().slice(-2)
-	
 
-	
+  const expiredDate = new Date(expired)
+
+  const expiredMonth = expiredDate.getMonth()
+  const expiredYear = expiredDate.getFullYear().toString().slice(-2)
+
+  // const check = imageCard.filter(t => t.name.includes('.nns.one'));
+
+  // const ImageCard = imageCard.filter(t => t.name.includes('.nns.one')===domain)
+  var imageCards = [{ name: '.nns.one' }, { name: '.uns' }, { name: '.eth' }]
+
+  const findItem = imageCards.find((item) => domain.includes(item.name))
+
   return (
     <div className="relative min-h-[196px] pl-5 pt-5 pr-8 text-white">
       {/* Card Background */}
@@ -38,9 +47,16 @@ const Card: React.FC<CardProp> = ({ data }) => {
             <p className="text-xs">{alias}</p>
           </div>
         </div>
-        <div className="w-9 h-10">
-          <Image src={logo} layout="responsive" />
-        </div>
+        {/* <div className="w-50 h-50"> */}
+        {
+          {
+            '.nns.one': <Image src={LogoNavara} />,
+            '.eth': <Image src={LogoETH} />,
+            '.uns': <Image src={LogoUNS} />,
+          }[findItem.name]
+        }
+
+        {/* </div> */}
       </div>
 
       <div className="flex justify-between  mt-2">
@@ -52,7 +68,9 @@ const Card: React.FC<CardProp> = ({ data }) => {
           <p className="text-[10px] font-normal text-[#F5F9FF]">{address}</p>
         </div>
         <div>
-          <p className="text-xs font-bold leading-6">{expiredMonth}/{expiredYear}</p>
+          <p className="text-xs font-bold leading-6">
+            {expiredMonth}/{expiredYear}
+          </p>
           <p className="text-[10px]">{isValid ? 'Valid' : 'Invalid'}</p>
         </div>
       </div>

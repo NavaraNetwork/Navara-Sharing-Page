@@ -30,9 +30,9 @@ const Widget: React.FC<widgetProps> = ({ items }) => {
       <div className="flex justify-between">
         {items.map((item, index) => {
           return (
-            <div key={index} className="divider relative flex flex-col items-center w-[50px]">
+            <div key={index} className="divider relative flex flex-col items-center w-[50px] cursor-pointer">
               <span onClick={() => handleClick(item.action)}>
-                <Image src={item.icon} width="16px" height="16px" />
+                <Image src={item.icon} width="25" height="25" />
               </span>
               <p className="mt-2 text-xs">{item.text}</p>
             </div>
