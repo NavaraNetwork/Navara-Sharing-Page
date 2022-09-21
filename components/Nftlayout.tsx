@@ -1,68 +1,68 @@
 import React from 'react'
 import Nft from './Nft'
-import nft1 from '../assets/Nft/nft1.png'
-import nft2 from '../assets/Nft/nft2.png'
-import nft3 from '../assets/Nft/nft3.png'
-import nft4 from '../assets/Nft/nft4.png'
-import iconeth from '../assets/Nft/eth.svg'
+import ImageNft1 from '../assets/Nft/nft1.png'
+import ImageNft2 from '../assets/Nft/nft2.png'
+import ImageNft3 from '../assets/Nft/nft3.png'
+import ImageNft4 from '../assets/Nft/nft4.png'
+import IconEth from '../assets/Nft/eth.svg'
 
 const CarouselLayout = () => {
   const nfts = [
     {
-      image: nft1,
+      image: ImageNft1,
       label: 'Andalaniosios',
       price: '2.1756',
       link: '/',
-      icon: iconeth,
+      icon: IconEth,
     },
     {
-      image: nft2,
+      image: ImageNft2,
       label: 'Bobobuy #001',
       price: '0.43',
       link: '/',
-      icon: iconeth,
+      icon: IconEth,
     },
     {
-      image: nft3,
+      image: ImageNft1,
       label: 'Girllllss #001',
       price: '1.43',
       link: '/',
-      icon: iconeth,
+      icon: IconEth,
     },
     {
-      image: nft4,
+      image: ImageNft1,
       label: 'Trio Cube #011',
       price: '0.1575',
       link: '/',
-      icon: iconeth,
+      icon: IconEth,
     },
     {
-      image: nft1,
+      image: ImageNft1,
       label: 'Andalaniosios',
       price: '2.1756',
       link: '/',
-      icon: iconeth,
+      icon: IconEth,
     },
     {
-      image: nft2,
+      image: ImageNft2,
       label: 'Bobobuy #001',
       price: '2.1756',
       link: '/',
-      icon: iconeth,
+      icon: IconEth,
     },
     {
-      image: nft3,
+      image: ImageNft3,
       label: 'Girllllss #001',
       price: '2.1756',
       link: '/',
-      icon: iconeth,
+      icon: IconEth,
     },
     {
-      image: nft4,
+      image: ImageNft4,
       label: 'Trio Cube #011',
       price: '2.1756',
       link: '/',
-      icon: iconeth,
+      icon: IconEth,
     },
   ]
 
