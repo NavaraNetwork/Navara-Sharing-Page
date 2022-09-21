@@ -33,7 +33,6 @@ const Mobile: React.FC = () => {
   // Searching status (whether there is pending API request)
   const [isSearching, setIsSearching] = useState(false)
 
-  const [data, setData] = useState([])
   // Debounce search term so that it only gives us latest value ...
   // ... if searchTerm has not been updated within last 500ms.
   // The goal is to only have the API call fire when user stops typing ...
@@ -46,8 +45,8 @@ const Mobile: React.FC = () => {
         domain: search,
       },
     }).then((result) => {
-      console.log(result.data)
-      setResults(result.data)
+      console.log(result, '123')
+      setResults(result)
     })
   }
   useEffect(
@@ -77,35 +76,19 @@ const Mobile: React.FC = () => {
         value={searchTerm}
         searching={resultSearch}
       />
-      {isSearching && (
+      {isSearching ? (
         <div className="my-3">
           <Spinner />
         </div>
+      ) : (
+        <div className={`flex cursor-pointer text-black hover:font-bold rounded-2xl mb-2`}>
+          <Link href={`/${results?.domain}`}>
+            <div className="flex px-2 my-3 flex-col ">
+              <p>{results?.domain}</p>
+            </div>
+          </Link>
+        </div>
       )}
-      {/* {results &&
-        results?.map((result) => ( */}
-      {/* {results && ( */}
-      {/* <Transition
-        show={results}
-        enter="transition-opacity duration-75"
-        enterFrom="opacity-0"
-        enterTo="opacity-100"
-        leave="transition-opacity duration-150"
-        leaveFrom="opacity-100"
-        leaveTo="opacity-0"
-      > */}
-      <div className="flex cursor-pointer hover:bg-gray-200">
-        {/* <div className="p-2">
-          <Image src={token} width="15" height="15" />
-        </div> */}
-        <Link href={`/${results.domain}`}>
-          <div className="flex p-1 flex-col">
-            <p>{results.domain}</p>
-          </div>
-        </Link>
-      </div>
-      {/* </Transition> */}
-      {/* )} */}
 
       <Card {...tempUser} />
 
