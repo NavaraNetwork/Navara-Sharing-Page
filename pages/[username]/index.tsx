@@ -16,6 +16,7 @@ import API from '../../services/api'
 
 /* Constants */
 import Card from '../../components/Card'
+import Modal from '../../components/UI/Modal'
 import { categories } from '../../constants/constants'
 import { tempUser, tempWidgetItems } from '../../constants/temporaryData'
 import { useDebounce } from '../../hooks/useDebounce'
@@ -25,7 +26,6 @@ interface IProflleProps {
 const Profile = ({ data }: IProflleProps) => {
   const router = useRouter()
   const domain = router.asPath
-  console.log(data, '12322')
   const [resultSearch, setResultSearch] = useState(false)
 
   const handleSearch = (event: any) => {
@@ -52,7 +52,7 @@ const Profile = ({ data }: IProflleProps) => {
         domain: search,
       },
     }).then((result) => {
-      console.log(result)
+      console.log(result, 'VÃI LZ')
       setResults(result)
     })
   }
@@ -71,6 +71,11 @@ const Profile = ({ data }: IProflleProps) => {
     [debouncedSearchTerm] // Only call effect if debounced search term changes
   )
   console.log(results, 'results')
+  const [isShow, setIsShow] = useState(false)
+  const handlOpen = () => {
+    console.log('123')
+    setIsShow(true)
+  }
   return (
     <div className="max-w-xs mx-auto">
       <div className="flex justify-center mb-5">
@@ -104,6 +109,7 @@ const Profile = ({ data }: IProflleProps) => {
       <Widget items={tempWidgetItems} />
 
       <Tabs tabList={categories} />
+      <Modal isShow={isShow} handlOpen={handlOpen} />
     </div>
   )
 }
@@ -112,7 +118,7 @@ export async function getServerSideProps(context: any) {
   // Fetch data from external API
   const domainName = context.params.username
   const res = await API.get(`domain/find?domain=${domainName}`)
-  console.log(res, '123')
+  console.log(res, '12sss3')
   const data = await res
 
   // Pass data to the page via props
