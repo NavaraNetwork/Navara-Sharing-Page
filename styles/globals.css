@@ -18,15 +18,15 @@ a {
   box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   html {
-    /* color-scheme: dark; */
+    color-scheme: dark;
   }
   body {
-    /* color: white; */
-    /* background: black; */
+    color: white;
+    background: black;
   }
-}
+} */
 
 .tooltip {
   position: relative;
@@ -44,19 +44,8 @@ a {
 
     /* Position the tooltip text*/
     position: absolute;
-		top: -30px;
+		top: -25px;
     z-index: 1;
-
-    &:after {
-      content: '';
-      position: absolute;
-      left: 10px;
-      bottom: -4px;
-      width: 8px;
-      height: 8px;
-      background: black;
-      transform: rotate(40deg);
-    }
 
   }
 
