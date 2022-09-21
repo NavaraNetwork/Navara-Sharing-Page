@@ -8,42 +8,38 @@ import { TokenType } from '../types/types'
 import Search from './UI/Search'
 
 /* Assets */
-import logoBitcoin from '../assets/logos/logo_bitcoin.svg'
-import logoEthereum from '../assets/logos/logo_ethereum.svg'
 import TokenList from './TokenList'
 
 type TabsProps = {
   tabList: string[]
   panels?: any[]
+  chains: any
 }
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
-const tokenBitcoin: TokenType = {
-  tokenLogo: logoBitcoin,
-  tokenNetworkLogo: logoBitcoin,
-  token: 'Bitcoin',
-  symbol: 'BTC',
-  address: '0x123...789',
-  isVerified: true,
-  isDefault: false,
-}
+const Tabs: React.FC<TabsProps> = ({ tabList, panels, chains }) => {
+  const chainList = chains.map((chain) => {
+    const data = Object.keys(chain).map((key) => {
+      return {
+        token: key,
+        address: chain[key],
+        tokenLogo: key,
+        tokenNetworkLogo: key
+      }
+    })
+    return data
+  })
 
-const tokenEthereum: TokenType = {
-  tokenLogo: logoEthereum,
-  tokenNetworkLogo: logoEthereum,
-  token: 'Ethereum',
-  symbol: 'ETH',
-  address: '0x123...789',
-  isVerified: true,
-  isDefault: true,
-}
+  const tokenList = [].concat.apply([], chainList)
+  const filteredTokenList = tokenList.filter((item) => {
+    return item.token !== 'chainId'
+  })
 
-const tokenList: TokenType[] = [tokenEthereum, tokenBitcoin, tokenBitcoin]
+  console.log(filteredTokenList)
 
-const Tabs: React.FC<TabsProps> = ({ tabList, panels }) => {
   return (
     <Tab.Group>
       <Tab.List className="flex space-x-1 rounded-2xl bg-[#F8FAFC] p-1">
@@ -65,7 +61,7 @@ const Tabs: React.FC<TabsProps> = ({ tabList, panels }) => {
       <Search placeholder="Seach token, NFT, ..." className="mb-7" />
       <Tab.Panels>
         <Tab.Panel>
-          <TokenList tokens={tokenList} />
+          <TokenList tokens={filteredTokenList} />
         </Tab.Panel>
         <Tab.Panel>
           <Nftlayout />
