@@ -14,9 +14,6 @@ const Modal: React.FC<ModalProps> = ({ isShow, handleOpen, handleClose, titleMod
   //   console.log(isOpen)
   return (
     <>
-      {/* <button onClick={handlOpen} type="button" className="bg-red-500 py-2.5 px-5 mr-2 mb-2 text-sm font-medium">
-        Alternative
-      </button> */}
       <Transition appear show={isShow} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={() => {}}>
           <Transition.Child

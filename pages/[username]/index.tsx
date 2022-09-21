@@ -5,18 +5,18 @@ import { useEffect, useState } from 'react'
 
 /* Components */
 
-import Tabs from '../../components/Tabs'
 import SearchDropdown from '../../components/UI/SearchDropdown'
-import { Spinner } from '../../components/UI/Spinner'
-import Widget from '../../components/Widget'
 
 /* Assets */
 import navaraLogo from '../../assets/logos/navara_logo.svg'
 import API from '../../services/api'
 
 /* Constants */
+import Link from 'next/link'
 import Card from '../../components/Card'
-import Modal from '../../components/UI/Modal'
+import Tabs from '../../components/Tabs'
+import { Spinner } from '../../components/UI/Spinner'
+import Widget from '../../components/Widget'
 import { categories } from '../../constants/constants'
 import { tempUser, tempWidgetItems } from '../../constants/temporaryData'
 import { useDebounce } from '../../hooks/useDebounce'
@@ -45,21 +45,29 @@ const Profile = ({ data }: IProflleProps) => {
   // The goal is to only have the API call fire when user stops typing ...
   // ... so that we aren't hitting our API rapidly.
   const debouncedSearchTerm = useDebounce(searchTerm, 500)
+  const [errorMessage, setErrorMessage] = useState('')
   // API search function
   const searchCharacters = async (search: any) => {
     return await API.get('domain/find', {
       params: {
         domain: search,
       },
-    }).then((result) => {
-      console.log(result, 'VÃI LZ')
-      setResults(result)
     })
+      .then((result) => {
+        setIsSearching(false)
+        setResults(result)
+      })
+      .catch((error) => {
+        setIsSearching(false)
+        setResults([])
+        console.log(error.response.data.message)
+        setErrorMessage(error.response.data.message)
+      })
   }
-  console.log(data, '123')
   useEffect(
     () => {
       if (debouncedSearchTerm) {
+        // setIsSearching(true)
         setIsSearching(true)
         searchCharacters(debouncedSearchTerm).then((results: any) => {
           setIsSearching(false)
@@ -74,11 +82,11 @@ const Profile = ({ data }: IProflleProps) => {
   console.log(results, 'results')
   const [isShow, setIsShow] = useState(false)
   const handlOpen = () => {
-    console.log('123')
     setIsShow(!isShow)
   }
+
   return (
-    <div className="max-w-xs mx-auto">
+    <div className="max-w-xs mx-auto my-5">
       <div className="flex justify-center mb-5">
         <Image src={navaraLogo} className="mx-auto" />
       </div>
@@ -90,28 +98,31 @@ const Profile = ({ data }: IProflleProps) => {
         searching={resultSearch}
       />
       {isSearching ? (
-        <div className="my-3">
+        results && results.length > 0 ? (
           <Spinner />
-        </div>
+        ) : (
+          <></>
+        )
       ) : (
         results && (
-          <div className={`flex cursor-pointer hover:font-bold rounded-2xl mb-2`}>
-            <a href={`/${results?.domain}`}>
-              <div className="flex px-2 my-3 flex-col ">
+          <div className={`flex cursor-pointer hover:font-bold hover:bg-gray-200 p-3 my-3 rounded-2xl `}>
+            <Link href={`${results?.domain}`}>
+              <a onClick={() => setIsSearching(true)}>
                 <p>{results?.domain}</p>
-              </div>
-            </a>
+              </a>
+              {/* <div className="flex px-2 my-3 flex-col ">
+                <p>{results?.domain}</p>
+              </div> */}
+            </Link>
           </div>
         )
       )}
-
+      {/* {results && results.length > 0 ? <>CÓ DÂT</> : <>{errorMessage}</>} */}
       <Card {...tempUser} />
 
       <Widget items={tempWidgetItems} />
 
       <Tabs tabList={categories} />
-
-      <Modal isShow={isShow} handlOpen={handlOpen} valueModal="ABC" titleModal="TITLE MODAL" />
     </div>
   )
 }
