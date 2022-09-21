@@ -9,6 +9,8 @@ import icon_send from '../assets/icons/send.svg'
 import checkMarkRound from '../assets/icons/checkmark_round.svg'
 import checkMark from '../assets/icons/checkmark.svg'
 import useCopyToClipBoard from '../hooks/useCopyToClipBoard'
+import { shortenAddress } from '../utils/stringFunctions'
+import LogoChainImage from './UI/LogoChain'
 
 const Token: React.FC<TokenType> = ({ tokenLogo, tokenNetworkLogo, token, symbol, address, isVerified, isDefault }) => {
   const addressRef = useRef<HTMLSpanElement>(null)
@@ -29,24 +31,24 @@ const Token: React.FC<TokenType> = ({ tokenLogo, tokenNetworkLogo, token, symbol
   }
 
   return (
-    <div className="grid grid-flow-col-dense py-3">
+    <div className="grid grid-cols-[40px_minmax(0,_1fr)_40px_40px] gap-4 py-3">
       <div>
         <div className="relative w-10 h-10 rounded-full">
-          <Image src={tokenLogo} layout="fill" />
+          <LogoChainImage network={tokenLogo} />
           <div className="absolute w-4 h-4 bottom-0 right-0 border border-white rounded-full">
-            <Image src={tokenNetworkLogo} layout="fill" />
+            <LogoChainImage network={tokenLogo} />
           </div>
         </div>
       </div>
       <div>
         <div>
-          <span className="inline-block font-bold mr-2">{token}</span>
-          <span>
-            (
-            <span className="text-[10px]" ref={addressRef}>
+          <span className="inline-block font-bold mr-2 capitalize">{token}</span>
+          <span className="tooltip">
+            (<span className="text-[10px]">{address && shortenAddress(address, 8)}</span>)
+            <span className="tooltiptext">{address}</span>
+            <span className="hidden" ref={addressRef}>
               {address}
             </span>
-            )
           </span>
         </div>
         <div className="flex items-center gap-2">

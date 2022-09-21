@@ -33,20 +33,31 @@ a {
   display: inline-block;
 
   .tooltiptext {
-		@apply text-[8px] w-24;
+		@apply text-[10px] min-w-[9rem];
 
     visibility: hidden;
     background-color: black;
     color: #fff;
     text-align: center;
-    padding: 5px 0;
+    padding: 5px;
     border-radius: 6px;
 
     /* Position the tooltip text*/
     position: absolute;
-		top: -25px;
+		top: -30px;
+    left: 0;
     z-index: 1;
 
+    &:after {
+      content: '';
+      position: absolute;
+      left: 10px;
+      bottom: -4px;
+      width: 8px;
+      height: 8px;
+      background: black;
+      transform: rotate(40deg);
+    }
   }
 
   /* Show the tooltip text when you mouse over the tooltip container */

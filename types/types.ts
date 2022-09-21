@@ -3,7 +3,7 @@ export type UserInfo = {
 	alias?: string
 	domain?: string
 	address?: string
-	expirationDate?: string
+	expired: string
 	isValid?: boolean
 	avatar?: any
 	logo?: any
