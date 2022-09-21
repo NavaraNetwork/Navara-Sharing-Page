@@ -69,7 +69,7 @@ const ModalSend: React.FC<ModalProps> = ({
                       <XIcon className="h-5 w-5 text-gray-500" />
                     </button>
                   </div>
-                  <Dialog.Title as="h3" className="text-3xl font-bold text-center font-medium leading-6 text-gray-900 ">
+                  <Dialog.Title as="h3" className="text-2xl font-bold text-center font-medium leading-6 text-gray-900 ">
                     {titleModal}
                   </Dialog.Title>
 

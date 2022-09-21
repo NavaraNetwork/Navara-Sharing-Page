@@ -70,14 +70,14 @@ const Token: React.FC<TokenType> = ({ tokenLogo, tokenNetworkLogo, token, symbol
           ) : null}
         </div>
       </div>
-      <div className="flex flex-col items-center justify-between h-full">
+      <div className="flex flex-col items-center justify-between h-full cursor-pointer">
         <div className="tooltip" onClick={handleToolTipClick}>
           <span className="tooltiptext">{toolTipText}</span>
           <Image src={copyIcon} width="24px" height="24px" />
         </div>
-        <p className="text-[14px]">Copy</p>
+        <p className="text-[14px] ">Copy</p>
       </div>
-      <div className="flex flex-col items-center justify-between h-full " onClick={handleOpenModal}>
+      <div className="flex flex-col items-center justify-between h-full cursor-pointer" onClick={handleOpenModal}>
         <Image src={icon_send} width="24px" height="24px" />
         <p className="text-[14px]">Send</p>
       </div>
