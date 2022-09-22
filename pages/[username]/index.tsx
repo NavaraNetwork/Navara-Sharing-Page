@@ -131,7 +131,7 @@ const Profile = ({ data }: IProflleProps) => {
   }, [])
 
   const [fakeLoad, setFakeLoad] = useState(false)
-  const handleClick = (domain: any) => {
+  const handleClick = () => {
     setFakeLoad(true)
     setTimeout(() => {
       setFakeLoad(false)
@@ -185,16 +185,14 @@ const Profile = ({ data }: IProflleProps) => {
               listDomains?.map((item, index) => {
                 return (
                   <div
-                    className={`flex items-center gap-4 py-2 hover:bg-gray-200 rounded-lg cursor-pointer`}
-                    onClick={() => handleClick(item?.domain)}
+                    className={` items-center gap-4 py-2 hover:bg-gray-200 rounded-lg cursor-pointer`}
                     key={index}
                   >
-                    <div className="rounded-full h-6 w-6 bg-gray-900 ml-2 p-1">
-                      <Image src={findItem?.icon} />
-                    </div>
-
                     <Link href={`${item?.domain}`}>
-                      <a>
+                      <a onClick={handleClick} className="flex">
+                        <div className="rounded-full h-6 w-6 bg-gray-900 mr-2 p-1">
+                          <Image src={findItem?.icon} />
+                        </div>
                         <p>{item?.domain}</p>
                       </a>
                     </Link>
