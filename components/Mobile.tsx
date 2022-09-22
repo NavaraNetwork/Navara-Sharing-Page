@@ -109,11 +109,23 @@ const Mobile: React.FC = () => {
       {/* </Transition> */}
       {/* )} */}
 
-      <Card {...tempUser} />
+      <Card
+        data={{
+          name: undefined,
+          alias: undefined,
+          domain: undefined,
+          address: undefined,
+          expired: '',
+          isValid: undefined,
+          avatar: undefined,
+          logo: undefined,
+        }}
+        {...tempUser}
+      />
 
       <Widget items={tempWidgetItems} />
 
-      <Tabs tabList={categories} />
+      <Tabs tabList={categories} chains={undefined} />
     </div>
   )
 }
