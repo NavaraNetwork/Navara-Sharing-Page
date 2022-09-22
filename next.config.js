@@ -17,7 +17,7 @@ module.exports = {
     return [
       {
         source: '/',
-        destination: 'https://navara.network/one',
+        destination: '/navara.nns.one',
         permanent: true,
       },
     ]

@@ -1,8 +1,6 @@
-import Image from 'next/image'
 import React from 'react'
 
-import search from '../../assets/icons/search.svg'
-
+import { SearchIcon } from '@heroicons/react/solid'
 type SearchProps = {
   placeholder?: string
   className?: string
@@ -16,7 +14,8 @@ const SearchDropdown: React.FC<SearchProps> = ({ placeholder, className, onChang
   return (
     <>
       <div className={`flex items-center gap-4 -4  ${className}`}>
-        <Image src={search} className="p-1 w-10 h-10 rounded-full dark:bg-white  " />
+        <SearchIcon width="20" height="20" className="dark:text-white" />
+        {/* <Image src={search} className="p-1 w-10 h-10 rounded-full  " /> */}
         <div>
           <input
             id="first_name"
