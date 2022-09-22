@@ -21,6 +21,8 @@ const Token: React.FC<TokenType> = ({ tokenLogo, tokenNetworkLogo, token, symbol
   const [, copy] = useCopyToClipBoard()
 
   const handleToolTipClick = () => {
+    console.log(addressRef.current);
+    
     null !== addressRef.current && copy(addressRef.current?.innerText)
     setToolTipText('Copied')
     setCopyIcon(checkMark)
@@ -42,8 +44,8 @@ const Token: React.FC<TokenType> = ({ tokenLogo, tokenNetworkLogo, token, symbol
       <div>
         <div className="relative w-10 h-10 rounded-full">
           <LogoChainImage network={tokenLogo} />
-          <div className="absolute w-4 h-4 bottom-0 right-0 border border-white rounded-full">
-            <LogoChainImage network={tokenLogo} />
+          <div className="absolute w-5 h-5 -bottom-2 -right-2 border border-white bg-white rounded-full">
+            <LogoChainImage network={tokenNetworkLogo} />
           </div>
         </div>
       </div>
@@ -51,14 +53,14 @@ const Token: React.FC<TokenType> = ({ tokenLogo, tokenNetworkLogo, token, symbol
         <div className="my-2">
           <span className="inline-block font-bold mr-2 capitalize">{token}</span>
           <span className="tooltip">
-            (<span className="text-[10px]">{address && shortenAddress(address, 8)}</span>)
+            <span className="text-[10px]">{address && shortenAddress(address, 8)}</span>
             <span className="tooltiptext">{address}</span>
             <span className="hidden" ref={addressRef}>
               {address}
             </span>
           </span>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 mt-2">
           <span className="text-[#8E9BAE]">{symbol}</span>
           <span className={`${isVerified ? 'inline' : 'hidden'}`}>
             <Image src={checkMarkRound} />
