@@ -63,7 +63,7 @@ const ModalSend: React.FC<ModalProps> = ({
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-lg transform overflow-hidden rounded-2xl dark:bg-gray-900 bg-white p-6 text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel className="w-full max-w-lg transform rounded-2xl dark:bg-gray-900 bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <div className="flex">
                     <button className="ml-auto" onClick={handleClose}>
                       <XIcon className="h-5 w-5 text-gray-500" />

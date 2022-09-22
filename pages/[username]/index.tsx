@@ -96,6 +96,21 @@ const Profile = ({ data }: IProflleProps) => {
   )
   const [isShow, setIsShow] = useState(false)
 
+  const { chains, ...domainInfo } = data
+
+  const filteredTokenList = Object.keys(chains[0])
+    .map((key) => {
+      return {
+        token: key,
+        address: chains[0][key],
+        tokenLogo: key,
+        tokenNetworkLogo: key,
+      }
+    })
+    .filter((item: any) => {
+      return item?.token !== 'chainId'
+    })
+
   return (
     <div className="grid justify-items-center overflow-x-hidden">
       <LayoutPage title={` ${data.domain} | Navara One`}></LayoutPage>
@@ -160,11 +175,11 @@ const Profile = ({ data }: IProflleProps) => {
           </div>
         </div>
 
-        <Card data={data} />
+        <Card tokenList={filteredTokenList} userInfo={domainInfo} />
 
         <Widget items={tempWidgetItems} />
 
-        <Tabs tabList={categories} chains={data.chains} />
+        <Tabs tabList={categories} chains={filteredTokenList} />
         {/* <Modal isShow={isShow} handlOpen={handlOpen} /> */}
       </div>
     </div>

@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import React, { useRef, useState } from 'react'
 
-import { TokenType, UserInfo } from '../types/types'
+import { UserInfo } from '../types/types'
 
 // Assets
 import checkMark from '../assets/icons/checkmark.svg'
@@ -16,11 +16,12 @@ import useCopyToClipBoard from '../hooks/useCopyToClipBoard'
 import { shortenAddress } from '../utils/stringFunctions'
 
 type CardProp = {
-  data: UserInfo
+  userInfo: UserInfo
+  tokenList: any
 }
 
-const Card: React.FC<CardProp> = ({ data }) => {
-  const { alias, domain, address, expired, logo, chains } = data
+const Card: React.FC<CardProp> = ({ userInfo, tokenList }) => {
+  const { domain, expired } = userInfo
 
   const addressRef = useRef<HTMLParagraphElement>(null)
   const [toolTipText, setToolTipText] = useState<string>('Copy token address')
@@ -29,8 +30,6 @@ const Card: React.FC<CardProp> = ({ data }) => {
   const [, copy] = useCopyToClipBoard()
 
   const handleToolTipClick = () => {
-    console.log(addressRef.current?.innerText)
-
     null !== addressRef.current && copy(addressRef.current?.innerText)
 
     setToolTipText('Copied')
@@ -41,23 +40,6 @@ const Card: React.FC<CardProp> = ({ data }) => {
       setCopyIcon(icon_copy)
     }, 3000)
   }
-
-  const chainList = chains?.map((chain: any) => {
-    const data = Object.keys(chain).map((key) => {
-      return {
-        token: key,
-        address: chain[key],
-        tokenLogo: key,
-        tokenNetworkLogo: key,
-      }
-    })
-    return data
-  })
-
-  const tokenList = [].concat.apply([], chainList)
-  const filteredTokenList: TokenType[] = tokenList.filter((item: TokenType) => {
-    return item?.token !== 'chainId'
-  })
 
   const expiredDate = new Date(expired)
   const today = new Date()
@@ -71,7 +53,7 @@ const Card: React.FC<CardProp> = ({ data }) => {
     { name: '.eth', icon: LogoETH },
   ]
 
-  const findItem = imageCards.find((item: any) => domain?.includes(item?.name))
+  const findItem = imageCards.find((item: { name: string; icon: any }) => domain?.includes(item?.name))
 
   return (
     <div className="relative min-h-[196px] pl-5 pt-5 pr-8 text-white">
@@ -113,13 +95,11 @@ const Card: React.FC<CardProp> = ({ data }) => {
 
           <div className="flex items-center gap-3">
             <span className="tooltip">
-              <p className="text-[10px] font-normal text-[#F5F9FF]">
-                {shortenAddress(filteredTokenList[0].address, 8)}
-              </p>
+              <p className="text-[10px] font-normal text-[#F5F9FF]">{shortenAddress(tokenList[0].address, 8)}</p>
               <p className="hidden" ref={addressRef}>
-                {filteredTokenList[0].address}
+                {tokenList[0].address}
               </p>
-              <p className="tooltiptext">{filteredTokenList[0].address}</p>
+              <p className="tooltiptext">{tokenList[0].address}</p>
             </span>
             <div className="tooltip" onClick={handleToolTipClick}>
               <span className="tooltiptext">{toolTipText}</span>
