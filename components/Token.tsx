@@ -71,7 +71,7 @@ const Token: React.FC<TokenType> = ({
         <div className="flex items-center gap-2 mt-2">
           <span className="text-[#8E9BAE]">{symbol}</span>
           <span className={`${isVerified ? 'inline' : 'hidden'}`}>
-            <Image src={checkMarkRound} alt="checkmark"/>
+            <Image src={checkMarkRound} alt="checkmark" />
           </span>
           {isDefault ? (
             <div className="flex items-center max-h-4 bg-[#F0F9FF] px-1 py-2 rounded-sm ">
@@ -80,15 +80,15 @@ const Token: React.FC<TokenType> = ({
           ) : null}
         </div>
       </div>
-      <div className="flex flex-col items-center justify-between h-full cursor-pointer">
+      <div className="flex flex-col items-center justify-between  cursor-pointer">
         <div className="tooltip" onClick={handleToolTipClick}>
           <span className="tooltiptext">{toolTipText}</span>
-          <Image src={copyIcon} width="24px" height="24px" alt='icon_copy' />
+          <Image src={copyIcon} width="24px" height="24px" alt="icon_copy" />
         </div>
         <p className="text-[14px] ">Copy</p>
       </div>
-      <div className="flex flex-col items-center justify-between h-full cursor-pointer" onClick={handleOpenModal}>
-        <Image src={icon_send} width="24px" height="24px" alt='icon_send' />
+      <div className="flex flex-col items-center justify-between  cursor-pointer" onClick={handleOpenModal}>
+        <Image src={icon_send} width="24px" height="24px" alt="icon_send" />
         <p className="text-[14px]">Send</p>
       </div>
       <ModalSend
