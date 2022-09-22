@@ -3,6 +3,7 @@ import { tokenListType } from '../types/types'
 import Token from './Token'
 
 const TokenList: React.FC<tokenListType> = ({ tokens }) => {
+  tokens[0].isDefault = true
   return (
     <React.Fragment>
       <div className="flex flex-col gap-2">
