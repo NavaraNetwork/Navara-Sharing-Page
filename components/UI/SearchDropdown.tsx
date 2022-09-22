@@ -20,7 +20,7 @@ const SearchDropdown: React.FC<SearchProps> = ({ placeholder, className, onChang
         <div>
           <input
             id="first_name"
-            className=" w-64 border text-gray-900 text-sm rounded-lg block w-full p-2.5"
+            className=" w-64 border text-gray-900 text-sm rounded-lg block  p-2.5"
             type="search"
             placeholder={placeholder}
             onChange={onChange}

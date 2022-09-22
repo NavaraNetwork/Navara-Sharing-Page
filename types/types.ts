@@ -1,10 +1,11 @@
 export type UserInfo = {
+	name?: string
 	alias?: string
 	domain?: string
 	address?: string
 	expired: string
 	isValid?: boolean
-	// avatar?: any
+	avatar?: any
 	logo?: any
 	chains?: any
 }
@@ -16,8 +17,12 @@ export type TokenType = {
 	symbol?: string
 	address?: string
 	isVerified?: boolean
-	isDefault?: boolean
+	isDefault?: boolean 
+	
 	tokenFrom?: string
 }
 
-export type tokenListType = { tokens: TokenType[] }
+export type tokenListType = {
+	placeholder?: string
+	className?: string
+	tokens: TokenType[] }
