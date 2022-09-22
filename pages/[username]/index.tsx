@@ -15,34 +15,35 @@ import API from '../../services/api'
 import Link from 'next/link'
 import { setTimeout } from 'timers'
 import Card from '../../components/Card'
+import LayoutPage from '../../components/commons/LayoutPage'
 import Tabs from '../../components/Tabs'
 import { Spinner } from '../../components/UI/Spinner'
 import Widget from '../../components/Widget'
 import { categories } from '../../constants/constants'
 import { tempWidgetItems } from '../../constants/temporaryData'
 import { useDebounce } from '../../hooks/useDebounce'
-import LayoutPage from '../../components/commons/LayoutPage'
 interface IProflleProps {
   data: any
 }
 const Profile = ({ data }: IProflleProps) => {
   const router = useRouter()
   const domain = router.asPath
-  
   const [resultSearch, setResultSearch] = useState(false)
+  const [searchTerm, setSearchTerm] = useState('')
 
   const handleSearch = (event: any) => {
+    const inputDomain = event.target.value
+
     setSearchTerm(event.target.value)
   }
 
   // State and setters for ...
   // Search term
-  const [searchTerm, setSearchTerm] = useState('')
   // API search results
   const [results, setResults] = useState([])
   // Searching status (whether there is pending API request)
   const [isSearching, setIsSearching] = useState(false)
-
+  const [typing, setTyping] = useState(false)
   // Debounce search term so that it only gives us latest value ...
   // ... if searchTerm has not been updated within last 500ms.
   // The goal is to only have the API call fire when user stops typing ...
@@ -59,14 +60,19 @@ const Profile = ({ data }: IProflleProps) => {
       .then((result: any) => {
         setResults(result)
         setErrorMessage('')
+        setTyping(false)
       })
       .catch((error) => {
         setResults([])
         setTimeout(() => {
           setErrorMessage(error.response.data.message)
         }, 1000)
+        setTyping(false)
       })
   }
+  useEffect(() => {
+    setTyping(true)
+  }, [searchTerm])
   useEffect(
     () => {
       if (debouncedSearchTerm) {
@@ -75,10 +81,12 @@ const Profile = ({ data }: IProflleProps) => {
         searchCharacters(debouncedSearchTerm).then((results: any) => {
           // setResults(results)
           // console.log(results, 'UEF')
+          setTyping(false)
           setIsSearching(false)
         })
       } else {
         setResults([])
+        setTyping(false)
         setIsSearching(false)
       }
     },
@@ -90,12 +98,7 @@ const Profile = ({ data }: IProflleProps) => {
   }
   return (
     <>
-      <LayoutPage
-        title={
-          ` ${data.domain} | Navara One`
-        }
-      >
-      </LayoutPage>
+      <LayoutPage title={` ${data.domain} | Navara One`}></LayoutPage>
 
       <div className="max-w-xs mx-auto my-5">
         <div className="flex justify-center mb-5">
@@ -113,17 +116,15 @@ const Profile = ({ data }: IProflleProps) => {
             {searchTerm === '' ? (
               <p className="my-2 text-center text-[13px] text-red-500 px-3">Start typing to search for assets</p>
             ) : results ? (
-              errorMessage ? (
+              typing ? (
                 <div className="my-3">
                   <Spinner />
                 </div>
+              ) : errorMessage ? (
+                <p className="my-3 text-center text-[13px] text-red-500 px-3">
+                  We were unable to find any results for your search
+                </p>
               ) : (
-                (
-                  <p className="my-3 text-center text-[13px] text-red-500 px-3">
-                    We were unable to find any results for your search
-                  </p>
-                ) &&
-                // <p className="my-3 text-[13px] text-red-500 px-3">We were unable to find any results for your search</p>
                 !isSearching && (
                   <div className={`flex cursor-pointer hover:font-bold hover:bg-gray-50 px-10 my-1 rounded-2xl `}>
                     <Link href={`${results?.domain}`}>
@@ -135,7 +136,20 @@ const Profile = ({ data }: IProflleProps) => {
                 )
               )
             ) : (
-              <></>
+              //     &&
+              // // <p className="my-3 text-[13px] text-red-500 px-3">We were unable to find any results for your search</p>
+              // !isSearching && (
+              // <div className={`flex cursor-pointer hover:font-bold hover:bg-gray-50 px-10 my-1 rounded-2xl `}>
+              //   <Link href={`${results?.domain}`}>
+              //     <a onClick={() => setIsSearching(true)}>
+              //       <p>{results?.domain}</p>
+              //     </a>
+              //   </Link>
+              // </div>
+              // )
+              <p className="my-3 text-center text-[13px] text-red-500 px-3">
+                We were unable to find any results for your search
+              </p>
             )}
           </div>
         </div>
