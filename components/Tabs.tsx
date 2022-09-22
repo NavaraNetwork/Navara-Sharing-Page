@@ -27,7 +27,7 @@ const Tabs: React.FC<TabsProps> = ({ tabList, panels, chains }) => {
         token: key,
         address: chain[key],
         tokenLogo: key,
-        tokenNetworkLogo: key
+        tokenNetworkLogo: key,
       }
     })
     return data
@@ -37,8 +37,6 @@ const Tabs: React.FC<TabsProps> = ({ tabList, panels, chains }) => {
   const filteredTokenList = tokenList.filter((item) => {
     return item.token !== 'chainId'
   })
-
-  console.log(filteredTokenList)
 
   return (
     <Tab.Group>
