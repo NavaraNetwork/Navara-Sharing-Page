@@ -1,21 +1,26 @@
 import Image from 'next/image'
+import React from 'react'
 
 import bitcoin from '../../assets/logos/logo_bitcoin.svg'
-import {
-  default as binance,
-  default as ethereum,
-  default as liteCoin,
-  default as uniswap,
-  default as xrp,
-} from '../../assets/logos/logo_ethereum.svg'
+import ethereum from '../../assets/logos/logo_ethereum.svg'
+import xrp from '../../assets/logos/logo_xrp.svg'
+import binance from '../../assets/logos/logo_binance.svg'
+import uniswap from '../../assets/logos/logo_uniswep.svg'
+import liteCoin from '../../assets/logos/logo_litecoin.svg'
+import near from '../../assets/logos/near.svg'
+import polkadot from '../../assets/logos/polkadot.svg'
+import solana from '../../assets/logos/solana.svg'
 
 const logo = {
-  ethereum: ethereum,
-  bitcoin: bitcoin,
-  xrp: xrp,
-  binance: binance,
-  uniswap: uniswap,
-  liteCoin: liteCoin,
+  ethereum,
+  bitcoin,
+  xrp,
+  binance,
+  uniswap,
+  liteCoin,
+  near,
+  polkadot,
+  solana
 }
 
 export default function LogoChainImage({ network }) {

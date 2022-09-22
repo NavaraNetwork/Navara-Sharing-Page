@@ -1,15 +1,20 @@
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 
 import { UserInfo } from '../types/types'
 
 // Assets
 import creditCard from '../assets/images/credit_card.svg'
-import checkMark from '../assets/icons/checkmark_round.svg'
 import Logo01 from '../assets/logos/logo-01.svg'
 import LogoETH from '../assets/logos/logo-02.svg'
 import LogoUNS from '../assets/logos/logo-03.svg'
 import LogoNavara from '../assets/logos/logo-white-navara.svg'
+import checkMark from '../assets/icons/checkmark.svg'
+import checkMarkRound from '../assets/icons/checkmark_round.svg'
+import avatar from '../assets/images/avatar.png'
+import { shortenAddress } from '../utils/stringFunctions'
+import useCopyToClipBoard from '../hooks/useCopyToClipBoard'
+import icon_copy from '../assets/icons/copy.svg'
 
 type CardProp = {
   data: UserInfo
@@ -17,16 +22,50 @@ type CardProp = {
 
 
 const Card: React.FC<CardProp> = ({ data }) => {
-  const { name, alias, domain, address, expired, isValid, avatar, logo } = data
+  const { alias, domain, address, expired, isValid, logo, chains } = data
+
+  const addressRef = useRef<HTMLParagraphElement>(null)
+  const [toolTipText, setToolTipText] = useState<string>('Copy token address')
+  const [copyIcon, setCopyIcon] = useState(icon_copy)
+
+  const [, copy] = useCopyToClipBoard()
+
+  const handleToolTipClick = () => {
+    console.log(addressRef.current?.innerText);
+    
+    null !== addressRef.current && copy(addressRef.current?.innerText)
+
+    setToolTipText('Copied')
+    setCopyIcon(checkMark)
+
+    setTimeout(() => {
+      setToolTipText('Copy token address')
+      setCopyIcon(icon_copy)
+    }, 3000)
+  }
+
+  const chainList = chains.map((chain) => {
+    const data = Object.keys(chain).map((key) => {
+      return {
+        token: key,
+        address: chain[key],
+        tokenLogo: key,
+        tokenNetworkLogo: key,
+      }
+    })
+    return data
+  })
+
+  const tokenList = [].concat.apply([], chainList)
+  const filteredTokenList = tokenList.filter((item) => {
+    return item.token !== 'chainId'
+  })
 
   const expiredDate = new Date(expired)
 
   const expiredMonth = expiredDate.getMonth()
   const expiredYear = expiredDate.getFullYear().toString().slice(-2)
 
-  // const check = imageCard.filter(t => t.name.includes('.nns.one'));
-
-  // const ImageCard = imageCard.filter(t => t.name.includes('.nns.one')===domain)
   var imageCards = [
     { name: '.nns.one', icon: LogoNavara },
     { name: '.uns', icon: LogoUNS },
@@ -48,9 +87,9 @@ const Card: React.FC<CardProp> = ({ data }) => {
           <div className="relative w-14 h-14 rounded-full overflow-clip">
             <Image src={avatar} layout="responsive" />
           </div>
-          <div>
-            <p className="mb-2 capitalize font-normal opacity-70">{name}</p>
-            <p className="text-xs">{alias}</p>
+          <div className="">
+            <p className="mb-1 capitalize font-normal">Navara One</p>
+            <p className="text-xs">@{domain?.replace('.nns.one', '')}</p>
           </div>
         </div>
         {/* <div className="w-50 h-50"> */}
@@ -70,9 +109,26 @@ const Card: React.FC<CardProp> = ({ data }) => {
         <div>
           <div className="flex gap-3">
             <p className="font-medium">{domain}</p>
-            <Image src={checkMark} />
+            <Image src={checkMarkRound} />
           </div>
-          <p className="text-[10px] font-normal text-[#F5F9FF]">{address}</p>
+
+          <div className="flex items-center gap-3">
+            <span className="tooltip">
+              <p className="text-[10px] font-normal text-[#F5F9FF]">
+                {shortenAddress(filteredTokenList[0].address, 8)}
+              </p>
+              <p className="hidden" ref={addressRef}>
+                {filteredTokenList[0].address}
+              </p>
+              <p className="tooltiptext">
+                {filteredTokenList[0].address}
+              </p>
+            </span>
+            <div className="tooltip" onClick={handleToolTipClick}>
+              <span className="tooltiptext">{toolTipText}</span>
+              <Image src={copyIcon} width="16px" height="16px" />
+            </div>
+          </div>
         </div>
         <div>
           <p className="text-xs font-bold leading-6">
