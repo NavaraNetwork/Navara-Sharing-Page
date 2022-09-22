@@ -16,7 +16,7 @@ type ModalProps = {
   handleOpen?: (event: any) => void
   valueModal?: string
   isShow?: boolean
-  tokenFrom?: string
+  tokenFrom?: string | boolean
   tokenTo?: string
   fromAddress?: string
 }
@@ -91,7 +91,7 @@ const ModalSend: React.FC<ModalProps> = ({
                   </p>
                   {listWalletConnect.map((item, index) => {
                     return (
-                      <div className="cursor-pointer hover:bg-gray-100 flex py-3 rounded-lg my-2 ">
+                      <div className="cursor-pointer hover:bg-gray-100 flex py-3 rounded-lg my-2 " key={index}>
                         <div className="mr-2 mx-10  ">
                           <Image src={item.iconWallet} />
                         </div>
