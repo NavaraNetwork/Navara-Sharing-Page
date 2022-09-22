@@ -1,27 +1,22 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
-  theme: {
-    extend: {
-      width: {
-        30: '7.5rem',
-        104: '26rem',
-        112: '28rem',
-        120: '30rem',
-        128: '32rem',
-        136: '34rem',
-        144: '36rem',
-      },
-      height: {
-        30: '7.5rem',
-        104: '26rem',
-        112: '28rem',
-        120: '30rem',
-        128: '32rem',
-        136: '34rem',
-        144: '36rem',
-      },
-    },
+
+  screens: {
+    sm: '640px',
+    // => @media (min-width: 640px) { ... }
+
+    md: '768px',
+    // => @media (min-width: 768px) { ... }
+
+    lg: '1024px',
+    // => @media (min-width: 1024px) { ... }
+
+    xl: '1280px',
+    // => @media (min-width: 1280px) { ... }
+
+    '2xl': '1536px',
+    // => @media (min-width: 1536px) { ... }
   },
   plugins: [],
   darkMode: 'class',
