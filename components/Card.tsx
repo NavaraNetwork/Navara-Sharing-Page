@@ -42,7 +42,7 @@ const Card: React.FC<CardProp> = ({ data }) => {
     }, 3000)
   }
 
-  const chainList = chains.map((chain: any) => {
+  const chainList = chains?.map((chain: any) => {
     const data = Object.keys(chain).map((key) => {
       return {
         token: key,
