@@ -16,7 +16,7 @@ const TokenList: React.FC<tokenListType> = ({ placeholder, className, tokens }) 
       <div className={`flex items-center gap-4 p-4 ${className}`}>
         <SearchIcon width="20" height="20" className="dark:text-white" />
         <input
-          className=" w-64 border text-gray-900 text-sm rounded-lg block  p-2.5 dark:bg-white"
+          className=" w-64 no-zoom  border text-gray-900 text-sm rounded-lg block  p-2.5 dark:bg-white"
           type="search"
           placeholder={placeholder}
           value={searchText}
