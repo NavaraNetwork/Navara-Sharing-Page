@@ -8,7 +8,6 @@ import TokenList from './TokenList'
 
 type TabsProps = {
   tabList: string[]
-  panels?: any[]
   chains: any
 }
 
@@ -16,24 +15,7 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
-const Tabs: React.FC<TabsProps> = ({ tabList, panels, chains }) => {
-  const chainList = chains.map((chain: any) => {
-    const data = Object.keys(chain).map((key) => {
-      return {
-        token: key,
-        address: chain[key],
-        tokenLogo: key,
-        tokenNetworkLogo: key,
-      }
-    })
-    return data
-  })
-
-  const tokenList = [].concat.apply([], chainList)
-  const filteredTokenList = tokenList.filter((item: any) => {
-    return item?.token !== 'chainId'
-  })
-
+const Tabs: React.FC<TabsProps> = ({ tabList, chains }) => {
   return (
     <Tab.Group>
       <Tab.List className="flex space-x-1 rounded-2xl bg-[#F8FAFC] p-1">
@@ -55,7 +37,7 @@ const Tabs: React.FC<TabsProps> = ({ tabList, panels, chains }) => {
       {/* <Search placeholder="Seach token, NFT, ..." className="mb-7" /> */}
       <Tab.Panels>
         <Tab.Panel>
-          <TokenList placeholder="Seach token, NFT, ..." tokens={filteredTokenList} />
+          <TokenList placeholder="Seach token, NFT, ..." tokens={chains} />
         </Tab.Panel>
         <Tab.Panel>
           <Nftlayout />

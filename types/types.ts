@@ -1,28 +1,29 @@
 export type UserInfo = {
-	name?: string
-	alias?: string
-	domain?: string
-	address?: string
-	expired: string
-	isValid?: boolean
-	avatar?: any
-	logo?: any
-	chains?: any
+  domain?: string
+  expired: string
 }
 
 export type TokenType = {
-	tokenLogo?: any
-	tokenNetworkLogo?: any
-	token?: string
-	symbol?: string
-	address?: string
-	isVerified?: boolean
-	isDefault?: boolean 
-	
-	tokenFrom?: string
+  tokenLogo?: any
+  tokenNetworkLogo?: any
+  token?: string
+  symbol?: string
+  address?: string
+  isVerified?: boolean
+  isDefault?: boolean
+
+  tokenFrom?: string
 }
 
 export type tokenListType = {
-	placeholder?: string
-	className?: string
-	tokens: TokenType[] }
+  placeholder?: string
+  className?: string
+  tokens: TokenType[]
+}
+
+export type DomainType = {
+  domainId: string
+  domain: string
+  expired: Date
+  chains: any[]
+}

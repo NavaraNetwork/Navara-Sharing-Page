@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 type CopiedValue = string | null
-type CopyFn = (text: string) => Promise<boolean>
+export type CopyFn = (text: string) => Promise<boolean>
 
 const useCopyToClipBoard = (): [CopiedValue, CopyFn] => {
   const [copiedText, setCopiedText] = useState<CopiedValue>(null)
