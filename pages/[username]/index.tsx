@@ -28,6 +28,7 @@ interface IProflleProps {
 const Profile = ({ data }: IProflleProps) => {
   const router = useRouter()
   const domain = router.asPath
+  
   const [resultSearch, setResultSearch] = useState(false)
 
   const handleSearch = (event: any) => {
