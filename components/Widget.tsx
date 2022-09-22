@@ -26,7 +26,7 @@ const Widget: React.FC<widgetProps> = ({ items }) => {
   }
 
   return (
-    <div className="relative -top-11 mx-auto pt-3 px-5 w-4/5 h-16 bg-white rounded-t-2xl">
+    <div className="relative -top-11 mx-auto py-2 px-5 w-4/5 h-16 bg-white rounded-t-2xl">
       <div className="flex justify-between">
         {items.map((item, index) => {
           return (
@@ -34,7 +34,7 @@ const Widget: React.FC<widgetProps> = ({ items }) => {
               <span onClick={() => handleClick(item.action)}>
                 <Image src={item.icon} width="25" height="25" />
               </span>
-              <p className="mt-2 text-xs">{item.text}</p>
+              <p className="mt-2 text-xs dark:text-black">{item.text}</p>
             </div>
           )
         })}

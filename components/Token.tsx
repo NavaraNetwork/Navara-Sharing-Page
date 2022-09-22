@@ -4,24 +4,34 @@ import React, { useRef, useState } from 'react'
 import { TokenType } from '../types/types'
 
 /* assets */
+import checkMark from '../assets/icons/checkmark.svg'
+import checkMarkRound from '../assets/icons/checkmark_round.svg'
 import icon_copy from '../assets/icons/copy.svg'
 import icon_send from '../assets/icons/send.svg'
-import checkMarkRound from '../assets/icons/checkmark_round.svg'
-import checkMark from '../assets/icons/checkmark.svg'
 import useCopyToClipBoard from '../hooks/useCopyToClipBoard'
 import { shortenAddress } from '../utils/stringFunctions'
 import LogoChainImage from './UI/LogoChain'
 import ModalSend from './UI/ModalSend'
 
-const Token: React.FC<TokenType> = ({ tokenLogo, tokenNetworkLogo, token, symbol, address, isVerified, isDefault, tokenFrom }) => {
+const Token: React.FC<TokenType> = ({
+  tokenLogo,
+  tokenNetworkLogo,
+  token,
+  symbol,
+  address,
+  isVerified,
+  isDefault,
+  tokenFrom,
+}) => {
   const addressRef = useRef<HTMLSpanElement>(null)
   const [toolTipText, setToolTipText] = useState<string>('Copy token address')
   const [copyIcon, setCopyIcon] = useState(icon_copy)
 
   const [, copy] = useCopyToClipBoard()
 
-
   const handleToolTipClick = () => {
+    console.log(addressRef.current)
+
     null !== addressRef.current && copy(addressRef.current?.innerText)
     setToolTipText('Copied')
     setCopyIcon(checkMark)
@@ -41,7 +51,7 @@ const Token: React.FC<TokenType> = ({ tokenLogo, tokenNetworkLogo, token, symbol
   return (
     <div className="grid grid-cols-[40px_minmax(0,_1fr)_40px_40px] gap-4 py-3">
       <div>
-        <div className="relative w-10 h-10 rounded-full">
+        <div className="relative w-7 h-7 border p-5 border-white bg-white rounded-full">
           <LogoChainImage network={tokenLogo} />
           <div className="absolute w-5 h-5 -bottom-2 -right-2 border border-white bg-white rounded-full">
             <LogoChainImage network={tokenNetworkLogo} />
