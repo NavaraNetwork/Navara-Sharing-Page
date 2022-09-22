@@ -22,7 +22,6 @@ import Widget from '../../components/Widget'
 import { categories } from '../../constants/constants'
 import { tempWidgetItems } from '../../constants/temporaryData'
 import { useDebounce } from '../../hooks/useDebounce'
-import ThemeToggler from '../../ThemeToggle'
 interface IProflleProps {
   data: any
 }
@@ -98,16 +97,16 @@ const Profile = ({ data }: IProflleProps) => {
   const [isShow, setIsShow] = useState(false)
 
   return (
-    <>
+    <div className="flex">
       <LayoutPage title={` ${data.domain} | Navara One`}></LayoutPage>
 
-      <div className="dark:bg-transparent max-w-xs mx-auto py-5">
+      <div className="dark:bg-slate-800 dark:rounded-lg dark:px-2 my-5 mx-auto   py-5">
         <div className="flex justify-center mb-5 ">
           <Image src={navaraLogo} width="30" height="30" className="mx-auto " />
           <span className="my-3 px-3 font-bold text-3xl dark:text-white">Navara</span>
-          <div className="flex justify-end">
+          {/* <div className="flex justify-end">
             <ThemeToggler />
-          </div>
+          </div> */}
         </div>
         <div className="rounded-lg border dark:border-black my-2">
           <SearchDropdown
@@ -168,7 +167,7 @@ const Profile = ({ data }: IProflleProps) => {
         <Tabs tabList={categories} chains={data.chains} />
         {/* <Modal isShow={isShow} handlOpen={handlOpen} /> */}
       </div>
-    </>
+    </div>
   )
 }
 
