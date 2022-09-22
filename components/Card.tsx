@@ -55,8 +55,8 @@ const Card: React.FC<CardProp> = ({ data }) => {
   })
 
   const tokenList = [].concat.apply([], chainList)
-  const filteredTokenList = tokenList.filter((item) => {
-    return item.token !== 'chainId'
+  const filteredTokenList = tokenList.filter((item: any) => {
+    return item?.token !== 'chainId'
   })
 
   const expiredDate = new Date(expired)
@@ -71,7 +71,7 @@ const Card: React.FC<CardProp> = ({ data }) => {
     { name: '.eth', icon: LogoETH },
   ]
 
-  const findItem = imageCards.find((item) => domain?.includes(item.name))
+  const findItem = imageCards.find((item: any) => domain?.includes(item?.name))
 
   return (
     <div className="relative min-h-[196px] pl-5 pt-5 pr-8 text-white">
