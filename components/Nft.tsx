@@ -8,9 +8,9 @@ type NftProps = {
 
 const Nft = ({ title, data }: NftProps) => {
 	return (
-		<div>
+		<div className='mt-4'>
 			{/* <h1 className='mt-10 text-left text-4xl font-bold'>{title}</h1> */}
-			<div className='grid grid-cols-2   gap-4'>
+			<div className='grid grid-cols-2 gap-4'>
 				{data.map((item: any, index: React.Key | null | undefined) => (
 					<Link key={index} href={item.link} passHref>
 						<a
