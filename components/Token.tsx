@@ -11,6 +11,7 @@ import checkMark from '../assets/icons/checkmark.svg'
 import useCopyToClipBoard from '../hooks/useCopyToClipBoard'
 import { shortenAddress } from '../utils/stringFunctions'
 import LogoChainImage from './UI/LogoChain'
+import ModalSend from './UI/ModalSend'
 
 const Token: React.FC<TokenType> = ({ tokenLogo, tokenNetworkLogo, token, symbol, address, isVerified, isDefault }) => {
   const addressRef = useRef<HTMLSpanElement>(null)
@@ -29,7 +30,13 @@ const Token: React.FC<TokenType> = ({ tokenLogo, tokenNetworkLogo, token, symbol
       setCopyIcon(icon_copy)
     }, 3000)
   }
-
+  const [isSend, setIsSend] = useState(false)
+  const handleOpenModal = () => {
+    setIsSend(true)
+  }
+  const handleClose = () => {
+    setIsSend(false)
+  }
   return (
     <div className="grid grid-cols-[40px_minmax(0,_1fr)_40px_40px] gap-4 py-3">
       <div>
@@ -41,7 +48,7 @@ const Token: React.FC<TokenType> = ({ tokenLogo, tokenNetworkLogo, token, symbol
         </div>
       </div>
       <div>
-        <div>
+        <div className="my-2">
           <span className="inline-block font-bold mr-2 capitalize">{token}</span>
           <span className="tooltip">
             (<span className="text-[10px]">{address && shortenAddress(address, 8)}</span>)
@@ -63,17 +70,26 @@ const Token: React.FC<TokenType> = ({ tokenLogo, tokenNetworkLogo, token, symbol
           ) : null}
         </div>
       </div>
-      <div className="flex flex-col items-center justify-between h-full">
+      <div className="flex flex-col items-center justify-between h-full cursor-pointer">
         <div className="tooltip" onClick={handleToolTipClick}>
           <span className="tooltiptext">{toolTipText}</span>
           <Image src={copyIcon} width="24px" height="24px" />
         </div>
-        <p>Copy</p>
+        <p className="text-[14px] ">Copy</p>
       </div>
-      <div className="flex flex-col items-center justify-between h-full">
+      <div className="flex flex-col items-center justify-between h-full cursor-pointer" onClick={handleOpenModal}>
         <Image src={icon_send} width="24px" height="24px" />
-        <p>Send</p>
+        <p className="text-[14px]">Send</p>
       </div>
+      <ModalSend
+        handleOpen={handleOpenModal}
+        handleClose={handleClose}
+        titleModal="Send With"
+        tokenFrom="ETH"
+        tokenTo={token}
+        fromAddress={address}
+        isShow={isSend}
+      />
     </div>
   )
 }
