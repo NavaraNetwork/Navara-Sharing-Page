@@ -20,9 +20,8 @@ type CardProp = {
   data: UserInfo
 }
 
-
 const Card: React.FC<CardProp> = ({ data }) => {
-  const { alias, domain, address, expired, isValid, logo, chains } = data
+  const { alias, domain, address, expired, logo, chains } = data
 
   const addressRef = useRef<HTMLParagraphElement>(null)
   const [toolTipText, setToolTipText] = useState<string>('Copy token address')
@@ -31,8 +30,8 @@ const Card: React.FC<CardProp> = ({ data }) => {
   const [, copy] = useCopyToClipBoard()
 
   const handleToolTipClick = () => {
-    console.log(addressRef.current?.innerText);
-    
+    console.log(addressRef.current?.innerText)
+
     null !== addressRef.current && copy(addressRef.current?.innerText)
 
     setToolTipText('Copied')
@@ -62,7 +61,8 @@ const Card: React.FC<CardProp> = ({ data }) => {
   })
 
   const expiredDate = new Date(expired)
-
+  const today = new Date()
+  const isValid = expiredDate.getTime() > today.getTime()
   const expiredMonth = expiredDate.getMonth()
   const expiredYear = expiredDate.getFullYear().toString().slice(-2)
 
@@ -72,20 +72,20 @@ const Card: React.FC<CardProp> = ({ data }) => {
     { name: '.eth', icon: LogoETH },
   ]
 
-  const findItem = imageCards.find((item) => domain.includes(item.name))
+  const findItem = imageCards.find((item) => domain?.includes(item.name))
 
   return (
     <div className="relative min-h-[196px] pl-5 pt-5 pr-8 text-white">
       {/* Card Background */}
-      <picture className="absolute top-0 left-0 w-full -z-10">
-        <Image src={creditCard} layout="responsive" />
+      <picture className="absolute top-0 left-0 w-full -z-10 bg-blue-900">
+        <Image src={creditCard} layout="responsive" alt="cardBackground" />
       </picture>
       {/* Card Background */}
 
       <div className="flex justify-between">
         <div className="flex gap-4">
           <div className="relative w-14 h-14 rounded-full overflow-clip">
-            <Image src={avatar} layout="responsive" />
+            <Image src={avatar} layout="responsive" alt="user avatar" />
           </div>
           <div className="">
             <p className="mb-1 capitalize font-normal">Navara One</p>
@@ -93,7 +93,7 @@ const Card: React.FC<CardProp> = ({ data }) => {
           </div>
         </div>
         {/* <div className="w-50 h-50"> */}
-        <Image src={findItem.icon} />
+        <Image src={findItem.icon} alt="" />
         {/* {
           {
             '.nns.one': <Image src={LogoNavara} />,
@@ -109,7 +109,7 @@ const Card: React.FC<CardProp> = ({ data }) => {
         <div>
           <div className="flex gap-3">
             <p className="font-medium">{domain}</p>
-            <Image src={checkMarkRound} />
+            <Image src={checkMarkRound} alt="checkmark" />
           </div>
 
           <div className="flex items-center gap-3">
@@ -120,13 +120,11 @@ const Card: React.FC<CardProp> = ({ data }) => {
               <p className="hidden" ref={addressRef}>
                 {filteredTokenList[0].address}
               </p>
-              <p className="tooltiptext">
-                {filteredTokenList[0].address}
-              </p>
+              <p className="tooltiptext">{filteredTokenList[0].address}</p>
             </span>
             <div className="tooltip" onClick={handleToolTipClick}>
               <span className="tooltiptext">{toolTipText}</span>
-              <Image src={copyIcon} width="16px" height="16px" />
+              <Image src={copyIcon} width="16px" height="16px" alt="copy icon" />
             </div>
           </div>
         </div>
