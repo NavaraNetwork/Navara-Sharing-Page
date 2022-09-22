@@ -13,16 +13,15 @@ import { shortenAddress } from '../utils/stringFunctions'
 import LogoChainImage from './UI/LogoChain'
 import ModalSend from './UI/ModalSend'
 
-const Token: React.FC<TokenType> = ({ tokenLogo, tokenNetworkLogo, token, symbol, address, isVerified, isDefault }) => {
+const Token: React.FC<TokenType> = ({ tokenLogo, tokenNetworkLogo, token, symbol, address, isVerified, isDefault, tokenFrom }) => {
   const addressRef = useRef<HTMLSpanElement>(null)
   const [toolTipText, setToolTipText] = useState<string>('Copy token address')
   const [copyIcon, setCopyIcon] = useState(icon_copy)
 
   const [, copy] = useCopyToClipBoard()
 
+
   const handleToolTipClick = () => {
-    console.log(addressRef.current);
-    
     null !== addressRef.current && copy(addressRef.current?.innerText)
     setToolTipText('Copied')
     setCopyIcon(checkMark)
@@ -87,7 +86,7 @@ const Token: React.FC<TokenType> = ({ tokenLogo, tokenNetworkLogo, token, symbol
         handleOpen={handleOpenModal}
         handleClose={handleClose}
         titleModal="Send With"
-        tokenFrom="ETH"
+        tokenFrom={tokenFrom}
         tokenTo={token}
         fromAddress={address}
         isShow={isSend}
