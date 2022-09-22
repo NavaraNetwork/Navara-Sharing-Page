@@ -39,7 +39,7 @@ const Profile = ({ data }: IProflleProps) => {
   // State and setters for ...
   // Search term
   // API search results
-  const [results, setResults] = useState([])
+  const [results, setResults] = useState<{}>({})
   // Searching status (whether there is pending API request)
   const [isSearching, setIsSearching] = useState(false)
   const [typing, setTyping] = useState(false)
