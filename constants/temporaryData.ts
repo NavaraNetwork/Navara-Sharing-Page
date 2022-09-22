@@ -1,12 +1,9 @@
-import { UserInfo } from '../types/types'
 import { WidgetButtonAction } from './enums'
 
 import follow from '../assets/icons/follow.svg'
 import nft from '../assets/icons/receive_square.svg'
 import token from '../assets/icons/send_square.svg'
-import share, { default as IconTest } from '../assets/icons/share.svg'
-import avatar from '../assets/images/lemon.jpg'
-import logo from '../assets/logos/navara_logo_custom.svg'
+import share from '../assets/icons/share.svg'
 
 export const tempWidgetItems: { icon: any; text: string; action?: string }[] = [
   {
@@ -27,14 +24,3 @@ export const tempWidgetItems: { icon: any; text: string; action?: string }[] = [
     text: 'Share',
   },
 ]
-
-export const tempUser: UserInfo = {
-  name: 'Do Nam Trung',
-  alias: '@trungdo',
-  domain: 'trungdo.nns.one',
-  address: '0x123.789',
-  expirationDate: '09/27',
-  isValid: true,
-  avatar: avatar,
-  logo: logo,
-}
