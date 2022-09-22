@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import React, { useRef, useState } from 'react'
 
-import { UserInfo } from '../types/types'
+import { TokenType, UserInfo } from '../types/types'
 
 // Assets
 import checkMark from '../assets/icons/checkmark.svg'
@@ -55,7 +55,7 @@ const Card: React.FC<CardProp> = ({ data }) => {
   })
 
   const tokenList = [].concat.apply([], chainList)
-  const filteredTokenList = tokenList.filter((item: any) => {
+  const filteredTokenList: TokenType[] = tokenList.filter((item: TokenType) => {
     return item?.token !== 'chainId'
   })
 
@@ -92,7 +92,7 @@ const Card: React.FC<CardProp> = ({ data }) => {
           </div>
         </div>
         {/* <div className="w-50 h-50"> */}
-        <Image src={findItem.icon} alt="" />
+        <Image src={findItem?.icon} alt="" />
         {/* {
           {
             '.nns.one': <Image src={LogoNavara} />,
