@@ -21,6 +21,7 @@ import Widget from '../../components/Widget'
 import { categories } from '../../constants/constants'
 import { tempWidgetItems } from '../../constants/temporaryData'
 import { useDebounce } from '../../hooks/useDebounce'
+import LayoutPage from '../../components/commons/LayoutPage'
 interface IProflleProps {
   data: any
 }
@@ -87,56 +88,65 @@ const Profile = ({ data }: IProflleProps) => {
     setIsShow(!isShow)
   }
   return (
-    <div className="max-w-xs mx-auto my-5">
-      <div className="flex justify-center mb-5">
-        <Image src={navaraLogo} className="mx-auto" />
-      </div>
-      <div className="rounded-lg border m-2">
-        <SearchDropdown
-          placeholder="Seach other address"
-          className="p-2"
-          onChange={handleSearch}
-          value={searchTerm}
-          searching={resultSearch}
-        />
-        <div className="  mb-1 ">
-          {searchTerm === '' ? (
-            <p className="my-2 text-center text-[13px] text-red-500 px-3">Start typing to search for assets</p>
-          ) : results ? (
-            errorMessage ? (
-              <div className="my-3">
-                <Spinner />
-              </div>
-            ) : (
-              (
-                <p className="my-3 text-center text-[13px] text-red-500 px-3">
-                  We were unable to find any results for your search
-                </p>
-              ) &&
-              // <p className="my-3 text-[13px] text-red-500 px-3">We were unable to find any results for your search</p>
-              !isSearching && (
-                <div className={`flex cursor-pointer hover:font-bold hover:bg-gray-50 px-10 my-1 rounded-2xl `}>
-                  <Link href={`${results?.domain}`}>
-                    <a onClick={() => setIsSearching(true)}>
-                      <p>{results?.domain}</p>
-                    </a>
-                  </Link>
-                </div>
-              )
-            )
-          ) : (
-            <></>
-          )}
+    <>
+      <LayoutPage
+        title={
+          ` ${data.domain} | Navara One`
+        }
+      >
+      </LayoutPage>
+
+      <div className="max-w-xs mx-auto my-5">
+        <div className="flex justify-center mb-5">
+          <Image src={navaraLogo} className="mx-auto" />
         </div>
+        <div className="rounded-lg border m-2">
+          <SearchDropdown
+            placeholder="Seach other address"
+            className="p-2"
+            onChange={handleSearch}
+            value={searchTerm}
+            searching={resultSearch}
+          />
+          <div className="  mb-1 ">
+            {searchTerm === '' ? (
+              <p className="my-2 text-center text-[13px] text-red-500 px-3">Start typing to search for assets</p>
+            ) : results ? (
+              errorMessage ? (
+                <div className="my-3">
+                  <Spinner />
+                </div>
+              ) : (
+                (
+                  <p className="my-3 text-center text-[13px] text-red-500 px-3">
+                    We were unable to find any results for your search
+                  </p>
+                ) &&
+                // <p className="my-3 text-[13px] text-red-500 px-3">We were unable to find any results for your search</p>
+                !isSearching && (
+                  <div className={`flex cursor-pointer hover:font-bold hover:bg-gray-50 px-10 my-1 rounded-2xl `}>
+                    <Link href={`${results?.domain}`}>
+                      <a onClick={() => setIsSearching(true)}>
+                        <p>{results?.domain}</p>
+                      </a>
+                    </Link>
+                  </div>
+                )
+              )
+            ) : (
+              <></>
+            )}
+          </div>
+        </div>
+
+        <Card data={data} />
+
+        <Widget items={tempWidgetItems} />
+
+        <Tabs tabList={categories} chains={data.chains} />
+        {/* <Modal isShow={isShow} handlOpen={handlOpen} /> */}
       </div>
-
-      <Card data={data} />
-
-      <Widget items={tempWidgetItems} />
-
-      <Tabs tabList={categories} chains={data.chains} />
-      {/* <Modal isShow={isShow} handlOpen={handlOpen} /> */}
-    </div>
+    </>
   )
 }
 
