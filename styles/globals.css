@@ -6,19 +6,17 @@
 
 .no-zoom {
     font-size: 16px;
-    transform-origin: top left;
-    transform: scale(0.75);   
+     transform-origin: top left;
+    /* transform: scale(0.75);     */
 
-  
-    width:  240px;            
-    height: 32px;              
-    padding      : 5.333333px;
+                
+    /* padding      : 5.333333px;
     border-radius: 6.666667px; 
     border-width : 1.333333px; 
     
      
     margin-right: -60px;      
-    margin-bottom: -8px;      
+    margin-bottom: -8px;       */
     
     
     
