@@ -97,10 +97,10 @@ const Profile = ({ data }: IProflleProps) => {
   const [isShow, setIsShow] = useState(false)
 
   return (
-    <div className="flex">
+    <div className="grid justify-items-center overflow-x-hidden">
       <LayoutPage title={` ${data.domain} | Navara One`}></LayoutPage>
 
-      <div className="dark:bg-slate-800 dark:rounded-lg dark:px-2 my-5 mx-auto   py-5">
+      <div className="dark:bg-slate-800 dark:rounded-lg dark:px-2 my-5 md:mx-40 py-5">
         <div className="flex justify-center mb-5 ">
           <Image src={navaraLogo} width="30" height="30" className="mx-auto " />
           <span className="my-3 px-3 font-bold text-3xl dark:text-white">Navara</span>
