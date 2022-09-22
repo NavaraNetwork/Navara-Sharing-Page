@@ -56,10 +56,10 @@ const Tabs: React.FC<TabsProps> = ({ tabList, panels, chains }) => {
           </Tab>
         ))}
       </Tab.List>
-      <Search placeholder="Seach token, NFT, ..." className="mb-7" />
+      {/* <Search placeholder="Seach token, NFT, ..." className="mb-7" /> */}
       <Tab.Panels>
         <Tab.Panel>
-          <TokenList tokens={filteredTokenList} />
+          <TokenList placeholder="Seach token, NFT, ..." tokens={filteredTokenList} />
         </Tab.Panel>
         <Tab.Panel>
           <Nftlayout />
