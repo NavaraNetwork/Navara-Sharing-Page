@@ -17,6 +17,7 @@ export type TokenType = {
 	address?: string
 	isVerified?: boolean
 	isDefault?: boolean
+	tokenFrom?: string
 }
 
 export type tokenListType = { tokens: TokenType[] }
