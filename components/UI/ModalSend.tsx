@@ -94,7 +94,10 @@ const ModalSend: React.FC<ModalProps> = ({
                   </p>
                   {listWalletConnect.map((item, index) => {
                     return (
-                      <div className="cursor-pointer hover:bg-gray-600  flex py-3 rounded-lg my-2 " key={index}>
+                      <div
+                        className="cursor-pointer hover:bg-gray-200 hover:text-black  flex py-3 rounded-lg my-2 "
+                        key={index}
+                      >
                         <div className="mr-2 mx-10  ">
                           <Image src={item.iconWallet} />
                         </div>
