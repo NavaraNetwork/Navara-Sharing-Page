@@ -33,8 +33,6 @@ const Profile = ({ data }: IProflleProps) => {
   const [searchTerm, setSearchTerm] = useState('')
 
   const handleSearch = (event: any) => {
-    const inputDomain = event.target.value
-
     setSearchTerm(event.target.value)
   }
 
@@ -94,9 +92,7 @@ const Profile = ({ data }: IProflleProps) => {
     [debouncedSearchTerm] // Only call effect if debounced search term changes
   )
   const [isShow, setIsShow] = useState(false)
-  const handlOpen = () => {
-    setIsShow(!isShow)
-  }
+
   return (
     <>
       <LayoutPage title={` ${data.domain} | Navara One`}></LayoutPage>
@@ -109,7 +105,7 @@ const Profile = ({ data }: IProflleProps) => {
             <ThemeToggler />
           </div>
         </div>
-        <div className="rounded-lg border dark:border-none my-2">
+        <div className="rounded-lg border dark:border-black my-2">
           <SearchDropdown
             placeholder="Seach other address"
             className="p-2"

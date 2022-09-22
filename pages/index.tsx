@@ -1,9 +1,7 @@
 import type { NextPage } from 'next'
-import Mobile from '../components/Mobile'
 
 import Head from 'next/head'
 import React from 'react'
-import ThemeToggler from '../ThemeToggle'
 
 const Home: NextPage = () => {
   return (
@@ -16,9 +14,9 @@ const Home: NextPage = () => {
           rel="stylesheet"
         />
       </Head>
-      <div className="pt-8 ">
-        <ThemeToggler />
-        <Mobile />
+      <div className="pt-8  ">
+        {/* <ThemeToggler /> */}
+        {/* <Mobile /> */}
       </div>
     </React.Fragment>
   )
