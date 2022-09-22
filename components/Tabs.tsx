@@ -3,10 +3,6 @@ import React from 'react'
 
 import Nftlayout from './Nftlayout'
 
-import { TokenType } from '../types/types'
-
-import Search from './UI/Search'
-
 /* Assets */
 import TokenList from './TokenList'
 
@@ -21,7 +17,7 @@ function classNames(...classes: string[]) {
 }
 
 const Tabs: React.FC<TabsProps> = ({ tabList, panels, chains }) => {
-  const chainList = chains.map((chain) => {
+  const chainList = chains.map((chain: any) => {
     const data = Object.keys(chain).map((key) => {
       return {
         token: key,
@@ -34,8 +30,8 @@ const Tabs: React.FC<TabsProps> = ({ tabList, panels, chains }) => {
   })
 
   const tokenList = [].concat.apply([], chainList)
-  const filteredTokenList = tokenList.filter((item) => {
-    return item.token !== 'chainId'
+  const filteredTokenList = tokenList.filter((item: any) => {
+    return item?.token !== 'chainId'
   })
 
   return (

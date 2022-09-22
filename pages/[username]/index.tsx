@@ -36,10 +36,14 @@ const Profile = ({ data }: IProflleProps) => {
     setSearchTerm(event.target.value)
   }
 
+  type resuiltType = {
+    domain?: string
+  }
+
   // State and setters for ...
   // Search term
   // API search results
-  const [results, setResults] = useState<{}>({})
+  const [results, setResults] = useState<resuiltType>({})
   // Searching status (whether there is pending API request)
   const [isSearching, setIsSearching] = useState(false)
   const [typing, setTyping] = useState(false)
@@ -62,7 +66,7 @@ const Profile = ({ data }: IProflleProps) => {
         setTyping(false)
       })
       .catch((error) => {
-        setResults([])
+        setResults({})
         setTimeout(() => {
           setErrorMessage(error.response.data.message)
         }, 1000)
@@ -84,7 +88,7 @@ const Profile = ({ data }: IProflleProps) => {
           setIsSearching(false)
         })
       } else {
-        setResults([])
+        setResults({})
         setTyping(false)
         setIsSearching(false)
       }
@@ -130,7 +134,7 @@ const Profile = ({ data }: IProflleProps) => {
                   <div
                     className={`flex cursor-pointer hover:font-bold hover:bg-gray-50 py-2 hover:text-black px-12 my-1 rounded-2xl `}
                   >
-                    <Link href={`${results?.domain}`}>
+                    <Link href={`${results.domain}`}>
                       <a onClick={() => setIsSearching(true)}>
                         <p>{results?.domain}</p>
                       </a>
