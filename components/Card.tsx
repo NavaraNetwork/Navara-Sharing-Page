@@ -4,17 +4,16 @@ import React, { useRef, useState } from 'react'
 import { UserInfo } from '../types/types'
 
 // Assets
+import checkMark from '../assets/icons/checkmark.svg'
+import checkMarkRound from '../assets/icons/checkmark_round.svg'
+import icon_copy from '../assets/icons/copy.svg'
+import avatar from '../assets/images/avatar.png'
 import creditCard from '../assets/images/credit_card.svg'
-import Logo01 from '../assets/logos/logo-01.svg'
 import LogoETH from '../assets/logos/logo-02.svg'
 import LogoUNS from '../assets/logos/logo-03.svg'
 import LogoNavara from '../assets/logos/logo-white-navara.svg'
-import checkMark from '../assets/icons/checkmark.svg'
-import checkMarkRound from '../assets/icons/checkmark_round.svg'
-import avatar from '../assets/images/avatar.png'
-import { shortenAddress } from '../utils/stringFunctions'
 import useCopyToClipBoard from '../hooks/useCopyToClipBoard'
-import icon_copy from '../assets/icons/copy.svg'
+import { shortenAddress } from '../utils/stringFunctions'
 
 type CardProp = {
   data: UserInfo
@@ -77,7 +76,7 @@ const Card: React.FC<CardProp> = ({ data }) => {
   return (
     <div className="relative min-h-[196px] pl-5 pt-5 pr-8 text-white">
       {/* Card Background */}
-      <picture className="absolute top-0 left-0 w-full -z-10 bg-blue-900">
+      <picture className="absolute top-0 left-0 w-full -z-10">
         <Image src={creditCard} layout="responsive" alt="cardBackground" />
       </picture>
       {/* Card Background */}
