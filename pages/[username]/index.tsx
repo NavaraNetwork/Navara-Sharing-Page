@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react'
 import SearchDropdown from '../../components/UI/SearchDropdown'
 
 /* Assets */
-import navaraLogo from '../../assets/logos/navara_logo.svg'
+import navaraLogo from '../../assets/logos/icon-navara.svg'
 import API from '../../services/api'
 
 /* Constants */
@@ -22,6 +22,7 @@ import Widget from '../../components/Widget'
 import { categories } from '../../constants/constants'
 import { tempWidgetItems } from '../../constants/temporaryData'
 import { useDebounce } from '../../hooks/useDebounce'
+import ThemeToggler from '../../ThemeToggle'
 interface IProflleProps {
   data: any
 }
@@ -70,17 +71,17 @@ const Profile = ({ data }: IProflleProps) => {
         setTyping(false)
       })
   }
+  //Typing input to loading
   useEffect(() => {
     setTyping(true)
   }, [searchTerm])
+
+  //release your hand from the keyboard then call api
   useEffect(
     () => {
       if (debouncedSearchTerm) {
         setIsSearching(true)
-
         searchCharacters(debouncedSearchTerm).then((results: any) => {
-          // setResults(results)
-          // console.log(results, 'UEF')
           setTyping(false)
           setIsSearching(false)
         })
@@ -100,11 +101,15 @@ const Profile = ({ data }: IProflleProps) => {
     <>
       <LayoutPage title={` ${data.domain} | Navara One`}></LayoutPage>
 
-      <div className="max-w-xs mx-auto my-5">
-        <div className="flex justify-center mb-5">
-          <Image src={navaraLogo} className="mx-auto" />
+      <div className="dark:bg-transparent max-w-xs mx-auto py-5">
+        <div className="flex justify-center mb-5 ">
+          <Image src={navaraLogo} width="30" height="30" className="mx-auto " />
+          <span className="my-3 px-3 font-bold text-3xl dark:text-white">Navara</span>
+          <div className="flex justify-end">
+            <ThemeToggler />
+          </div>
         </div>
-        <div className="rounded-lg border m-2">
+        <div className="rounded-lg border dark:border-none my-2">
           <SearchDropdown
             placeholder="Seach other address"
             className="p-2"
@@ -114,7 +119,7 @@ const Profile = ({ data }: IProflleProps) => {
           />
           <div className="  mb-1 ">
             {searchTerm === '' ? (
-              <p className="my-2 text-center text-[13px] text-red-500 px-3">Start typing to search for assets</p>
+              <p className="my-2 text-center text-[13px]  px-3">Start typing to search for assets</p>
             ) : results ? (
               typing ? (
                 <div className="my-3">
@@ -126,7 +131,9 @@ const Profile = ({ data }: IProflleProps) => {
                 </p>
               ) : (
                 !isSearching && (
-                  <div className={`flex cursor-pointer hover:font-bold hover:bg-gray-50 px-10 my-1 rounded-2xl `}>
+                  <div
+                    className={`flex cursor-pointer hover:font-bold hover:bg-gray-50 py-2 hover:text-black px-12 my-1 rounded-2xl `}
+                  >
                     <Link href={`${results?.domain}`}>
                       <a onClick={() => setIsSearching(true)}>
                         <p>{results?.domain}</p>

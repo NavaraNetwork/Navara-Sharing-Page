@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
-import { tokenListType } from '../types/types'
 import search from '../assets/icons/search.svg'
+import { tokenListType } from '../types/types'
 import Token from './Token'
 
 const TokenList: React.FC<tokenListType> = ({ placeholder, className, tokens }) => {
@@ -15,9 +15,9 @@ const TokenList: React.FC<tokenListType> = ({ placeholder, className, tokens }) 
   return (
     <div>
       <div className={`flex items-center gap-4 p-4 ${className}`}>
-        <Image src={search} />
+        <Image src={search} className="p-1 w-10 h-10 rounded-full dark:bg-white  " />
         <input
-          className=" w-64 border text-gray-900 text-sm rounded-lg block  p-2.5"
+          className=" w-64 border text-gray-900 text-sm rounded-lg block  p-2.5 dark:bg-white"
           type="search"
           placeholder={placeholder}
           value={searchText}
