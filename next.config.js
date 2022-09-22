@@ -2,10 +2,12 @@
 
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
-  // images: {
-  //   unoptimized: true,
-  // },
+  trailingSlash: true,
+  images: {
+    loader: 'custom',
+    // disableStaticImages: true,
+  },
+
   async redirects() {
     return [
       {
