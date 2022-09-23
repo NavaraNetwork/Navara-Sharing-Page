@@ -14,7 +14,7 @@ const Home: NextPage = () => {
           rel="stylesheet"
         />
       </Head>
-      <div className="pt-8  ">
+      <div className="pt-5">
         {/* <ThemeToggler /> */}
         {/* <Mobile /> */}
       </div>

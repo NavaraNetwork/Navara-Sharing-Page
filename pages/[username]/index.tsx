@@ -10,6 +10,8 @@ import SearchDropdown from '../../components/UI/SearchDropdown'
 /* Assets */
 import navaraLogo from '../../assets/logos/icon-navara.svg'
 import API from '../../services/api'
+import batteryIcon from '../../assets/icons/battery-full.svg'
+import wifiIcon from '../../assets/icons/wifi.svg'
 
 /* Constants */
 import Link from 'next/link'
@@ -111,13 +113,26 @@ const Profile = ({ data }: IProflleProps) => {
       return item?.token !== 'chainId'
     })
 
-  return (
-    <div className="grid justify-items-center overflow-x-hidden">
-      <LayoutPage title={` ${data.domain} | Navara One`}></LayoutPage>
+  const d = new Date()
+  let hour = d.getHours()
+  let minute = (d.getMinutes() < 10 ? '0' : '') + d.getMinutes()
 
-      <div className="dark:bg-slate-800 dark:rounded-lg dark:px-2 my-5  py-5">
+  return (
+    <div className="relative grid justify-items-center items-center bg-zinc-300 h-[100vh]">
+      <LayoutPage title={` ${data.domain} | Navara One`}></LayoutPage>
+      <div className="hide-scrollbar bg-white dark:rounded-lg dark:px-2 h-[95%] overflow-y-scroll overflow-x-hidden px-7 rounded-[3rem] border-[10px] border-gray-800">
+        <div className="sticky top-0 flex justify-between w-full z-30 bg-white">
+          <p className="mt-2 font-bold">
+            {hour}:{minute}
+          </p>
+          <div className="notch absolute left-1/2 -translate-x-1/2"></div>
+          <div className="mt-1 flex gap-2">
+            <Image src={wifiIcon} width="20px" height="20px" alt="wifi icon" />
+            <Image src={batteryIcon} width="20px" height="20px" alt="baterry icon" />
+          </div>
+        </div>
         <div className="flex justify-center mb-5 ">
-          <Image src={navaraLogo} width="30" height="30" className="mx-auto " />
+          <Image src={navaraLogo} width="30" height="30" className="mx-auto" alt="navara logo" />
           <span className="my-3 px-3 font-bold text-3xl dark:text-white">Navara</span>
           {/* <div className="flex justify-end">
             <ThemeToggler />
