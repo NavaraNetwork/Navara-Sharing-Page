@@ -131,11 +131,12 @@ const Profile = ({ data }: IProflleProps) => {
   }, [])
 
   const [fakeLoad, setFakeLoad] = useState(false)
-  const handleClick = () => {
+  const handleClick = (domain: any) => {
     setFakeLoad(true)
     setTimeout(() => {
-      listDomains && setFakeLoad(false)
+      setFakeLoad(false)
     }, 2000)
+
     setIsSearching(true)
   }
   return (
@@ -163,7 +164,7 @@ const Profile = ({ data }: IProflleProps) => {
             <ThemeToggler />
           </div> */}
         </div>
-        <div className="rounded-lg border dark:border-black my-2">
+        <div className="rounded-lg mx-2 my-2">
           <SearchDropdown
             placeholder="Seach other address"
             className="p-2"
@@ -185,13 +186,13 @@ const Profile = ({ data }: IProflleProps) => {
                 </p>
               ) : (
                 !isSearching &&
-                listDomains?.map((item) => {
+                listDomains?.map((item: any) => {
                   return (
                     <div
                       className={`flex cursor-pointer hover:font-bold hover:bg-gray-50 py-2 hover:text-black px-12 my-1 rounded-2xl `}
                     >
-                      <Link href={`${item.domain}`}>
-                        <a onClick={handleClick}>
+                      <Link href={`${item?.domain}`}>
+                        <a onClick={() => handleClick(item?.domain)}>
                           <p>{item?.domain}</p>
                         </a>
                       </Link>
@@ -200,17 +201,6 @@ const Profile = ({ data }: IProflleProps) => {
                 })
               )
             ) : (
-              //     &&
-              // // <p className="my-3 text-[13px] text-red-500 px-3">We were unable to find any results for your search</p>
-              // !isSearching && (
-              // <div className={`flex cursor-pointer hover:font-bold hover:bg-gray-50 px-10 my-1 rounded-2xl `}>
-              //   <Link href={`${results?.domain}`}>
-              //     <a onClick={() => setIsSearching(true)}>
-              //       <p>{results?.domain}</p>
-              //     </a>
-              //   </Link>
-              // </div>
-              // )
               <p className="my-3 text-center text-[13px] text-red-500 px-3">
                 We were unable to find any results for your search
               </p>
