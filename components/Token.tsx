@@ -48,7 +48,7 @@ const Token: React.FC<TokenType> = ({
     setIsSend(false)
   }
   return (
-    <div className="grid grid-cols-[40px_minmax(0,_1fr)_40px_40px] gap-4 py-3">
+    <div className="grid grid-cols-[40px_minmax(0,_1fr)_40px_40px] gap-4 py-3 border-b last:border-b-0">
       <div>
         <div className="relative w-7 h-7 border p-5 border-white bg-white rounded-full">
           <LogoChainImage network={tokenLogo} />

@@ -56,7 +56,7 @@ const Card: React.FC<CardProp> = ({ userInfo, tokenList }) => {
   const findItem = imageCards.find((item: { name: string; icon: any }) => domain?.includes(item?.name))
 
   return (
-    <div className="relative min-h-[196px] pl-5 pt-5 pr-8 text-white">
+    <div className="relative min-h-[196px] pl-5 pt-5 pr-8 text-white z-10">
       {/* Card Background */}
       <picture className="absolute top-0 left-0 w-full -z-10">
         <Image src={creditCard} layout="responsive" alt="cardBackground" />

@@ -25,7 +25,7 @@ const Tabs: React.FC<TabsProps> = ({ tabList, chains }) => {
             className={({ selected }) =>
               classNames(
                 'w-full py-2.5 text-sm font-bold leading-5 text-blue-700 rounded-2xl',
-                'ring-white ring-opacity-25 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-1',
+                'ring-white ring-opacity-25 ring-offset-2 ring-offset-blue-400 focus:outline-none',
                 selected ? 'bg-white shadow' : 'text-[#8E9BAE] hover:bg-blue-100/20'
               )
             }
