@@ -26,7 +26,7 @@ const Widget: React.FC<widgetProps> = ({ items }) => {
   }
 
   return (
-    <div className="relative -top-11 mx-auto py-3 px-2 w-4/5 h-16 bg-white rounded-t-2xl z-20">
+    <div className="relative -top-11 mx-auto py-3 px-2 w-4/5 h-16 bg-white rounded-t-2xl z-10">
       <div className="flex">
         {items.map((item, index) => {
           return (
