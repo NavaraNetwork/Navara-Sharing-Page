@@ -8,10 +8,10 @@ import { useEffect, useState } from 'react'
 import SearchDropdown from '../../components/UI/SearchDropdown'
 
 /* Assets */
-import navaraLogo from '../../assets/logos/icon-navara.svg'
-import API from '../../services/api'
 import batteryIcon from '../../assets/icons/battery-full.svg'
 import wifiIcon from '../../assets/icons/wifi.svg'
+import navaraLogo from '../../assets/logos/icon-navara.svg'
+import API from '../../services/api'
 
 /* Constants */
 import Link from 'next/link'
@@ -19,6 +19,7 @@ import { setInterval, setTimeout } from 'timers'
 import Card from '../../components/Card'
 import LayoutPage from '../../components/commons/LayoutPage'
 import Tabs from '../../components/Tabs'
+import { SkeletonDomain } from '../../components/UI/SkeletonDomain'
 import { Spinner } from '../../components/UI/Spinner'
 import Widget from '../../components/Widget'
 import { categories } from '../../constants/constants'
@@ -32,7 +33,7 @@ const Profile = ({ data }: IProflleProps) => {
   const domain = router.asPath
   const [resultSearch, setResultSearch] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
-
+  const [dataShow, setDataShow] = useState(false)
   const handleSearch = (event: any) => {
     setSearchTerm(event.target.value)
   }
@@ -40,7 +41,7 @@ const Profile = ({ data }: IProflleProps) => {
   type resuiltType = {
     domain?: string
   }
-
+  type listDomain = [{ domainId?: string; domain?: string; expired?: string }]
   // State and setters for ...
   // Search term
   // API search results
@@ -56,7 +57,9 @@ const Profile = ({ data }: IProflleProps) => {
   const [errorMessage, setErrorMessage] = useState('')
   const [now, setNow] = useState(new Date())
 
+  const [listDomains, setListDomains] = useState<listDomain>([] as any)
   // API search function
+
   const searchCharacters = async (search: any) => {
     return await API.get('domain/find', {
       params: {
@@ -65,6 +68,8 @@ const Profile = ({ data }: IProflleProps) => {
     })
       .then((result: any) => {
         setResults(result)
+        // console.log(result)
+        setListDomains(result)
         setErrorMessage('')
         setTyping(false)
       })
@@ -79,6 +84,7 @@ const Profile = ({ data }: IProflleProps) => {
   //Typing input to loading
   useEffect(() => {
     setTyping(true)
+    setDataShow(false)
   }, [searchTerm])
 
   //release your hand from the keyboard then call api
@@ -98,7 +104,6 @@ const Profile = ({ data }: IProflleProps) => {
     },
     [debouncedSearchTerm] // Only call effect if debounced search term changes
   )
-  const [isShow, setIsShow] = useState(false)
 
   const { chains, ...domainInfo } = data
 
@@ -125,6 +130,14 @@ const Profile = ({ data }: IProflleProps) => {
     }
   }, [])
 
+  const [fakeLoad, setFakeLoad] = useState(false)
+  const handleClick = () => {
+    setFakeLoad(true)
+    setTimeout(() => {
+      listDomains && setFakeLoad(false)
+    }, 2000)
+    setIsSearching(true)
+  }
   return (
     <div className="relative grid justify-items-center items-center bg-zinc-300 h-[100vh]">
       <LayoutPage title={` ${data.domain} | Navara One`}></LayoutPage>
@@ -171,17 +184,20 @@ const Profile = ({ data }: IProflleProps) => {
                   We were unable to find any results for your search
                 </p>
               ) : (
-                !isSearching && (
-                  <div
-                    className={`flex cursor-pointer hover:font-bold hover:bg-gray-50 py-2 hover:text-black px-12 my-1 rounded-2xl `}
-                  >
-                    <Link href={`${results.domain}`}>
-                      <a onClick={() => setIsSearching(true)}>
-                        <p>{results?.domain}</p>
-                      </a>
-                    </Link>
-                  </div>
-                )
+                !isSearching &&
+                listDomains?.map((item) => {
+                  return (
+                    <div
+                      className={`flex cursor-pointer hover:font-bold hover:bg-gray-50 py-2 hover:text-black px-12 my-1 rounded-2xl `}
+                    >
+                      <Link href={`${item.domain}`}>
+                        <a onClick={handleClick}>
+                          <p>{item?.domain}</p>
+                        </a>
+                      </Link>
+                    </div>
+                  )
+                })
               )
             ) : (
               //     &&
@@ -201,25 +217,32 @@ const Profile = ({ data }: IProflleProps) => {
             )}
           </div>
         </div>
+        {fakeLoad ? (
+          <SkeletonDomain />
+        ) : (
+          <>
+            <Card tokenList={filteredTokenList} userInfo={domainInfo} />
 
-        <Card tokenList={filteredTokenList} userInfo={domainInfo} />
+            <Widget items={tempWidgetItems} />
 
-        <Widget items={tempWidgetItems} />
+            <Tabs tabList={categories} chains={filteredTokenList} />
+          </>
+        )}
 
-        <Tabs tabList={categories} chains={filteredTokenList} />
         {/* <Modal isShow={isShow} handlOpen={handlOpen} /> */}
       </div>
     </div>
   )
 }
 
-export async function getServerSideProps(context: any) {
+export const getServerSideProps = async (context: any) => {
   // Fetch data from external API
   const domainName = context.params.username
   const res = await API.get(`domain/find?domain=${domainName}`)
   const data = await res
 
   // Pass data to the page via props
+
   return { props: { data: data } }
 }
 
