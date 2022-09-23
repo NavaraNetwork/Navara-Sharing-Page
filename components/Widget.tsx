@@ -26,13 +26,13 @@ const Widget: React.FC<widgetProps> = ({ items }) => {
   }
 
   return (
-    <div className="relative -top-11 mx-auto py-2 px-5 w-4/5 h-16 bg-white rounded-t-2xl">
-      <div className="flex justify-between">
+    <div className="relative -top-11 mx-auto py-3 px-2 w-4/5 h-16 bg-white rounded-t-2xl z-20">
+      <div className="flex">
         {items.map((item, index) => {
           return (
-            <div key={index} className="divider relative flex flex-col items-center w-[50px] cursor-pointer">
+            <div key={index} className="divider relative flex flex-col grow items-center w-[50px] cursor-pointer">
               <span onClick={() => handleClick(item.action)}>
-                <Image src={item.icon} width="25" height="25" />
+                <Image src={item.icon} width="25" height="25" alt="icon" />
               </span>
               <p className="mt-2 text-xs dark:text-black">{item.text}</p>
             </div>

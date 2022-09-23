@@ -2,24 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 .no-zoom {
-    font-size: 16px;
-     transform-origin: top left;
-    /* transform: scale(0.75);     */
+  font-size: 16px;
+  transform-origin: top left;
+  /* transform: scale(0.75);     */
 
-                
-    /* padding      : 5.333333px;
+  /* padding      : 5.333333px;
     border-radius: 6.666667px; 
     border-width : 1.333333px; 
     
      
     margin-right: -60px;      
     margin-bottom: -8px;       */
-    
-    
-    
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -37,7 +31,7 @@
   display: inline-block;
 
   .tooltiptext {
-		@apply text-[10px] min-w-[9rem];
+    @apply text-[10px] w-24 break-words;
 
     visibility: hidden;
     background-color: black;
@@ -48,7 +42,7 @@
 
     /* Position the tooltip text*/
     position: absolute;
-		top: -35px;
+    top: -55px;
     left: 0;
     z-index: 1;
 
@@ -59,7 +53,7 @@
       bottom: -4px;
       width: 8px;
       height: 8px;
-      background: black;
+      background-color: black;
       transform: rotate(40deg);
     }
   }
@@ -70,4 +64,35 @@
       visibility: visible;
     }
   }
+}
+
+.divider {
+  &:not(:last-child):after {
+    content: '';
+    position: absolute;
+    width: 1px;
+    height: 45px;
+    background: linear-gradient(180deg, rgba(189, 189, 189, 0) 0%, #bdbdbd 48.96%, rgba(189, 189, 189, 0) 100%);
+    opacity: 0.3;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+  }
+}
+
+.hide-scrollbar {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.notch {
+  @apply rounded-b-3xl;
+  width: 60%;
+  height: 30px;
+  background-color: rgb(31, 41, 55);
 }
