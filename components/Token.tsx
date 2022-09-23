@@ -75,7 +75,7 @@ const Token: React.FC<TokenType> = ({
           </span>
           {isDefault ? (
             <div className="flex items-center max-h-4 bg-[#F0F9FF] px-1 py-2 rounded-sm ">
-              <span className="text-[10px] text-[#165CDD] font-bold">Default</span>
+              <span className="text-[10px] text-[#1d4ed8] font-bold">Default</span>
             </div>
           ) : null}
         </div>
