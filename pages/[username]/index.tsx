@@ -15,7 +15,7 @@ import wifiIcon from '../../assets/icons/wifi.svg'
 
 /* Constants */
 import Link from 'next/link'
-import { setTimeout } from 'timers'
+import { setInterval, setTimeout } from 'timers'
 import Card from '../../components/Card'
 import LayoutPage from '../../components/commons/LayoutPage'
 import Tabs from '../../components/Tabs'
@@ -54,6 +54,8 @@ const Profile = ({ data }: IProflleProps) => {
   // ... so that we aren't hitting our API rapidly.
   const debouncedSearchTerm = useDebounce(searchTerm, 500)
   const [errorMessage, setErrorMessage] = useState('')
+  const [now, setNow] = useState(new Date())
+
   // API search function
   const searchCharacters = async (search: any) => {
     return await API.get('domain/find', {
@@ -113,17 +115,27 @@ const Profile = ({ data }: IProflleProps) => {
       return item?.token !== 'chainId'
     })
 
-  const d = new Date()
-  let hour = d.getHours()
-  let minute = (d.getMinutes() < 10 ? '0' : '') + d.getMinutes()
+  useEffect(() => {
+    setInterval(() => {
+      setNow(() => new Date())
+    }, 30000)
+
+    return () => {
+      clearInterval
+    }
+  }, [])
 
   return (
     <div className="relative grid justify-items-center items-center bg-zinc-300 h-[100vh]">
       <LayoutPage title={` ${data.domain} | Navara One`}></LayoutPage>
-      <div className="hide-scrollbar bg-white dark:rounded-lg dark:px-2 h-[95%] overflow-y-scroll overflow-x-hidden px-7 rounded-[3rem] border-[10px] border-gray-800">
+      <div className="hide-scrollbar bg-white dark:rounded-lg dark:px-2 h-[95%] w-[400px] overflow-y-scroll overflow-x-hidden px-7 rounded-[3rem] border-[10px] border-gray-800">
         <div className="sticky top-0 flex justify-between w-full z-30 bg-white">
           <p className="mt-2 font-bold">
-            {hour}:{minute}
+            {now.toLocaleString('en-US', {
+              hour: 'numeric',
+              minute: 'numeric',
+              hour12: false,
+            })}
           </p>
           <div className="notch absolute left-1/2 -translate-x-1/2"></div>
           <div className="mt-1 flex gap-2">
