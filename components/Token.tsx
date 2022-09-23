@@ -48,11 +48,13 @@ const Token: React.FC<TokenType> = ({
     setIsSend(false)
   }
   return (
-    <div className="grid grid-cols-[40px_minmax(0,_1fr)_40px_40px] gap-4 py-3 border-b last:border-b-0">
-      <div>
-        <div className="relative w-7 h-7 border p-5 border-white bg-white rounded-full">
+    <div className="grid grid-cols-[45px_minmax(0,_1fr)_30px_40px] gap-4 py-3 border-b last:border-b-0">
+      <div className="relative flex items-center justify-center w-12 h-12 border border-white bg-[#edf0f4] rounded-full">
+        <div className="relative w-7 h-7 top-0">
           <LogoChainImage network={tokenLogo} />
-          <div className="absolute w-5 h-5 -bottom-2 -right-2 border border-white bg-white rounded-full">
+        </div>
+        <div className="absolute -bottom-1 -right-1 flex items-center justify-center w-6 h-6 border-2 border-white bg-[#edf0f4] rounded-full">
+          <div className="absolute w-4 h-4 border-white">
             <LogoChainImage network={tokenNetworkLogo} />
           </div>
         </div>
@@ -70,9 +72,9 @@ const Token: React.FC<TokenType> = ({
         </div>
         <div className="flex items-center gap-2 mt-2">
           <span className="text-[#8E9BAE]">{symbol}</span>
-          <span className={`${isVerified ? 'inline' : 'hidden'}`}>
-            <Image src={checkMarkRound} alt="checkmark" />
-          </span>
+          {/* <span className={`${isVerified ? 'inline' : 'hidden'}`}> */}
+          <Image src={checkMarkRound} alt="checkmark" />
+          {/* </span> */}
           {isDefault ? (
             <div className="flex items-center max-h-4 bg-[#F0F9FF] px-1 py-2 rounded-sm ">
               <span className="text-[10px] text-[#1d4ed8] font-bold">Default</span>
