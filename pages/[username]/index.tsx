@@ -12,8 +12,12 @@ import navaraLogo from '../../assets/logos/icon-navara.svg'
 import API from '../../services/api'
 
 /* Constants */
+import { SearchIcon } from '@heroicons/react/solid'
 import Link from 'next/link'
 import { setInterval, setTimeout } from 'timers'
+import LogoETH from '../../assets/logos/logo-02.svg'
+import LogoUNS from '../../assets/logos/logo-03.svg'
+import LogoNavara from '../../assets/logos/logo-white-navara.svg'
 import Card from '../../components/Card'
 import LayoutPage from '../../components/commons/LayoutPage'
 import Tabs from '../../components/Tabs'
@@ -83,7 +87,6 @@ const Profile = ({ data }: IProflleProps) => {
     setTyping(true)
     setDataShow(false)
   }, [searchTerm])
-
   //release your hand from the keyboard then call api
   useEffect(
     () => {
@@ -133,9 +136,15 @@ const Profile = ({ data }: IProflleProps) => {
     setTimeout(() => {
       setFakeLoad(false)
     }, 2000)
-
+    setSearchTerm('')
     setIsSearching(true)
   }
+  var imageCards = [
+    { name: '.nns.one', icon: LogoNavara },
+    { name: '.uns', icon: LogoUNS },
+    { name: '.eth', icon: LogoETH },
+  ]
+  const findItem = imageCards.find((item: { name: string; icon: any }) => domain?.includes(item?.name))
   return (
     <div className="flex justify-center bg-zinc-300 h-[95vh] p-7">
       <LayoutPage title={` ${data.domain} | Navara One`}></LayoutPage>
@@ -147,23 +156,27 @@ const Profile = ({ data }: IProflleProps) => {
             <ThemeToggler />
           </div> */}
         </div>
-        <div className="rounded-lg mx-2 my-2">
+        <div className={`flex items-center gap-4 p-4  `}>
+          <SearchIcon width="20" height="20" className="dark:text-white" />
           <SearchDropdown
             placeholder="Seach other address"
-            className="p-2"
             onChange={handleSearch}
             value={searchTerm}
             searching={resultSearch}
           />
-          <div className="  mb-1 ">
+        </div>
+
+        <div className="">
+          <div className={` mb-1 overflow-y-auto  mx-2`}>
             {searchTerm === '' ? (
-              <p className="my-2 text-center text-[13px]  px-3">Start typing to search for assets</p>
-            ) : results ? (
+              <></>
+            ) : // <p className="my-2 text-center text-[13px]  px-3">Start typing to search for assets</p>
+            results ? (
               typing ? (
                 <div className="my-3">
                   <Spinner />
                 </div>
-              ) : errorMessage ? (
+              ) : listDomains && listDomains.length <= 0 ? (
                 <p className="my-3 text-center text-[13px] text-red-500 px-3">
                   We were unable to find any results for your search
                 </p>
@@ -172,11 +185,15 @@ const Profile = ({ data }: IProflleProps) => {
                 listDomains?.map((item, index) => {
                   return (
                     <div
-                      className={`flex cursor-pointer hover:font-bold hover:bg-gray-50 py-2 hover:text-black px-12 my-1 rounded-2xl `}
-                      key={index}
+                      className={`flex items-center gap-4 py-2 hover:bg-gray-200 rounded-lg cursor-pointer`}
+                      onClick={() => handleClick(item?.domain)}
                     >
+                      <div className="rounded-full h-6 w-6 bg-gray-900 mr-2 p-1">
+                        <Image src={findItem?.icon} />
+                      </div>
+
                       <Link href={`${item?.domain}`}>
-                        <a onClick={() => handleClick(item?.domain)}>
+                        <a>
                           <p>{item?.domain}</p>
                         </a>
                       </Link>
@@ -191,7 +208,7 @@ const Profile = ({ data }: IProflleProps) => {
             )}
           </div>
         </div>
-        {!fakeLoad ? (
+        {fakeLoad ? (
           <SkeletonDomain />
         ) : (
           <>

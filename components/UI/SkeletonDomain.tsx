@@ -1,15 +1,9 @@
-import Image from 'next/image'
-
-import Widget from '../Widget'
-import { categories } from '../../constants/constants'
-import { tempWidgetItems } from '../../constants/temporaryData'
 import { Tab } from '@headlessui/react'
-import { classNames } from '../../utils/common'
 import { SearchIcon } from '@heroicons/react/solid'
-import icon_copy from '../../assets/icons/copy.svg'
-import icon_send from '../../assets/icons/send.svg'
-import { Input } from './Input'
 import Link from 'next/link'
+import { categories } from '../../constants/constants'
+import { classNames } from '../../utils/common'
+import { Input } from './Input'
 
 const nftTemplate = (
   <Link href={''}>
@@ -67,12 +61,33 @@ const tokenSkeleton = (
           <div className="w-3/4 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
         </div>
         <div className="flex flex-col items-center justify-between  cursor-pointer">
-          <Image src={icon_copy} width="24px" height="24px" alt="icon_copy" />
-          <p className="text-[14px] ">Copy</p>
+          {/* <Image src={icon_copy} width="24px" height="24px" alt="icon_copy" /> */}
+          <div className="icon mb-5">
+            <svg
+              className="w-full h-12 text-gray-200"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+              fill="currentColor"
+              viewBox="0 0 640 512"
+            >
+              <path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" />
+            </svg>
+          </div>
+          {/* <p className="text-[14px] ">Copy</p> */}
         </div>
         <div className="flex flex-col items-center justify-between  cursor-pointer">
-          <Image src={icon_send} width="24px" height="24px" alt="icon_send" />
-          <p className="text-[14px]">Send</p>
+          <div className="icon mb-5">
+            <svg
+              className="w-full h-12 text-gray-200"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+              fill="currentColor"
+              viewBox="0 0 640 512"
+            >
+              <path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" />
+            </svg>
+          </div>
+          {/* <p className="text-[14px]">Send</p> */}
         </div>
       </div>
     </div>
@@ -83,22 +98,12 @@ export const SkeletonDomain = () => {
   return (
     <div>
       <div role="status" className="relative min-h-[196px] pl-5 pt-5 pr-8 text-white z-10 space-y-8 animate-pulse">
-        <div className="absolute top-0 left-0 flex justify-center items-center w-full h-48 bg-gray-300 rounded dark:bg-gray-700">
-          <svg
-            className="w-full h-12 text-gray-200"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
-            fill="currentColor"
-            viewBox="0 0 640 512"
-          >
-            <path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" />
-          </svg>
-        </div>
+        <div className="absolute top-0 left-0 flex justify-center items-center w-full h-48 bg-gray-300 rounded dark:bg-gray-700"></div>
         {/* Card Background */}
       </div>
-      <Widget items={tempWidgetItems} />
+      {/* <Widget items={tempWidgetItems} /> */}
       <Tab.Group>
-        <Tab.List className="flex space-x-1 rounded-2xl bg-[#F8FAFC] p-1">
+        <Tab.List className="flex mt-5 space-x-1 rounded-2xl bg-[#F8FAFC] p-1">
           {categories.map((tab, index) => (
             <Tab
               key={index}
