@@ -30,8 +30,12 @@ const Widget: React.FC<widgetProps> = ({ items }) => {
       <div className="flex">
         {items.map((item, index) => {
           return (
-            <div key={index} className="divider relative flex flex-col grow items-center w-[50px] cursor-pointer">
-              <span onClick={() => handleClick(item.action)}>
+            <div
+              key={index}
+              className="divider relative flex flex-col grow items-center w-[50px] cursor-pointer"
+              onClick={() => handleClick(item.action)}
+            >
+              <span>
                 <Image src={item.icon} width="25" height="25" alt="icon" />
               </span>
               <p className="mt-2 text-xs dark:text-black">{item.text}</p>
