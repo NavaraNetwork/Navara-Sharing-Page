@@ -38,14 +38,14 @@ const Profile = ({ data }: IProflleProps) => {
     setSearchTerm(event.target.value)
   }
 
-  type resuiltType = {
+  type resultType = {
     domain?: string
   }
   type listDomain = [{ domainId?: string; domain?: string; expired?: string }]
   // State and setters for ...
   // Search term
   // API search results
-  const [results, setResults] = useState<resuiltType>({})
+  const [results, setResults] = useState<resultType>({})
   // Searching status (whether there is pending API request)
   const [isSearching, setIsSearching] = useState(false)
   const [typing, setTyping] = useState(false)
@@ -68,7 +68,6 @@ const Profile = ({ data }: IProflleProps) => {
     })
       .then((result: any) => {
         setResults(result)
-        // console.log(result)
         setListDomains(result)
         setErrorMessage('')
         setTyping(false)
@@ -139,23 +138,9 @@ const Profile = ({ data }: IProflleProps) => {
     setIsSearching(true)
   }
   return (
-    <div className="relative grid justify-items-center items-center bg-zinc-300 h-[100vh]">
+    <div className="flex justify-center bg-zinc-300 h-[95vh] p-7">
       <LayoutPage title={` ${data.domain} | Navara One`}></LayoutPage>
-      <div className="hide-scrollbar bg-white dark:rounded-lg dark:px-2 h-[95%] w-[400px] overflow-y-scroll overflow-x-hidden px-7 rounded-[3rem] border-[10px] border-gray-800">
-        <div className="sticky top-0 flex justify-between w-full z-30 bg-white">
-          <p className="mt-2 font-bold">
-            {now.toLocaleString('en-US', {
-              hour: 'numeric',
-              minute: 'numeric',
-              hour12: false,
-            })}
-          </p>
-          <div className="notch absolute left-1/2 -translate-x-1/2"></div>
-          <div className="mt-1 flex gap-2">
-            <Image src={wifiIcon} width="20px" height="20px" alt="wifi icon" />
-            <Image src={batteryIcon} width="20px" height="20px" alt="baterry icon" />
-          </div>
-        </div>
+      <div className="hide-scrollbar bg-white dark:rounded-lg dark:px-2 w-[400px] overflow-y-scroll overflow-x-hidden p-7 rounded-xl">
         <div className="flex justify-center mb-5 ">
           <Image src={navaraLogo} width="30" height="30" className="mx-auto" alt="navara logo" />
           <span className="my-3 px-3 font-bold text-3xl dark:text-white">Navara</span>
@@ -185,10 +170,11 @@ const Profile = ({ data }: IProflleProps) => {
                 </p>
               ) : (
                 !isSearching &&
-                listDomains?.map((item) => {
+                listDomains?.map((item, index) => {
                   return (
                     <div
                       className={`flex cursor-pointer hover:font-bold hover:bg-gray-50 py-2 hover:text-black px-12 my-1 rounded-2xl `}
+                      key={index}
                     >
                       <Link href={`${item.domain}`}>
                         <a onClick={handleClick}>
@@ -217,7 +203,7 @@ const Profile = ({ data }: IProflleProps) => {
             )}
           </div>
         </div>
-        {fakeLoad ? (
+        {!fakeLoad ? (
           <SkeletonDomain />
         ) : (
           <>

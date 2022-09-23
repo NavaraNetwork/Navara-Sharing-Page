@@ -10,8 +10,6 @@ type ModalProps = {
   isShow?: boolean
 }
 const Modal: React.FC<ModalProps> = ({ isShow, handleOpen, handleClose, titleModal, valueModal }) => {
-  //   let [isOpen, setIsOpen] = useState(isShow)
-  //   console.log(isOpen)
   return (
     <>
       <Transition appear show={isShow} as={Fragment}>
