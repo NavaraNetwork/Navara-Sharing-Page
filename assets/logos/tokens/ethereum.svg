@@ -1,9 +1,21 @@
-<svg width="39" height="40" viewBox="0 0 39 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-<ellipse cx="19.3952" cy="20" rx="19.3952" ry="20" fill="#EDF0F4"/>
-<path d="M19.3408 8L19.1865 8.54043V24.221L19.3408 24.3797L26.3993 20.0773L19.3408 8Z" fill="#060A1D"/>
-<path d="M19.3419 8L12.2832 20.0773L19.3419 24.3797V16.7688V8Z" fill="#8E9BAE"/>
-<path d="M19.3428 25.7577L19.2559 25.8671V31.4527L19.3428 31.7145L26.4056 21.4575L19.3428 25.7577Z" fill="#10192D"/>
-<path d="M19.3419 31.7145V25.7577L12.2832 21.4575L19.3419 31.7145Z" fill="#8E9BAE"/>
-<path d="M19.3428 24.3795L26.4013 20.077L19.3428 16.7686V24.3795Z" fill="#060A1D"/>
-<path d="M12.2832 20.077L19.3419 24.3795V16.7686L12.2832 20.077Z" fill="#060A1D"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW 2019 (64-Bit) -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="100%" height="100%" version="1.1" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd"
+viewBox="0 0 784.37 1277.39"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ xmlns:xodm="http://www.corel.com/coreldraw/odm/2003">
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_1421394342400">
+   <g>
+    <polygon fill="#343434" fill-rule="nonzero" points="392.07,0 383.5,29.11 383.5,873.74 392.07,882.29 784.13,650.54 "/>
+    <polygon fill="#8C8C8C" fill-rule="nonzero" points="392.07,0 -0,650.54 392.07,882.29 392.07,472.33 "/>
+    <polygon fill="#3C3C3B" fill-rule="nonzero" points="392.07,956.52 387.24,962.41 387.24,1263.28 392.07,1277.38 784.37,724.89 "/>
+    <polygon fill="#8C8C8C" fill-rule="nonzero" points="392.07,1277.38 392.07,956.52 -0,724.89 "/>
+    <polygon fill="#141414" fill-rule="nonzero" points="392.07,882.29 784.13,650.54 392.07,472.33 "/>
+    <polygon fill="#393939" fill-rule="nonzero" points="0,650.54 392.07,882.29 392.07,472.33 "/>
+   </g>
+  </g>
+ </g>
 </svg>
