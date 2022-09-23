@@ -8,7 +8,7 @@ type InputProps = {
 export const Input: React.FC<InputProps> = ({ className, placeholder, onChange, value }) => {
   return (
     <input
-      className="w-64 border no-zoom text-gray-900 text-sm rounded-lg block  p-2.5 dark:bg-white"
+      className="w-full border no-zoom text-gray-900 text-sm rounded-lg block p-2.5 dark:bg-white focus-visible:outline-[#1d4ed8] focus-visible:border-white"
       type="search"
       placeholder={placeholder}
       onChange={onChange}

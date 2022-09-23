@@ -12,9 +12,9 @@ type SearchProps = {
 
 const SearchDropdown: React.FC<SearchProps> = ({ placeholder, className, onChange, onSubmit, value }) => {
   return (
-    <>
+    <div className={`${className}`}>
       <Input placeholder="Search other domain" onChange={onChange} value={value} />
-    </>
+    </div>
   )
 }
 
