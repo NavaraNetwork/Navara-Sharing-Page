@@ -2,6 +2,7 @@ import { SearchIcon } from '@heroicons/react/solid'
 import React from 'react'
 import { tokenListType } from '../types/types'
 import Token from './Token'
+import { Input } from './UI/Input'
 
 const TokenList: React.FC<tokenListType> = ({ placeholder, className, tokens }) => {
   tokens[0].isDefault = true
@@ -15,13 +16,11 @@ const TokenList: React.FC<tokenListType> = ({ placeholder, className, tokens }) 
     <div>
       <div className={`flex items-center gap-4 p-4 ${className}`}>
         <SearchIcon width="20" height="20" className="dark:text-white" />
-        <input
-          className=" w-64 no-zoom  border text-gray-900 text-sm rounded-lg block  p-2.5 dark:bg-white"
-          type="search"
-          placeholder={placeholder}
+        <Input
+          placeholder="Search token,NFT"
           value={searchText}
           onChange={({ target }) => setSearchText(target.value)}
-        />{' '}
+        />
       </div>
       <React.Fragment>
         <div className="flex flex-col gap-2">
