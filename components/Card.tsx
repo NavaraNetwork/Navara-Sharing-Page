@@ -73,17 +73,7 @@ const Card: React.FC<CardProp> = ({ userInfo, tokenList }) => {
             <p className="text-xs">@{domain?.replace('.nns.one', '')}</p>
           </div>
         </div>
-        {/* <div className="w-50 h-50"> */}
         <Image src={findItem?.icon} alt="" />
-        {/* {
-          {
-            '.nns.one': <Image src={LogoNavara} />,
-            '.eth': <Image src={LogoETH} />,
-            '.uns': <Image src={LogoUNS} />,
-          }[findItem.name]
-        } */}
-
-        {/* </div> */}
       </div>
 
       <div className="flex justify-between  mt-2">
