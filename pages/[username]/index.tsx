@@ -146,67 +146,67 @@ const Profile = ({ data }: IProflleProps) => {
   ]
   const findItem = imageCards.find((item: { name: string; icon: any }) => domain?.includes(item?.name))
   return (
-    <div className="flex justify-center bg-zinc-300 h-[95vh] p-7">
+    <div className="flex justify-center bg-zinc-300 h-[100vh] p-7">
       <LayoutPage title={` ${data.domain} | Navara One`}></LayoutPage>
-      <div className="hide-scrollbar bg-white dark:rounded-lg dark:px-2 w-[400px] overflow-y-scroll overflow-x-hidden p-7 rounded-xl">
-        <div className="flex justify-center mb-5 ">
+      <div className="hide-scrollbar bg-white dark:rounded-lg dark:px-2 w-[400px] overflow-y-scroll overflow-x-hidden p-7 pt-5 rounded-xl">
+        <div className="flex justify-center ">
           <Image src={navaraLogo} width="30" height="30" className="mx-auto" alt="navara logo" />
           <span className="my-3 px-3 font-bold text-3xl dark:text-white">Navara</span>
           {/* <div className="flex justify-end">
             <ThemeToggler />
           </div> */}
         </div>
-        <div className={`flex items-center gap-4 p-4  `}>
+        <div className={`flex items-center gap-4 p-4`}>
           <SearchIcon width="20" height="20" className="dark:text-white" />
           <SearchDropdown
             placeholder="Seach other address"
             onChange={handleSearch}
             value={searchTerm}
             searching={resultSearch}
+            className="grow"
           />
         </div>
 
-        <div className="">
-          <div className={` mb-1 overflow-y-auto  mx-2`}>
-            {searchTerm === '' ? (
-              <></>
-            ) : // <p className="my-2 text-center text-[13px]  px-3">Start typing to search for assets</p>
-            results ? (
-              typing ? (
-                <div className="my-3">
-                  <Spinner />
-                </div>
-              ) : listDomains && listDomains.length <= 0 ? (
-                <p className="my-3 text-center text-[13px] text-red-500 px-3">
-                  We were unable to find any results for your search
-                </p>
-              ) : (
-                !isSearching &&
-                listDomains?.map((item, index) => {
-                  return (
-                    <div
-                      className={`flex items-center gap-4 py-2 hover:bg-gray-200 rounded-lg cursor-pointer`}
-                      onClick={() => handleClick(item?.domain)}
-                    >
-                      <div className="rounded-full h-6 w-6 bg-gray-900 mr-2 p-1">
-                        <Image src={findItem?.icon} />
-                      </div>
-
-                      <Link href={`${item?.domain}`}>
-                        <a>
-                          <p>{item?.domain}</p>
-                        </a>
-                      </Link>
-                    </div>
-                  )
-                })
-              )
-            ) : (
-              <p className="my-3 text-center text-[13px] text-red-500 px-3">
+        <div className={` mb-1 overflow-y-auto  mx-2`}>
+          {searchTerm === '' ? (
+            <></>
+          ) : // <p className="my-2 text-center text-[13px]  px-3">Start typing to search for assets</p>
+          results ? (
+            typing ? (
+              <div className="my-3">
+                <Spinner />
+              </div>
+            ) : listDomains && listDomains.length <= 0 ? (
+              <p className="mb-3 text-center text-[12px] text-red-500 px-3 font-bold">
                 We were unable to find any results for your search
               </p>
-            )}
-          </div>
+            ) : (
+              !isSearching &&
+              listDomains?.map((item, index) => {
+                return (
+                  <div
+                    className={`flex items-center gap-4 py-2 hover:bg-gray-200 rounded-lg cursor-pointer`}
+                    onClick={() => handleClick(item?.domain)}
+                    key={index}
+                  >
+                    <div className="rounded-full h-6 w-6 bg-gray-900 ml-2 p-1">
+                      <Image src={findItem?.icon} />
+                    </div>
+
+                    <Link href={`${item?.domain}`}>
+                      <a>
+                        <p>{item?.domain}</p>
+                      </a>
+                    </Link>
+                  </div>
+                )
+              })
+            )
+          ) : (
+            <p className="my-3 text-center text-[13px] text-red-500 px-3">
+              We were unable to find any results for your search
+            </p>
+          )}
         </div>
         {fakeLoad ? (
           <SkeletonDomain />
