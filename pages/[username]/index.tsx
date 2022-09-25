@@ -27,6 +27,7 @@ import Widget from '../../components/Widget'
 import { categories } from '../../constants/constants'
 import { tempWidgetItems } from '../../constants/temporaryData'
 import { useDebounce } from '../../hooks/useDebounce'
+import ThemeToggler from '../../ThemeToggle'
 interface IProflleProps {
   data: any
 }
@@ -146,15 +147,15 @@ const Profile = ({ data }: IProflleProps) => {
   ]
   const findItem = imageCards.find((item: { name: string; icon: any }) => domain?.includes(item?.name))
   return (
-    <div className="flex justify-center bg-zinc-300 h-[100vh] p-7">
+    <div className="flex justify-center bg-zinc-400 dark:bg-zinc-900 h-[100vh] p-7">
       <LayoutPage title={` ${data.domain} | Navara One`}></LayoutPage>
-      <div className="hide-scrollbar bg-white dark:rounded-lg dark:px-2 w-[400px] overflow-y-scroll overflow-x-hidden p-7 pt-5 rounded-xl">
+      <div className="hide-scrollbar bg-white dark:bg-slate-900   w-[400px] overflow-y-scroll overflow-x-hidden p-7 pt-5 rounded-xl">
         <div className="flex justify-center ">
           <Image src={navaraLogo} width="30" height="30" className="mx-auto" alt="navara logo" />
           <span className="my-3 px-3 font-bold text-3xl dark:text-white">Navara</span>
-          {/* <div className="flex justify-end">
+          <div className="flex justify-end">
             <ThemeToggler />
-          </div> */}
+          </div>
         </div>
         <div className={`flex items-center gap-4 p-4`}>
           <SearchIcon width="20" height="20" className="dark:text-white" />
@@ -185,7 +186,7 @@ const Profile = ({ data }: IProflleProps) => {
               listDomains?.map((item, index) => {
                 return (
                   <div
-                    className={` items-center gap-4 py-2 hover:bg-gray-200 rounded-lg cursor-pointer`}
+                    className={` items-center gap-4 py-2 hover:bg-gray-200 hover:text-black rounded-lg cursor-pointer`}
                     key={index}
                   >
                     <Link href={`${item?.domain}`}>
