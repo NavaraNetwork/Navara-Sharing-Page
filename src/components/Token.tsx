@@ -1,17 +1,17 @@
 import Image from 'next/image'
 import React, { useRef, useState } from 'react'
 
-import { TokenType } from '../types/types'
+import { TokenType } from '../../types/types'
 
 /* assets */
-import checkMark from '../assets/icons/checkmark.svg'
-import checkMarkRound from '../assets/icons/checkmark_round.svg'
-import icon_copy from '../assets/icons/copy.svg'
-import icon_send from '../assets/icons/send.svg'
+import checkMark from '../../assets/icons/checkmark.svg'
+import checkMarkRound from '../../assets/icons/checkmark_round.svg'
+import icon_copy from '../../assets/icons/copy.svg'
+import icon_send from '../../assets/icons/send.svg'
+import { shortenAddress } from '../../utils/stringFunctions'
+import LogoChainImage from '../commons/UI/LogoChain'
+import ModalSend from '../commons/UI/ModalSend'
 import useCopyToClipBoard from '../hooks/useCopyToClipBoard'
-import { shortenAddress } from '../utils/stringFunctions'
-import LogoChainImage from './UI/LogoChain'
-import ModalSend from './UI/ModalSend'
 
 const Token: React.FC<TokenType> = ({
   tokenLogo,

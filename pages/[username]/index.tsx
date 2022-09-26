@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 
 /* Components */
 
-import SearchDropdown from '../../components/UI/SearchDropdown'
+import SearchDropdown from '../../src/commons/UI/SearchDropdown'
 
 /* Assets */
 import navaraLogo from '../../assets/logos/icon-navara.svg'
@@ -18,15 +18,16 @@ import { setInterval, setTimeout } from 'timers'
 import LogoETH from '../../assets/logos/logo-02.svg'
 import LogoUNS from '../../assets/logos/logo-03.svg'
 import LogoNavara from '../../assets/logos/logo-white-navara.svg'
-import Card from '../../components/Card'
-import LayoutPage from '../../components/commons/LayoutPage'
-import Tabs from '../../components/Tabs'
-import { SkeletonDomain } from '../../components/UI/SkeletonDomain'
-import { Spinner } from '../../components/UI/Spinner'
-import Widget from '../../components/Widget'
 import { categories } from '../../constants/constants'
 import { tempWidgetItems } from '../../constants/temporaryData'
-import { useDebounce } from '../../hooks/useDebounce'
+// import { useDebounce } from '../../hooks/useDebounce'
+import LayoutPage from '../../src/commons/LayoutPage'
+import { SkeletonDomain } from '../../src/commons/UI/SkeletonDomain'
+import { Spinner } from '../../src/commons/UI/Spinner'
+import Card from '../../src/components/Card'
+import Tabs from '../../src/components/Tabs'
+import Widget from '../../src/components/Widget'
+import { useDebounce } from '../../src/hooks/useDebounce'
 import ThemeToggler from '../../ThemeToggle'
 interface IProflleProps {
   data: any
@@ -147,7 +148,7 @@ const Profile = ({ data }: IProflleProps) => {
   ]
   const findItem = imageCards.find((item: { name: string; icon: any }) => domain?.includes(item?.name))
   return (
-    <div className="flex justify-center bg-zinc-400 dark:bg-zinc-900 h-[100vh] p-7">
+    <div className="flex justify-center bg-zinc-400 dark:bg-zinc-700 h-[100vh] p-7">
       <LayoutPage title={` ${data.domain} | Navara One`}></LayoutPage>
       <div className="hide-scrollbar bg-white dark:bg-slate-900   w-[400px] overflow-y-scroll overflow-x-hidden p-7 pt-5 rounded-xl">
         <div className="flex justify-center ">
