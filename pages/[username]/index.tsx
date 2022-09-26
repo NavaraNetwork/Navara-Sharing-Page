@@ -59,7 +59,6 @@ const Profile = ({ data }: IProflleProps) => {
   // ... so that we aren't hitting our API rapidly.
   const debouncedSearchTerm = useDebounce(searchTerm, 500)
   const [errorMessage, setErrorMessage] = useState('')
-  const [now, setNow] = useState(new Date())
 
   const [listDomains, setListDomains] = useState<listDomain>([] as any)
   // API search function
@@ -109,28 +108,20 @@ const Profile = ({ data }: IProflleProps) => {
 
   const { chains, ...domainInfo } = data
 
-  const filteredTokenList = Object.keys(chains[0])
-    .map((key) => {
-      return {
-        token: key,
-        address: chains[0][key],
-        tokenLogo: key,
-        tokenNetworkLogo: key,
-      }
-    })
-    .filter((item: any) => {
-      return item?.token !== 'chainId'
-    })
-
-  useEffect(() => {
-    setInterval(() => {
-      setNow(() => new Date())
-    }, 30000)
-
-    return () => {
-      clearInterval
-    }
-  }, [])
+  const filteredTokenList = chains
+    ? Object.keys(chains[0])
+        .map((key) => {
+          return {
+            token: key,
+            address: chains[0][key],
+            tokenLogo: key,
+            tokenNetworkLogo: key,
+          }
+        })
+        .filter((item: any) => {
+          return item?.token !== 'chainId'
+        })
+    : []
 
   const [fakeLoad, setFakeLoad] = useState(false)
   const handleClick = () => {
