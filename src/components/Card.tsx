@@ -41,17 +41,6 @@ const Card: React.FC<CardProp> = ({ userInfo, tokenList }) => {
     }, 3000)
   }
 
-  const getExpiredDate = (expired: string): { isValid: boolean; expiredDate: string } => {
-    const expiredDateFormat = new Date(expired)
-    const today = new Date()
-
-    const isValid = expiredDateFormat.getTime() > today.getTime()
-    const expiredMonth = expiredDateFormat.getMonth()
-    const expiredYear = expiredDateFormat.getFullYear().toString().slice(-2)
-
-    return { isValid: isValid, expiredDate: expiredMonth + expiredYear }
-  }
-
   const renderExpiredDateAndValid = (expired: string) => {
     if (expired) {
       const expiredDateFormat = new Date(expired)
