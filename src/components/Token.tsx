@@ -51,11 +51,11 @@ const Token: React.FC<TokenType> = ({
     <div className="grid grid-cols-[45px_minmax(0,_1fr)_30px_40px] gap-4 py-3 border-b last:border-b-0">
       <div className="relative flex items-center justify-center w-12 h-12 border border-white bg-[#edf0f4] rounded-full">
         <div className="relative w-7 h-7 top-0">
-          <LogoChainImage network={tokenLogo} />
+          <LogoChainImage network={tokenLogo} width="" height="" />
         </div>
         <div className="absolute -bottom-1 -right-1 flex items-center justify-center w-6 h-6 border-2 border-white bg-[#edf0f4] rounded-full">
           <div className="absolute w-4 h-4 border-white">
-            <LogoChainImage network={tokenNetworkLogo} />
+            <LogoChainImage width="" height="" network={tokenNetworkLogo} />
           </div>
         </div>
       </div>
