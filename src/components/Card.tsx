@@ -1,19 +1,19 @@
 import Image from 'next/image'
 import React, { useRef, useState } from 'react'
 
-import { UserInfo } from '../types/types'
+import { UserInfo } from '../../types/types'
 
 // Assets
-import checkMark from '../assets/icons/checkmark.svg'
-import checkMarkRound from '../assets/icons/checkmark_round.svg'
-import icon_copy from '../assets/icons/copy.svg'
-import avatar from '../assets/images/avatar.png'
-import creditCard from '../assets/images/credit_card.svg'
-import LogoETH from '../assets/logos/logo-02.svg'
-import LogoUNS from '../assets/logos/logo-03.svg'
-import LogoNavara from '../assets/logos/logo-white-navara.svg'
+import checkMark from '../../assets/icons/checkmark.svg'
+import checkMarkRound from '../../assets/icons/checkmark_round.svg'
+import icon_copy from '../../assets/icons/copy.svg'
+import avatar from '../../assets/images/avatar.png'
+import creditCard from '../../assets/images/credit_card.svg'
+import LogoETH from '../../assets/logos/logo-02.svg'
+import LogoUNS from '../../assets/logos/logo-03.svg'
+import LogoNavara from '../../assets/logos/logo-white-navara.svg'
+import { shortenAddress } from '../../utils/stringFunctions'
 import useCopyToClipBoard from '../hooks/useCopyToClipBoard'
-import { shortenAddress } from '../utils/stringFunctions'
 
 type CardProp = {
   userInfo: UserInfo
