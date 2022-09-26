@@ -1,8 +1,8 @@
 import { SearchIcon } from '@heroicons/react/solid'
 import React from 'react'
-import { tokenListType } from '../types/types'
+import { tokenListType } from '../../types/types'
+import { Input } from '../commons/UI/Input'
 import Token from './Token'
-import { Input } from './UI/Input'
 
 const TokenList: React.FC<tokenListType> = ({ placeholder, className, tokens }) => {
   tokens[0].isDefault = true

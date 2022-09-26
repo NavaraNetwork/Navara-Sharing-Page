@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import Image from 'next/image'
 import React, { useState } from 'react'
-import Modal from './UI/Modal'
+import Modal from '../commons/UI/Modal'
 
 type widgetProps = {
   items: {
