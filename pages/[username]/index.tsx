@@ -14,13 +14,13 @@ import API from '../../services/api'
 /* Constants */
 import { SearchIcon } from '@heroicons/react/solid'
 import Link from 'next/link'
-import { setInterval, setTimeout } from 'timers'
+import { setTimeout } from 'timers'
 import LogoETH from '../../assets/logos/logo-02.svg'
 import LogoUNS from '../../assets/logos/logo-03.svg'
 import LogoNavara from '../../assets/logos/logo-white-navara.svg'
+// import { useDebounce } from '../../hooks/useDebounce'
 import { categories } from '../../constants/constants'
 import { tempWidgetItems } from '../../constants/temporaryData'
-// import { useDebounce } from '../../hooks/useDebounce'
 import LayoutPage from '../../src/commons/LayoutPage'
 import { SkeletonDomain } from '../../src/commons/UI/SkeletonDomain'
 import { Spinner } from '../../src/commons/UI/Spinner'
@@ -62,7 +62,6 @@ const Profile = ({ data }: IProflleProps) => {
 
   const [listDomains, setListDomains] = useState<listDomain>([] as any)
   // API search function
-
   const searchCharacters = async (search: any) => {
     return await API.get('domain/find', {
       params: {
@@ -76,6 +75,7 @@ const Profile = ({ data }: IProflleProps) => {
         setTyping(false)
       })
       .catch((error) => {
+        router.push('/error')
         setResults({})
         setTimeout(() => {
           setErrorMessage(error.response.data.message)
@@ -93,10 +93,14 @@ const Profile = ({ data }: IProflleProps) => {
     () => {
       if (debouncedSearchTerm) {
         setIsSearching(true)
-        searchCharacters(debouncedSearchTerm).then((results: any) => {
-          setTyping(false)
-          setIsSearching(false)
-        })
+        searchCharacters(debouncedSearchTerm)
+          .then((results: any) => {
+            setTyping(false)
+            setIsSearching(false)
+          })
+          .catch((error) => {
+            router.push('/error')
+          })
       } else {
         setResults({})
         setTyping(false)
@@ -107,7 +111,7 @@ const Profile = ({ data }: IProflleProps) => {
   )
 
   const { chains, ...domainInfo } = data
-
+  console.log(data, ' console.log(data)')
   const filteredTokenList = chains
     ? Object.keys(chains[0])
         .map((key) => {
@@ -137,6 +141,7 @@ const Profile = ({ data }: IProflleProps) => {
     { name: '.uns', icon: LogoUNS },
     { name: '.eth', icon: LogoETH },
   ]
+
   const findItem = imageCards.find((item: { name: string; icon: any }) => domain?.includes(item?.name))
   return (
     <div className="flex justify-center bg-zinc-400 dark:bg-zinc-700 h-[100vh] p-7">
