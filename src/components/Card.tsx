@@ -41,11 +41,36 @@ const Card: React.FC<CardProp> = ({ userInfo, tokenList }) => {
     }, 3000)
   }
 
-  const expiredDate = new Date(expired)
-  const today = new Date()
-  const isValid = expiredDate.getTime() > today.getTime()
-  const expiredMonth = expiredDate.getMonth()
-  const expiredYear = expiredDate.getFullYear().toString().slice(-2)
+  const getExpiredDate = (expired: string): { isValid: boolean; expiredDate: string } => {
+    const expiredDateFormat = new Date(expired)
+    const today = new Date()
+
+    const isValid = expiredDateFormat.getTime() > today.getTime()
+    const expiredMonth = expiredDateFormat.getMonth()
+    const expiredYear = expiredDateFormat.getFullYear().toString().slice(-2)
+
+    return { isValid: isValid, expiredDate: expiredMonth + expiredYear }
+  }
+
+  const renderExpiredDateAndValid = (expired: string) => {
+    if (expired) {
+      const expiredDateFormat = new Date(expired)
+      const today = new Date()
+
+      const isValid = expiredDateFormat.getTime() > today.getTime()
+      const expiredMonth = expiredDateFormat.getMonth()
+      const expiredYear = expiredDateFormat.getFullYear().toString().slice(-2)
+
+      return (
+        <div>
+          <p className="text-xs font-bold leading-6">{expiredMonth + '/' + expiredYear}</p>
+          <p className="text-[10px]">{isValid ? 'Valid' : 'Invalid'}</p>
+        </div>
+      )
+    } else {
+      return
+    }
+  }
 
   var imageCards = [
     { name: '.nns.one', icon: LogoNavara },
@@ -54,6 +79,7 @@ const Card: React.FC<CardProp> = ({ userInfo, tokenList }) => {
   ]
 
   const findItem = imageCards.find((item: { name: string; icon: any }) => domain?.includes(item?.name))
+  const defaultToken = tokenList && tokenList[0]
 
   return (
     <div className="relative min-h-[196px] pl-5 pt-5 pr-8 text-white z-10">
@@ -70,7 +96,7 @@ const Card: React.FC<CardProp> = ({ userInfo, tokenList }) => {
           </div>
           <div className="">
             <p className="mb-1 capitalize font-normal">Navara One</p>
-            <p className="text-xs">@{domain?.replace('.nns.one', '')}</p>
+            <p className="text-xs">{domain ? '@' + domain?.replace('.nns.one', '') : ''}</p>
           </div>
         </div>
         <Image src={findItem?.icon} alt="" />
@@ -78,31 +104,30 @@ const Card: React.FC<CardProp> = ({ userInfo, tokenList }) => {
 
       <div className="flex justify-between  mt-2">
         <div>
-          <div className="flex gap-3">
-            <p className="font-medium">{domain}</p>
-            <Image src={checkMarkRound} alt="checkmark" />
-          </div>
+          {defaultToken && (
+            <div className="flex gap-3">
+              <p className="font-medium">{domain}</p>
+              <Image src={checkMarkRound} alt="checkmark" />
+            </div>
+          )}
 
           <div className="flex items-center gap-3">
             <span className="tooltip">
-              <p className="text-[10px] font-normal text-[#F5F9FF]">{shortenAddress(tokenList[0].address, 8)}</p>
+              <p className="text-[10px] font-normal text-[#F5F9FF]">{shortenAddress(defaultToken?.address, 8)}</p>
               <p className="hidden" ref={addressRef}>
-                {tokenList[0].address}
+                {defaultToken?.address}
               </p>
-              <p className="tooltiptext">{tokenList[0].address}</p>
+              <p className="tooltiptext">{defaultToken?.address}</p>
             </span>
-            <div className="tooltip" onClick={handleToolTipClick}>
-              <span className="tooltiptext">{toolTipText}</span>
-              <Image src={copyIcon} width="16px" height="16px" alt="copy icon" />
-            </div>
+            {defaultToken && (
+              <div className="tooltip" onClick={handleToolTipClick}>
+                <span className="tooltiptext">{toolTipText}</span>
+                <Image src={copyIcon} width="16px" height="16px" alt="copy icon" />
+              </div>
+            )}
           </div>
         </div>
-        <div>
-          <p className="text-xs font-bold leading-6">
-            {expiredMonth}/{expiredYear}
-          </p>
-          <p className="text-[10px]">{isValid ? 'Valid' : 'Invalid'}</p>
-        </div>
+        {renderExpiredDateAndValid(expired)}
       </div>
     </div>
   )
