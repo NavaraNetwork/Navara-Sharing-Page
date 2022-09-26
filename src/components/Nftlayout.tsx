@@ -1,10 +1,9 @@
-import React from 'react'
+import IconEth from '../../assets/Nft/eth.svg'
+import ImageNft1 from '../../assets/Nft/nft1.png'
+import ImageNft2 from '../../assets/Nft/nft2.png'
+import ImageNft3 from '../../assets/Nft/nft3.png'
+import ImageNft4 from '../../assets/Nft/nft4.png'
 import Nft from './Nft'
-import ImageNft1 from '../assets/Nft/nft1.png'
-import ImageNft2 from '../assets/Nft/nft2.png'
-import ImageNft3 from '../assets/Nft/nft3.png'
-import ImageNft4 from '../assets/Nft/nft4.png'
-import IconEth from '../assets/Nft/eth.svg'
 
 const CarouselLayout = () => {
   const nfts = [

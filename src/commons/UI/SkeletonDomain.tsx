@@ -1,8 +1,8 @@
 import { Tab } from '@headlessui/react'
 import { SearchIcon } from '@heroicons/react/solid'
 import Link from 'next/link'
-import { categories } from '../../constants/constants'
-import { classNames } from '../../utils/common'
+import { categories } from '../../../constants/constants'
+import { classNames } from '../../../utils/common'
 import { Input } from './Input'
 
 const nftTemplate = (

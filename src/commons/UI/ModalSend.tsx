@@ -2,12 +2,12 @@ import { Dialog, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/solid'
 import Image from 'next/image'
 import React, { Fragment } from 'react'
-import IconArrowRight from '../../assets/icons/icon-arrow-right.svg'
-import IconCoinBase from '../../assets/logos/icon-coinbase.svg'
-import IconMetaMask from '../../assets/logos/icon-metamask.svg'
-import IconNavara from '../../assets/logos/icon-navara.svg'
-import IconTrustWallet from '../../assets/logos/icon-trustwallet.svg'
-import { shortenAddress } from '../../utils/stringFunctions'
+import IconArrowRight from '../../../assets/icons/icon-arrow-right.svg'
+import IconCoinBase from '../../../assets/logos/icon-coinbase.svg'
+import IconMetaMask from '../../../assets/logos/icon-metamask.svg'
+import IconNavara from '../../../assets/logos/icon-navara.svg'
+import IconTrustWallet from '../../../assets/logos/icon-trustwallet.svg'
+import { shortenAddress } from '../../../utils/stringFunctions'
 
 type ModalProps = {
   titleModal?: string
