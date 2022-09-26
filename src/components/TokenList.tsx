@@ -5,12 +5,13 @@ import { Input } from '../commons/UI/Input'
 import Token from './Token'
 
 const TokenList: React.FC<tokenListType> = ({ placeholder, className, tokens }) => {
-  tokens[0].isDefault = true
-  const defaultToken = tokens[0].token
+  tokens.length === 0 ? tokens.push({ isDefault: true }) : (tokens[0].isDefault = true)
+
+  const defaultToken = tokens[0]?.token
   const [searchText, setSearchText] = React.useState('')
 
   const filteredTokens = tokens.filter(({ token, address }: any) =>
-    token.toLowerCase().includes(searchText.toLowerCase())
+    token?.toLowerCase().includes(searchText.toLowerCase())
   )
   return (
     <div>
