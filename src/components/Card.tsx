@@ -71,7 +71,7 @@ const Card: React.FC<CardProp> = ({ userInfo, tokenList }) => {
   const defaultToken = tokenList && tokenList[0]
 
   return (
-    <div className="relative min-h-[196px] pl-5 pt-5 pr-8 text-white z-10">
+    <div className="relative min-h-[190px] pl-5 pt-5 pr-8 text-white z-10">
       {/* Card Background */}
       <picture className="absolute top-0 left-0 w-full -z-10">
         <Image src={creditCard} layout="responsive" alt="cardBackground" />

@@ -10,7 +10,7 @@ const nextConfig = {
     return [
       {
         source: '/',
-        destination: '/navara.nns.one',
+        destination: '/navara',
         permanent: true,
       },
     ]

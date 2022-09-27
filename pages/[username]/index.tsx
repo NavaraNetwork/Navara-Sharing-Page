@@ -111,7 +111,9 @@ const Profile = ({ data }: IProflleProps) => {
   )
 
   const { chains, ...domainInfo } = data
-  console.log(data, ' console.log(data)')
+
+  // console.log(splitHostname[0])
+
   const filteredTokenList = chains
     ? Object.keys(chains[0])
         .map((key) => {
@@ -137,11 +139,16 @@ const Profile = ({ data }: IProflleProps) => {
     setIsSearching(true)
   }
   var imageCards = [
-    { name: '.nns.one', icon: LogoNavara },
+    { name: '', icon: LogoNavara },
     { name: '.uns', icon: LogoUNS },
     { name: '.eth', icon: LogoETH },
   ]
 
+  // useEffect(() => {
+  //   if (typeof window !== 'undefined' && window.location.host === '') {
+  //     console.log(window.location.host)
+  //   }
+  // }, [])
   const findItem = imageCards.find((item: { name: string; icon: any }) => domain?.includes(item?.name))
   return (
     <div className="flex justify-center bg-[#F9FAFB] dark:bg-[#111827] h-[100vh]  ">
@@ -155,7 +162,7 @@ const Profile = ({ data }: IProflleProps) => {
             <ThemeToggler />
           </div>
         </div>
-        <div className={`flex items-center gap-4 p-4`}>
+        <div className={`flex items-center gap-4 py-4`}>
           <SearchDropdown
             placeholder="Seach other address"
             onChange={handleSearch}
@@ -181,16 +188,17 @@ const Profile = ({ data }: IProflleProps) => {
               </p>
             ) : (
               !isSearching &&
-              listDomains?.map((item, index) => {
+              listDomains?.map((item: any, index) => {
+                const subDomain = item?.domain.split('.nns.one')
                 return (
                   <div
                     className={` items-center gap-4 py-2 hover:bg-gray-200 hover:text-black rounded-lg cursor-pointer`}
                     key={index}
                   >
-                    <Link href={`${item?.domain}`}>
+                    <Link href={`${subDomain[0]}`}>
                       <a onClick={handleClick} className="flex">
-                        <div className="rounded-full h-6 w-6 bg-gray-900 mr-2 p-1">
-                          <Image src={findItem?.icon} />
+                        <div className="rounded-full bg-black h-6 w-6  mr-2 p-1">
+                          <Image src={findItem?.icon} width="20" height="20" />
                         </div>
                         <p>{item?.domain}</p>
                       </a>
@@ -216,8 +224,6 @@ const Profile = ({ data }: IProflleProps) => {
             <Tabs tabList={categories} chains={filteredTokenList} />
           </>
         )}
-
-        {/* <Modal isShow={isShow} handlOpen={handlOpen} /> */}
       </div>
     </div>
   )
@@ -226,7 +232,8 @@ const Profile = ({ data }: IProflleProps) => {
 export const getServerSideProps = async (context: any) => {
   // Fetch data from external API
   const domainName = context.params.username
-  const res = await API.get(`domain/find?domain=${domainName}`)
+
+  const res = await API.get(`domain/find?domain=${domainName}.nns.one`)
   const data = await res
 
   // Pass data to the page via props
