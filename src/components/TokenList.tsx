@@ -1,5 +1,7 @@
 import Image from 'next/image'
+
 import React, { useState } from 'react'
+
 import IconSearch from '../../assets/icons/search.svg'
 import { tokenListType } from '../../types/types'
 import { Input } from '../commons/UI/Input'
@@ -17,6 +19,7 @@ const TokenList: React.FC<tokenListType> = ({ placeholder, className, tokens }) 
   const [selected, setSelected] = useState(people[0])
   return (
     <div>
+
       <div className={`grid grid-flow-row-dense grid-cols-3 gap-1 p-4`}>
         <div className="col-span-2">
           <Input
@@ -38,6 +41,7 @@ const TokenList: React.FC<tokenListType> = ({ placeholder, className, tokens }) 
             <option value="FR">ETHERIUM</option>
           </select>
         </div>
+
       </div>
       <React.Fragment>
         <div className="flex flex-col gap-2">
