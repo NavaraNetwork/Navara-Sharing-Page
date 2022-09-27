@@ -146,6 +146,7 @@ const Profile = ({ data }: IProflleProps) => {
   return (
     <div className="flex justify-center bg-[#F9FAFB] dark:bg-[#111827] h-[100vh]  ">
       <LayoutPage title={` ${data.domain} | Navara One`}></LayoutPage>
+
       <div className="hide-scrollbar border dark:border-black bg-white dark:bg-[#1F2938]   w-[450px] overflow-y-scroll overflow-x-hidden p-7 pt-5 rounded-xl">
         <div className="flex justify-center ">
           <Image src={navaraLogo} width="30" height="30" className="mx-auto" alt="navara logo" />
