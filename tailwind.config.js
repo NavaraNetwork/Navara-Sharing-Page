@@ -1,6 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./pages/**/*.{js,ts,jsx,tsx}', './src/**/*.{js,ts,jsx,tsx}'],
+  content: [
+    './node_modules/flowbite-react/**/*.js',
+    './pages/**/*.{js,ts,jsx,tsx}',
+    './src/**/*.{js,ts,jsx,tsx}',
+    './public/**/*.html',
+  ],
 
   screens: {
     sm: '640px',
@@ -18,6 +23,6 @@ module.exports = {
     '2xl': '1536px',
     // => @media (min-width: 1536px) { ... }
   },
-  plugins: [],
+  plugins: [require('flowbite/plugin')],
   darkMode: 'class',
 }
