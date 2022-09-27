@@ -144,9 +144,9 @@ const Profile = ({ data }: IProflleProps) => {
 
   const findItem = imageCards.find((item: { name: string; icon: any }) => domain?.includes(item?.name))
   return (
-    <div className="flex justify-center bg-zinc-400 dark:bg-zinc-700 h-[100vh] p-7">
+    <div className="flex justify-center bg-[#F9FAFB] dark:bg-[#111827] h-[100vh]  ">
       <LayoutPage title={` ${data.domain} | Navara One`}></LayoutPage>
-      <div className="hide-scrollbar bg-white dark:bg-slate-900   w-[400px] overflow-y-scroll overflow-x-hidden p-7 pt-5 rounded-xl">
+      <div className="hide-scrollbar border dark:border-black bg-white dark:bg-[#1F2938]   w-[400px] overflow-y-scroll overflow-x-hidden p-7 pt-5 rounded-xl">
         <div className="flex justify-center ">
           <Image src={navaraLogo} width="30" height="30" className="mx-auto" alt="navara logo" />
           <span className="my-3 px-3 font-bold text-3xl dark:text-white">Navara</span>
@@ -155,13 +155,13 @@ const Profile = ({ data }: IProflleProps) => {
           </div>
         </div>
         <div className={`flex items-center gap-4 p-4`}>
-          <SearchIcon width="20" height="20" className="dark:text-white" />
           <SearchDropdown
             placeholder="Seach other address"
             onChange={handleSearch}
             value={searchTerm}
             searching={resultSearch}
             className="grow"
+            icon={<SearchIcon width="20" height="20" className="dark:text-white" />}
           />
         </div>
 
