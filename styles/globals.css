@@ -2,33 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply bg-zinc-300;
-}
+
 
 .no-zoom {
   font-size: 16px;
   transform-origin: top left;
-  /* transform: scale(0.75);     */
-
-  /* padding      : 5.333333px;
-    border-radius: 6.666667px; 
-    border-width : 1.333333px; 
-    
-     
-    margin-right: -60px;      
-    margin-bottom: -8px;       */
+  
 }
 
-/* @media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
-} */
+
 
 .tooltip {
   position: relative;
