@@ -15,7 +15,6 @@ const TokenList: React.FC<tokenListType> = ({ placeholder, className, tokens }) 
   const filteredTokens = tokens.filter(({ token, address }: any) =>
     token?.toLowerCase().includes(searchText.toLowerCase())
   )
-  console.log(tokens, 'tokens')
 
   const handleChange = (e: any) => {
     setSearchText(e.target.value)
