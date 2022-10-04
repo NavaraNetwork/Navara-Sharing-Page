@@ -75,7 +75,7 @@ const Profile = ({ data }: IProflleProps) => {
         setTyping(false)
       })
       .catch((error) => {
-        router.push('/error')
+        // router.push('/error')
         setResults({})
         setTimeout(() => {
           setErrorMessage(error.response.data.message)
