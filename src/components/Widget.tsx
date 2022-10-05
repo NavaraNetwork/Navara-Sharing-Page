@@ -16,17 +16,13 @@ const Widget: React.FC<widgetProps> = ({ items }) => {
 
   const handleClick = (action?: string) => {
     setIsOpen(true)
-
-    // if (action === WidgetButtonAction.OpenModal) {
-    //   setIsOpen(true)
-    // }
   }
   const handleClose = () => {
     setIsOpen(false)
   }
 
   return (
-    <div className="relative -top-11 mx-auto py-3 px-2 w-4/5  shadow-lg bg-white rounded-[10px] z-10">
+    <div className="relative -top-6 mx-auto py-3 px-2 w-4/5  shadow-lg bg-white rounded-[10px] z-10">
       <div className="flex">
         {items.map((item, index) => {
           return (

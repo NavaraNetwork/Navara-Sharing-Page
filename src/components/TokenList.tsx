@@ -19,7 +19,7 @@ const TokenList: React.FC<tokenListType> = ({ placeholder, className, tokens }) 
   const [selected, setSelected] = useState(people[0])
   return (
     <div>
-      <div className={`grid grid-flow-row-dense grid-cols-3 gap-1 p-4`}>
+      <div className={`grid grid-flow-row-dense grid-cols-3 gap-1 py-4`}>
         <div className="col-span-2">
           <Input
             icon={<Image src={IconSearch} />}
