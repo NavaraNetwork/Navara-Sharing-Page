@@ -1,5 +1,7 @@
 import React from 'react'
 
+import Image from 'next/image'
+import IconSearch from '../../../assets/icons/search.svg'
 import { Input } from './Input'
 type SearchProps = {
   placeholder?: string
@@ -13,7 +15,7 @@ type SearchProps = {
 const SearchDropdown: React.FC<SearchProps> = ({ placeholder, className, onChange, onSubmit, value }) => {
   return (
     <div className={`${className}`}>
-      <Input placeholder="Search other domain" onChange={onChange} value={value} />
+      <Input placeholder="Search other domain" onChange={onChange} value={value} icon={<Image src={IconSearch} />} />
     </div>
   )
 }
