@@ -1,9 +1,9 @@
-import { SearchIcon } from '@heroicons/react/solid'
+import Image from 'next/image'
 import React from 'react'
+import IconSearch from '../../assets/icons/search.svg'
 import { tokenListType } from '../../types/types'
 import { Input } from '../commons/UI/Input'
 import Token from './Token'
-
 const TokenList: React.FC<tokenListType> = ({ placeholder, className, tokens }) => {
   tokens.length === 0 ? tokens.push({ isDefault: true }) : (tokens[0].isDefault = true)
 
@@ -15,9 +15,9 @@ const TokenList: React.FC<tokenListType> = ({ placeholder, className, tokens }) 
   )
   return (
     <div>
-      <div className={`flex items-center gap-4 p-4 ${className}`}>
-        <SearchIcon width="20" height="20" className="dark:text-white" />
+      <div className={`  p-4 `}>
         <Input
+          icon={<Image src={IconSearch} />}
           placeholder="Search token,NFT"
           value={searchText}
           onChange={({ target }) => setSearchText(target.value)}
