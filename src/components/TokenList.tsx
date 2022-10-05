@@ -1,5 +1,7 @@
 import Image from 'next/image'
+
 import React, { useState } from 'react'
+
 import IconSearch from '../../assets/icons/search.svg'
 import { tokenListType } from '../../types/types'
 import { Input } from '../commons/UI/Input'
