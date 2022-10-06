@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import React, { useState } from 'react'
+import React from 'react'
 
 import IconSearch from '../../assets/icons/search.svg'
 import { tokenListType } from '../../types/types'
@@ -15,8 +15,12 @@ const TokenList: React.FC<tokenListType> = ({ placeholder, className, tokens }) 
   const filteredTokens = tokens.filter(({ token, address }: any) =>
     token?.toLowerCase().includes(searchText.toLowerCase())
   )
-  const people = [{ name: 'Multichain' }, { name: 'NEAR' }, { name: 'Ethereum' }, { name: 'Solana' }]
-  const [selected, setSelected] = useState(people[0])
+  console.log(tokens, 'tokens')
+
+  const handleChange = (e: any) => {
+    setSearchText(e.target.value)
+  }
+
   return (
     <div>
       <div className={`grid grid-flow-row-dense grid-cols-3 gap-1 py-4`}>
@@ -33,11 +37,17 @@ const TokenList: React.FC<tokenListType> = ({ placeholder, className, tokens }) 
           <select
             id="countries"
             className="bg-[#061154] border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-4 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 "
+            onChange={handleChange}
           >
-            <option selected>All Chain</option>
-            <option value="US">NEAR</option>
-            <option value="CA">SOLANA</option>
-            <option value="FR">ETHERIUM</option>
+            <option value="">All chains</option>
+            {tokens &&
+              tokens?.map((item: any, index: any) => {
+                return (
+                  <option value={item?.token} key={index}>
+                    {item?.token}
+                  </option>
+                )
+              })}
           </select>
         </div>
       </div>
