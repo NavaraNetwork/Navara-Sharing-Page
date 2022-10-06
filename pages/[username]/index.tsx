@@ -39,7 +39,7 @@ const Profile = ({ data }: IProflleProps) => {
   const [searchTerm, setSearchTerm] = useState('')
   const [dataShow, setDataShow] = useState(false)
   const handleSearch = (event: any) => {
-    setSearchTerm(event.target.value)
+    setSearchTerm(event.target.value.toLowerCase())
   }
 
   type resultType = {
@@ -77,9 +77,7 @@ const Profile = ({ data }: IProflleProps) => {
       .catch((error) => {
         // router.push('/error')
         setResults({})
-        setTimeout(() => {
-          setErrorMessage(error.response.data.message)
-        }, 1000)
+
         setTyping(false)
       })
   }
@@ -112,8 +110,6 @@ const Profile = ({ data }: IProflleProps) => {
 
   const { chains, ...domainInfo } = data
 
-  // console.log(splitHostname[0])
-
   const filteredTokenList = chains
     ? Object.keys(chains[0])
         .map((key) => {
@@ -144,17 +140,14 @@ const Profile = ({ data }: IProflleProps) => {
     { name: '.eth', icon: LogoETH },
   ]
 
-  // useEffect(() => {
-  //   if (typeof window !== 'undefined' && window.location.host === '') {
-  //     console.log(window.location.host)
-  //   }
-  // }, [])
+  //find item by images
   const findItem = imageCards.find((item: { name: string; icon: any }) => domain?.includes(item?.name))
+
   return (
-    <div className="flex justify-center bg-[#F9FAFB] dark:bg-[#111827] h-[100vh]  ">
+    <div className="flex justify-center bg-[#F3F4F6] dark:bg-[#0F172A] h-[100vh] overflow-y-auto ">
       <LayoutPage title={` ${data.domain} | Navara One`}></LayoutPage>
 
-      <div className="hide-scrollbar border dark:border-black bg-white dark:bg-[#1F2938]   w-[450px] overflow-y-scroll overflow-x-hidden p-7 pt-5 rounded-xl">
+      <div className="hide-scrollbar border dark:border-black bg-[#F9FAFB] dark:bg-[#151E31] pt-3 pb-5  w-[450px]  overflow-x-hidden p-7  rounded-xl">
         <div className="flex justify-center ">
           <Image src={navaraLogo} width="30" height="30" className="mx-auto" alt="navara logo" />
           <span className="my-3 px-3 font-bold text-3xl dark:text-white">Navara</span>
@@ -234,6 +227,7 @@ export const getServerSideProps = async (context: any) => {
   const domainName = context.params.username
 
   const res = await API.get(`domain/find?domain=${domainName}.nns.one`)
+  // const errorCode = res ? false : res.statusCode
   const data = await res
 
   // Pass data to the page via props
