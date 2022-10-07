@@ -65,7 +65,7 @@ const Profile = ({ data }: IProflleProps) => {
   const searchCharacters = async (search: any) => {
     return await API.get('domain/find', {
       params: {
-        domain: search,
+        input: search,
       },
     })
       .then((result: any) => {
@@ -226,7 +226,7 @@ export const getServerSideProps = async (context: any) => {
   // Fetch data from external API
   const domainName = context.params.username
 
-  const res = await API.get(`domain/find?domain=${domainName}.nns.one`)
+  const res = await API.get(`domain/find?input=${domainName}.nns.one`)
   // const errorCode = res ? false : res.statusCode
   const data = await res
 
