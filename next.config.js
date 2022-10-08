@@ -6,15 +6,16 @@ const nextConfig = {
   // images: {
   //   unoptimized: true,
   // },
-  async redirects() {
-    return [
-      {
-        source: '/',
-        destination: '/navara',
-        permanent: true,
-      },
-    ]
-  },
+  // async redirects() {
+  //   return [
+  //     {
+  //       source: '/',
+
+  //       destination: '/navara',
+  //       permanent: true,
+  //     },
+  //   ]
+  // },
 }
 
 module.exports = nextConfig

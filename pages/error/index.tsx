@@ -30,7 +30,7 @@ const ErrorPage = () => {
           <Button
             variant="primary"
             onClick={() => {
-              router.push('/navara.nns.one')
+              router.push('/navara')
             }}
             styleMore="font-bold"
           >

@@ -19,6 +19,7 @@ import LogoETH from '../../assets/logos/logo-02.svg'
 import LogoUNS from '../../assets/logos/logo-03.svg'
 import LogoNavara from '../../assets/logos/logo-white-navara.svg'
 // import { useDebounce } from '../../hooks/useDebounce'
+import { GetServerSideProps, NextPage } from 'next'
 import { categories } from '../../constants/constants'
 import { tempWidgetItems } from '../../constants/temporaryData'
 import LayoutPage from '../../src/commons/LayoutPage'
@@ -32,7 +33,7 @@ import ThemeToggler from '../../ThemeToggle'
 interface IProflleProps {
   data: any
 }
-const Profile = ({ data }: IProflleProps) => {
+const Profile: NextPage<{ data: IProflleProps }> = (props) => {
   const router = useRouter()
   const domain = router.asPath
   const [resultSearch, setResultSearch] = useState(false)
@@ -59,7 +60,7 @@ const Profile = ({ data }: IProflleProps) => {
   // ... so that we aren't hitting our API rapidly.
   const debouncedSearchTerm = useDebounce(searchTerm, 500)
   const [errorMessage, setErrorMessage] = useState('')
-
+  const [data2, setData2] = useState([])
   const [listDomains, setListDomains] = useState<listDomain>([] as any)
   // API search function
   const searchCharacters = async (search: any) => {
@@ -81,6 +82,23 @@ const Profile = ({ data }: IProflleProps) => {
         setTyping(false)
       })
   }
+
+  // useEffect(() => {
+  //   // declare the data fetching function
+  //   const fetchData = async () => {
+  //     const res = await API.get(`domain/find?input=${window.location.hostname.split('.nns.one')[0]}.nns.one`)
+  //     setData2(res)
+  //   }
+
+  //   // call the function
+  //   fetchData()
+  //     // make sure to catch any error
+  //     .catch((error) => {
+  //       console.log(error)
+  //       router.push('/error')
+  //     })
+  // }, [])
+
   //Typing input to loading
   useEffect(() => {
     setTyping(true)
@@ -91,14 +109,10 @@ const Profile = ({ data }: IProflleProps) => {
     () => {
       if (debouncedSearchTerm) {
         setIsSearching(true)
-        searchCharacters(debouncedSearchTerm)
-          .then((results: any) => {
-            setTyping(false)
-            setIsSearching(false)
-          })
-          .catch((error) => {
-            router.push('/error')
-          })
+        searchCharacters(debouncedSearchTerm).then((results: any) => {
+          setTyping(false)
+          setIsSearching(false)
+        })
       } else {
         setResults({})
         setTyping(false)
@@ -108,7 +122,12 @@ const Profile = ({ data }: IProflleProps) => {
     [debouncedSearchTerm] // Only call effect if debounced search term changes
   )
 
-  const { chains, ...domainInfo } = data
+  const { chains, ...domainInfo } = props.data
+
+  // console.log(props.data.length <= 0)
+  useEffect(() => {
+    props.data.length <= 0 && router.push('/error')
+  }, [])
 
   const filteredTokenList = chains
     ? Object.keys(chains[0])
@@ -124,7 +143,6 @@ const Profile = ({ data }: IProflleProps) => {
           return item?.token !== 'chainId'
         })
     : []
-
   const [fakeLoad, setFakeLoad] = useState(false)
   const handleClick = () => {
     setFakeLoad(true)
@@ -145,7 +163,7 @@ const Profile = ({ data }: IProflleProps) => {
 
   return (
     <div className="flex justify-center bg-[#F3F4F6] dark:bg-[#0F172A] h-[100vh] overflow-y-auto ">
-      <LayoutPage title={` ${data.domain} | Navara One`}></LayoutPage>
+      <LayoutPage title={` ${props.data.domain} | Navara One`}></LayoutPage>
 
       <div className="hide-scrollbar border dark:border-black bg-[#F9FAFB] dark:bg-[#151E31] pt-3 pb-5  w-[450px]  overflow-x-hidden p-7  rounded-xl">
         <div className="flex justify-center ">
@@ -188,7 +206,7 @@ const Profile = ({ data }: IProflleProps) => {
                     className={` items-center gap-4 py-2 hover:bg-gray-200 hover:text-black rounded-lg cursor-pointer`}
                     key={index}
                   >
-                    <Link href={`${subDomain[0]}`}>
+                    <Link href={`/${subDomain[0]}`}>
                       <a onClick={handleClick} className="flex">
                         <div className="rounded-full bg-black h-6 w-6  mr-2 p-1">
                           <Image src={findItem?.icon} width="20" height="20" />
@@ -222,17 +240,21 @@ const Profile = ({ data }: IProflleProps) => {
   )
 }
 
-export const getServerSideProps = async (context: any) => {
-  // Fetch data from external API
-  const domainName = context.params.username
-
-  const res = await API.get(`domain/find?input=${domainName}.nns.one`)
-  // const errorCode = res ? false : res.statusCode
-  const data = await res
-
-  // Pass data to the page via props
-
-  return { props: { data: data } }
+export const getServerSideProps: GetServerSideProps = async ({ params, res }) => {
+  try {
+    const domainName = params.username
+    const result = await API.get(`domain/find?input=${domainName}.nns.one`)
+    const data: IProflleProps = await result
+    console.log(res)
+    return {
+      props: { data },
+    }
+  } catch {
+    res.statusCode = 404
+    return {
+      props: { data: [] },
+    }
+  }
 }
 
 export default Profile
