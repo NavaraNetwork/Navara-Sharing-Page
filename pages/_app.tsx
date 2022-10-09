@@ -1,6 +1,7 @@
 import { ThemeProvider } from 'next-themes'
 import type { AppProps } from 'next/app'
 import '../styles/globals.css'
+import '../styles/styleBtnDarkmode.css'
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider enableSystem={true} attribute="class">

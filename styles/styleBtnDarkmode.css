@@ -1,0 +1,66 @@
+
+
+
+.toggle-wrapper {
+	position: relative;
+	width: 40px;
+	border-radius: 15px;
+}
+
+.toggle {
+	opacity: 0;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	z-index: 3;
+	position: absolute;
+	top: 0;
+	cursor: pointer;
+}
+
+.toggle-body {
+	display: block;
+	width: 60px;
+	height: 40px;
+	box-sizing: border-box;
+	box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3);
+	padding: 10px;
+	border-radius: 25px;
+	background: #f4faf9;
+	z-index: 1;
+}
+
+.thumb {
+	position: absolute;
+	border-radius: 15px;
+	top: 10px;
+	left: 10px;
+	width: 20px;
+	height: 20px;
+	background-color: orange;
+	box-shadow: 0 0 10px yellow;
+	z-index: 2;
+	transition: all 0.4s ease;
+}
+
+.toggle:checked + .toggle-body {
+	background: #153655;
+}
+
+.toggle:checked + .toggle-body .thumb {
+	background: #f8ff89;
+	box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+	left: 30px;
+	transition: all 0.4s ease;
+}
+
+.toggle:checked + .toggle-body .thumb:after {
+	content: '';
+	width: 100%;
+	height: 100%;
+	top: -8px;
+	left: -8px;
+	background: #153655;
+	border-radius: 15px;
+	position: absolute;
+}
