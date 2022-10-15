@@ -10,6 +10,7 @@ type SearchProps = {
   onSubmit?: (event: any) => void
   value?: string
   searching?: boolean
+  icon?: any
 }
 
 const SearchDropdown: React.FC<SearchProps> = ({ placeholder, className, onChange, onSubmit, value }) => {

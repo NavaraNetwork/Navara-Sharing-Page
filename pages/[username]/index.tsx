@@ -31,7 +31,10 @@ import Widget from '../../src/components/Widget'
 import { useDebounce } from '../../src/hooks/useDebounce'
 import ThemeToggler from '../../ThemeToggle'
 interface IProflleProps {
+  domain: any
+  length: number
   data: any
+  chains: any
 }
 const Profile: NextPage<{ data: IProflleProps }> = (props) => {
   const router = useRouter()
@@ -82,23 +85,6 @@ const Profile: NextPage<{ data: IProflleProps }> = (props) => {
         setTyping(false)
       })
   }
-
-  // useEffect(() => {
-  //   // declare the data fetching function
-  //   const fetchData = async () => {
-  //     const res = await API.get(`domain/find?input=${window.location.hostname.split('.nns.one')[0]}.nns.one`)
-  //     setData2(res)
-  //   }
-
-  //   // call the function
-  //   fetchData()
-  //     // make sure to catch any error
-  //     .catch((error) => {
-  //       console.log(error)
-  //       router.push('/error')
-  //     })
-  // }, [])
-
   //Typing input to loading
   useEffect(() => {
     setTyping(true)
@@ -126,8 +112,10 @@ const Profile: NextPage<{ data: IProflleProps }> = (props) => {
 
   // console.log(props.data.length <= 0)
   useEffect(() => {
-    props.data.length <= 0 && router.push('/error')
+    props?.data?.length <= 0 && router.push('/error')
   }, [])
+
+  useEffect(() => {})
 
   const filteredTokenList = chains
     ? Object.keys(chains[0])
@@ -242,9 +230,9 @@ const Profile: NextPage<{ data: IProflleProps }> = (props) => {
 
 export const getServerSideProps: GetServerSideProps = async ({ params, res }) => {
   try {
-    const domainName = params.username
+    const domainName = params?.username
     const result = await API.get(`domain/find?input=${domainName}.nns.one`)
-    const data: IProflleProps = await result
+    const data = await result
     console.log(res)
     return {
       props: { data },

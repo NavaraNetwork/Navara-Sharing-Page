@@ -1,6 +1,6 @@
 export type UserInfo = {
   domain?: string
-  expired: string
+  expired?: any
 }
 
 export type TokenType = {
