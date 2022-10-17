@@ -10,10 +10,17 @@ import ThemeToggler from '../ThemeToggle'
 
 const Home: NextPage = () => {
   useEffect(() => {
+    //TH2 : quanganh.nns.one =>nns.one/quanganh chua ton tai
+    //Th3 : navara.nns.one=> nns.one/navara ton tai
     if (typeof window !== 'undefined' && window.location.hostname.split('.nns.one').length <= 0) {
-      window.location.href = `/navara`
+      window.location.href = `https://nns.one/navara`
     } else {
-      window.location.href = `/${window.location.hostname.split('.nns.one')[0]}`
+      if (typeof window !== 'undefined' && window.location.hostname.split('.nns.one')[0] === 'nns.one') {
+        //TH : nns.one => nns.one/navara
+        window.location.href = `https://nns.one/navara`
+      } else {
+        window.location.href = `https://nns.one/${window.location.hostname.split('.nns.one')[0]}`
+      }
     }
   }, [])
   return (

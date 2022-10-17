@@ -154,12 +154,12 @@ const Profile: NextPage<{ data: IProflleProps }> = (props) => {
       <LayoutPage title={` ${props.data.domain} | Navara One`}></LayoutPage>
 
       <div className="hide-scrollbar border dark:border-black bg-[#F9FAFB] dark:bg-[#151E31] pt-3 pb-5  w-[450px]  overflow-x-hidden p-7  rounded-xl">
+        <div className="flex justify-end ml-auto">
+          <ThemeToggler />
+        </div>
         <div className="flex justify-center ">
           <Image src={navaraLogo} width="30" height="30" className="mx-auto" alt="navara logo" />
           <span className="my-3 px-3 font-bold text-3xl dark:text-white">Navara</span>
-          <div className="flex justify-end">
-            <ThemeToggler />
-          </div>
         </div>
         <div className={`flex items-center gap-4 py-4`}>
           <SearchDropdown
