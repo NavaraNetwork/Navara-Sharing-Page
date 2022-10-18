@@ -15,7 +15,7 @@ const ErrorPage = () => {
         <div className="my-10">
           <p className="text-2xl font-bold text-black dark:text-white">Page Not Found!</p>
           <p className="my-5 dark:text-gray-200">
-            We're sorry, the page you requested could not be found. Please go back to the homepage
+            We are sorry, the page you requested could not be found. Please go back to the homepage
           </p>
         </div>
         <div className="flex justify-center">
